@@ -1,0 +1,359 @@
+(
+    `omit (de)serializer`: false
+    `schema tree`: | `set` {
+        'legacy json schema': | `schema` (
+            `schema imports`: {}
+            `resolver imports`: {}
+            `globals`: (
+                `complexity`: | `unconstrained` ~
+                `text types`: {
+                    'text': (
+                        `type`: | `single line` ~
+                    )
+                }
+                `simple types`: {
+                    'boolean': (
+                        `type`: | `boolean` ~
+                    )
+                }
+            )
+            `modules`: {
+                'Array Definition': (
+                    `root value`: | `group` {
+                        'type': (
+                            `description`: _
+                            `value`: | `state` (
+                                `options`: {
+                                    'list': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                }
+                                `results`: _
+                            )
+                        )
+                    }
+                )
+                'Boolean Definition': (
+                    `root value`: | `nothing` ~
+                )
+                'Null Definition': (
+                    `root value`: | `nothing` ~
+                )
+                'Number Definition': (
+                    `root value`: | `nothing` ~
+                )
+                'Object Definition': (
+                    `root value`: | `group` {
+                        'type': (
+                            `description`: _
+                            `value`: | `state` (
+                                `options`: {
+                                    'verbose group': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `group` {
+                                            'properties': (
+                                                `description`: _
+                                                `value`: | `dictionary` (
+                                                    `value`: | `group` {
+                                                        'definition': (
+                                                            `description`: _
+                                                            `value`: | `component` (
+                                                                `type`: | `internal` 'Definition'
+                                                                `results`: _
+                                                            )
+                                                        )
+                                                        'optional': (
+                                                            `description`: _
+                                                            `value`: | `simple` | `global` 'boolean'
+                                                        )
+                                                    }
+                                                )
+                                            )
+                                        }
+                                    )
+                                    'dictionary': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                }
+                                `results`: _
+                            )
+                        )
+                    }
+                )
+                'String Definition': (
+                    `root value`: | `state` (
+                        `options`: {
+                            'any': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'enum': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `dictionary` (
+                                    `value`: | `nothing` ~
+                                )
+                            )
+                        }
+                        `results`: _
+                    )
+                )
+                'Definition': (
+                    `root value`: | `state` (
+                        `options`: {
+                            'any': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'any of': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `group` {
+                                    'array': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'Array Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'boolean': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'Boolean Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'null': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'Null Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'number': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'Number Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'object': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'Object Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'string': (
+                                        `description`: _
+                                        `value`: | `optional` | `component` (
+                                            `type`: | `internal` 'String Definition'
+                                            `results`: _
+                                        )
+                                    )
+                                    'else': (
+                                        `description`: _
+                                        `value`: | `optional` | `text` | `global` 'text'
+                                    )
+                                }
+                            )
+                            'definition reference': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `text` | `global` 'text'
+                            )
+                            'array': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Array Definition'
+                                    `results`: _
+                                )
+                            )
+                            'boolean': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Boolean Definition'
+                                    `results`: _
+                                )
+                            )
+                            'null': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Null Definition'
+                                    `results`: _
+                                )
+                            )
+                            'number': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Number Definition'
+                                    `results`: _
+                                )
+                            )
+                            'object': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Object Definition'
+                                    `results`: _
+                                )
+                            )
+                            'string': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'String Definition'
+                                    `results`: _
+                                )
+                            )
+                        }
+                        `results`: _
+                    )
+                )
+                'Schema': (
+                    `root value`: | `group` {
+                        'definitions': (
+                            `description`: _
+                            `value`: | `dictionary` (
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Definition'
+                                    `results`: _
+                                )
+                            )
+                        )
+                        'root': (
+                            `description`: _
+                            `value`: | `text` | `global` 'text'
+                        )
+                    }
+                )
+                'Error': (
+                    `root value`: | `group` {
+                        'path': (
+                            `description`: _
+                            `value`: | `text` | `global` 'text'
+                        )
+                        'type': (
+                            `description`: _
+                            `value`: | `state` (
+                                `options`: {
+                                    'not the right type': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `group` {
+                                            'expected': (
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Value Type'
+                                                    `results`: _
+                                                )
+                                            )
+                                            'actual': (
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Value Type'
+                                                    `results`: _
+                                                )
+                                            )
+                                        }
+                                    )
+                                    'type not allowed': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `group` {
+                                            'type': (
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Value Type'
+                                                    `results`: _
+                                                )
+                                            )
+                                        }
+                                    )
+                                    'missing property': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `text` | `global` 'text'
+                                    )
+                                    'superfluous property': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `group` {
+                                            'name': (
+                                                `description`: _
+                                                `value`: | `text` | `global` 'text'
+                                            )
+                                            'type': (
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Value Type'
+                                                    `results`: _
+                                                )
+                                            )
+                                        }
+                                    )
+                                }
+                                `results`: _
+                            )
+                        )
+                    }
+                )
+                'Value Type': (
+                    `root value`: | `state` (
+                        `options`: {
+                            'array': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'boolean': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'null': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'number': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'object': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'string': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                        }
+                        `results`: _
+                    )
+                )
+            }
+            `complexity`: | `unconstrained` ~
+        )
+    }
+)
