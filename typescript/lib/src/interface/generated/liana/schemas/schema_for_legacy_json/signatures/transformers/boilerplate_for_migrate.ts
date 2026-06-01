@@ -5,6 +5,38 @@ import * as i_out from "../../data"
 
 import * as i_in from "../../data"
 
+export namespace Schema_ {
+    
+    export type I = i_in.Schema
+    
+    export type O = i_out.Schema
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Schema_ = (
+    context: Schema_.I,
+) => Schema_.O
+
+export namespace Value_ {
+    
+    export type I = i_in.Value
+    
+    export type O = i_out.Value
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Value_ = (
+    context: Value_.I,
+) => Value_.O
+
 export namespace Array_ {
     
     export type I = i_in.Array
@@ -85,6 +117,22 @@ export type Object_ = (
     context: Object_.I,
 ) => Object_.O
 
+export namespace Static_Object_ {
+    
+    export type I = i_in.Static_Object
+    
+    export type O = i_out.Static_Object
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Static_Object_ = (
+    context: Static_Object_.I,
+) => Static_Object_.O
+
 export namespace String_ {
     
     export type I = i_in.String
@@ -101,45 +149,14 @@ export type String_ = (
     context: String_.I,
 ) => String_.O
 
-export namespace Value_ {
-    
-    export type I = i_in.Value
-    
-    export type O = i_out.Value
-    
-    export namespace P {
-        
-    }
-    
-}
-
-export type Value_ = (
-    context: Value_.I,
-) => Value_.O
-
-export namespace Schema_ {
-    
-    export type I = i_in.Schema
-    
-    export type O = i_out.Schema
-    
-    export namespace P {
-        
-    }
-    
-}
-
-export type Schema_ = (
-    context: Schema_.I,
-) => Schema_.O
-
 export { 
+    Schema_ as Schema, 
+    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 
     Number_ as Number, 
     Object_ as Object, 
+    Static_Object_ as Static_Object, 
     String_ as String, 
-    Value_ as Value, 
-    Schema_ as Schema, 
 }

@@ -7,6 +7,44 @@ import * as i_out from "../../data"
 
 import * as i_in from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
 
+export namespace Schema_ {
+    
+    export type I = i_in.Value
+    
+    export type O = i_out.Schema
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Schema_ = (
+    context: Schema_.I,
+    abort: _pi.Abort<Schema_.E>,
+) => Schema_.O
+
+export namespace Value_ {
+    
+    export type I = i_in.Value
+    
+    export type O = i_out.Value
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Value_ = (
+    context: Value_.I,
+    abort: _pi.Abort<Value_.E>,
+) => Value_.O
+
 export namespace Array_ {
     
     export type I = i_in.Value
@@ -102,6 +140,25 @@ export type Object_ = (
     abort: _pi.Abort<Object_.E>,
 ) => Object_.O
 
+export namespace Static_Object_ {
+    
+    export type I = i_in.Value
+    
+    export type O = i_out.Static_Object
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Static_Object_ = (
+    context: Static_Object_.I,
+    abort: _pi.Abort<Static_Object_.E>,
+) => Static_Object_.O
+
 export namespace String_ {
     
     export type I = i_in.Value
@@ -121,51 +178,14 @@ export type String_ = (
     abort: _pi.Abort<String_.E>,
 ) => String_.O
 
-export namespace Value_ {
-    
-    export type I = i_in.Value
-    
-    export type O = i_out.Value
-    
-    export type E = i_generic.Error
-    
-    export namespace P {
-        
-    }
-    
-}
-
-export type Value_ = (
-    context: Value_.I,
-    abort: _pi.Abort<Value_.E>,
-) => Value_.O
-
-export namespace Schema_ {
-    
-    export type I = i_in.Value
-    
-    export type O = i_out.Schema
-    
-    export type E = i_generic.Error
-    
-    export namespace P {
-        
-    }
-    
-}
-
-export type Schema_ = (
-    context: Schema_.I,
-    abort: _pi.Abort<Schema_.E>,
-) => Schema_.O
-
 export { 
+    Schema_ as Schema, 
+    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 
     Number_ as Number, 
     Object_ as Object, 
+    Static_Object_ as Static_Object, 
     String_ as String, 
-    Value_ as Value, 
-    Schema_ as Schema, 
 }

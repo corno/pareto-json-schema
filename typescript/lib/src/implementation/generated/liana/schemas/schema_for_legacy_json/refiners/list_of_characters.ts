@@ -7,6 +7,36 @@ import * as v_deserialize from "astn-core/dist/implementation/manual/refiners/pa
 
 import * as v_unmarshall from "./astn_parse_tree"
 
+export const Schema: t_signatures.Schema = ($, abort, $p) => v_unmarshall.Schema(
+    v_deserialize.Document(
+        $,
+        ($) => abort(
+            ['parse error', $],
+        ),
+        {
+            'tab size': $p['tab size'],
+        },
+    )['content'],
+    ($) => abort(
+        ['unmarshall error', $],
+    ),
+)
+
+export const Value: t_signatures.Value = ($, abort, $p) => v_unmarshall.Value(
+    v_deserialize.Document(
+        $,
+        ($) => abort(
+            ['parse error', $],
+        ),
+        {
+            'tab size': $p['tab size'],
+        },
+    )['content'],
+    ($) => abort(
+        ['unmarshall error', $],
+    ),
+)
+
 export const Array: t_signatures.Array = ($, abort, $p) => v_unmarshall.Array(
     v_deserialize.Document(
         $,
@@ -82,37 +112,22 @@ export const Object: t_signatures.Object = ($, abort, $p) => v_unmarshall.Object
     ),
 )
 
+export const Static_Object: t_signatures.Static_Object = ($, abort, $p) => v_unmarshall.Static_Object(
+    v_deserialize.Document(
+        $,
+        ($) => abort(
+            ['parse error', $],
+        ),
+        {
+            'tab size': $p['tab size'],
+        },
+    )['content'],
+    ($) => abort(
+        ['unmarshall error', $],
+    ),
+)
+
 export const String: t_signatures.String = ($, abort, $p) => v_unmarshall.String(
-    v_deserialize.Document(
-        $,
-        ($) => abort(
-            ['parse error', $],
-        ),
-        {
-            'tab size': $p['tab size'],
-        },
-    )['content'],
-    ($) => abort(
-        ['unmarshall error', $],
-    ),
-)
-
-export const Value: t_signatures.Value = ($, abort, $p) => v_unmarshall.Value(
-    v_deserialize.Document(
-        $,
-        ($) => abort(
-            ['parse error', $],
-        ),
-        {
-            'tab size': $p['tab size'],
-        },
-    )['content'],
-    ($) => abort(
-        ['unmarshall error', $],
-    ),
-)
-
-export const Schema: t_signatures.Schema = ($, abort, $p) => v_unmarshall.Schema(
     v_deserialize.Document(
         $,
         ($) => abort(

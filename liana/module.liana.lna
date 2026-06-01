@@ -18,97 +18,22 @@
                 }
             )
             `modules`: {
-                'Array': (
+                'Schema': (
                     `root value`: | `group` {
-                        'type': (
+                        'definitions': (
                             `description`: _
-                            `value`: | `state` (
-                                `options`: {
-                                    'list': (
-                                        `constraints`: _
-                                        `description`: _
-                                        `value`: | `component` (
-                                            `type`: | `internal` 'Value'
-                                            `results`: _
-                                        )
-                                    )
-                                }
-                                `results`: _
-                            )
-                        )
-                    }
-                )
-                'Boolean': (
-                    `root value`: | `nothing` ~
-                )
-                'Null': (
-                    `root value`: | `nothing` ~
-                )
-                'Number': (
-                    `root value`: | `nothing` ~
-                )
-                'Object': (
-                    `root value`: | `group` {
-                        'type': (
-                            `description`: _
-                            `value`: | `state` (
-                                `options`: {
-                                    'verbose group': (
-                                        `constraints`: _
-                                        `description`: _
-                                        `value`: | `group` {
-                                            'properties': (
-                                                `description`: _
-                                                `value`: | `dictionary` (
-                                                    `value`: | `group` {
-                                                        'definition': (
-                                                            `description`: _
-                                                            `value`: | `component` (
-                                                                `type`: | `internal` 'Value'
-                                                                `results`: _
-                                                            )
-                                                        )
-                                                        'optional': (
-                                                            `description`: _
-                                                            `value`: | `simple` | `global` 'boolean'
-                                                        )
-                                                    }
-                                                )
-                                            )
-                                        }
-                                    )
-                                    'dictionary': (
-                                        `constraints`: _
-                                        `description`: _
-                                        `value`: | `component` (
-                                            `type`: | `internal` 'Value'
-                                            `results`: _
-                                        )
-                                    )
-                                }
-                                `results`: _
-                            )
-                        )
-                    }
-                )
-                'String': (
-                    `root value`: | `state` (
-                        `options`: {
-                            'any': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `nothing` ~
-                            )
-                            'enum': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `dictionary` (
-                                    `value`: | `nothing` ~
+                            `value`: | `dictionary` (
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Value'
+                                    `results`: _
                                 )
                             )
-                        }
-                        `results`: _
-                    )
+                        )
+                        'root': (
+                            `description`: _
+                            `value`: | `text` | `global` 'text'
+                        )
+                    }
                 )
                 'Value': (
                     `root value`: | `state` (
@@ -175,51 +100,68 @@
                                 `description`: _
                                 `value`: | `text` | `global` 'text'
                             )
-                            'array': (
+                            'primitive': (
                                 `constraints`: _
                                 `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Array'
+                                `value`: | `state` (
+                                    `options`: {
+                                        'array': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'Array'
+                                                `results`: _
+                                            )
+                                        )
+                                        'boolean': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'Boolean'
+                                                `results`: _
+                                            )
+                                        )
+                                        'null': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'Null'
+                                                `results`: _
+                                            )
+                                        )
+                                        'number': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'Number'
+                                                `results`: _
+                                            )
+                                        )
+                                        'object': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'Object'
+                                                `results`: _
+                                            )
+                                        )
+                                        'string': (
+                                            `constraints`: _
+                                            `description`: _
+                                            `value`: | `component` (
+                                                `type`: | `internal` 'String'
+                                                `results`: _
+                                            )
+                                        )
+                                    }
                                     `results`: _
                                 )
                             )
-                            'boolean': (
+                            'nullable': (
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Boolean'
-                                    `results`: _
-                                )
-                            )
-                            'null': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Null'
-                                    `results`: _
-                                )
-                            )
-                            'number': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Number'
-                                    `results`: _
-                                )
-                            )
-                            'object': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Object'
-                                    `results`: _
-                                )
-                            )
-                            'string': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'String'
+                                    `type`: | `internal` 'Value'
                                     `results`: _
                                 )
                             )
@@ -227,103 +169,87 @@
                         `results`: _
                     )
                 )
-                'Schema': (
+                'Array': (
                     `root value`: | `group` {
-                        'definitions': (
-                            `description`: _
-                            `value`: | `dictionary` (
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Value'
-                                    `results`: _
-                                )
-                            )
-                        )
-                        'root': (
-                            `description`: _
-                            `value`: | `text` | `global` 'text'
-                        )
-                    }
-                )
-            }
-            `complexity`: | `unconstrained` ~
-        )
-        'error': | `schema` (
-            `schema imports`: {}
-            `resolver imports`: {}
-            `globals`: (
-                `complexity`: | `unconstrained` ~
-                `text types`: {
-                    'text': (
-                        `type`: | `single line` ~
-                    )
-                }
-                `simple types`: {
-                    'boolean': (
-                        `type`: | `boolean` ~
-                    )
-                }
-            )
-            `modules`: {
-                'Error': (
-                    `root value`: | `group` {
-                        'path': (
-                            `description`: _
-                            `value`: | `text` | `global` 'text'
-                        )
                         'type': (
                             `description`: _
                             `value`: | `state` (
                                 `options`: {
-                                    'not the right type': (
+                                    'dynamic': (
                                         `constraints`: _
                                         `description`: _
-                                        `value`: | `group` {
-                                            'expected': (
-                                                `description`: _
-                                                `value`: | `component` (
-                                                    `type`: | `internal` 'Value Type'
-                                                    `results`: _
-                                                )
-                                            )
-                                            'actual': (
-                                                `description`: _
-                                                `value`: | `component` (
-                                                    `type`: | `internal` 'Value Type'
-                                                    `results`: _
-                                                )
-                                            )
-                                        }
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Value'
+                                            `results`: _
+                                        )
                                     )
-                                    'type not allowed': (
+                                    'static': (
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `group` {
-                                            'type': (
+                                            'properties': (
                                                 `description`: _
-                                                `value`: | `component` (
-                                                    `type`: | `internal` 'Value Type'
-                                                    `results`: _
+                                                `value`: | `dictionary` (
+                                                    `value`: | `component` (
+                                                        `type`: | `internal` 'Value'
+                                                        `results`: _
+                                                    )
                                                 )
                                             )
                                         }
                                     )
-                                    'missing property': (
+                                }
+                                `results`: _
+                            )
+                        )
+                    }
+                )
+                'Boolean': (
+                    `root value`: | `nothing` ~
+                )
+                'Null': (
+                    `root value`: | `nothing` ~
+                )
+                'Number': (
+                    `root value`: | `nothing` ~
+                )
+                'Object': (
+                    `root value`: | `group` {
+                        'type': (
+                            `description`: _
+                            `value`: | `state` (
+                                `options`: {
+                                    'static': (
                                         `constraints`: _
                                         `description`: _
-                                        `value`: | `text` | `global` 'text'
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Static Object'
+                                            `results`: _
+                                        )
                                     )
-                                    'superfluous property': (
+                                    'dynamic': (
+                                        `constraints`: _
+                                        `description`: _
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Value'
+                                            `results`: _
+                                        )
+                                    )
+                                    'mixed': (
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `group` {
-                                            'name': (
-                                                `description`: _
-                                                `value`: | `text` | `global` 'text'
-                                            )
-                                            'type': (
+                                            'static': (
                                                 `description`: _
                                                 `value`: | `component` (
-                                                    `type`: | `internal` 'Value Type'
+                                                    `type`: | `internal` 'Static Object'
+                                                    `results`: _
+                                                )
+                                            )
+                                            'dynamic': (
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Value'
                                                     `results`: _
                                                 )
                                             )
@@ -335,38 +261,61 @@
                         )
                     }
                 )
-                'Value Type': (
+                'Static Object': (
+                    `root value`: | `group` {
+                        'properties': (
+                            `description`: _
+                            `value`: | `dictionary` (
+                                `value`: | `group` {
+                                    'definition': (
+                                        `description`: _
+                                        `value`: | `component` (
+                                            `type`: | `internal` 'Value'
+                                            `results`: _
+                                        )
+                                    )
+                                    'presence': (
+                                        `description`: _
+                                        `value`: | `state` (
+                                            `options`: {
+                                                'required': (
+                                                    `constraints`: _
+                                                    `description`: _
+                                                    `value`: | `nothing` ~
+                                                )
+                                                'optional': (
+                                                    `constraints`: _
+                                                    `description`: _
+                                                    `value`: | `group` {
+                                                        'nullable': (
+                                                            `description`: _
+                                                            `value`: | `simple` | `global` 'boolean'
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                            `results`: _
+                                        )
+                                    )
+                                }
+                            )
+                        )
+                    }
+                )
+                'String': (
                     `root value`: | `state` (
                         `options`: {
-                            'array': (
+                            'any': (
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `nothing` ~
                             )
-                            'boolean': (
+                            'enum': (
                                 `constraints`: _
                                 `description`: _
-                                `value`: | `nothing` ~
-                            )
-                            'null': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `nothing` ~
-                            )
-                            'number': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `nothing` ~
-                            )
-                            'object': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `nothing` ~
-                            )
-                            'string': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `nothing` ~
+                                `value`: | `dictionary` (
+                                    `value`: | `nothing` ~
+                                )
                             )
                         }
                         `results`: _

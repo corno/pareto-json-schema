@@ -7,6 +7,54 @@ import * as i_in from "pareto-fountain-pen/dist/interface/generated/liana/schema
 
 import * as i_out from "../../data"
 
+export namespace Schema_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Schema
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Schema_ = (
+    context: Schema_.I,
+    abort: _pi.Abort<Schema_.E>,
+    parameters: {
+        readonly 'tab size': Schema_.P.tab_size
+    },
+) => Schema_.O
+
+export namespace Value_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Value
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Value_ = (
+    context: Value_.I,
+    abort: _pi.Abort<Value_.E>,
+    parameters: {
+        readonly 'tab size': Value_.P.tab_size
+    },
+) => Value_.O
+
 export namespace Array_ {
     
     export type I = i_in.List_of_Characters
@@ -127,6 +175,30 @@ export type Object_ = (
     },
 ) => Object_.O
 
+export namespace Static_Object_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Static_Object
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Static_Object_ = (
+    context: Static_Object_.I,
+    abort: _pi.Abort<Static_Object_.E>,
+    parameters: {
+        readonly 'tab size': Static_Object_.P.tab_size
+    },
+) => Static_Object_.O
+
 export namespace String_ {
     
     export type I = i_in.List_of_Characters
@@ -151,61 +223,14 @@ export type String_ = (
     },
 ) => String_.O
 
-export namespace Value_ {
-    
-    export type I = i_in.List_of_Characters
-    
-    export type O = i_out.Value
-    
-    export type E = i_generic.Error
-    
-    export namespace P {
-        
-        export type tab_size = number
-        
-    }
-    
-}
-
-export type Value_ = (
-    context: Value_.I,
-    abort: _pi.Abort<Value_.E>,
-    parameters: {
-        readonly 'tab size': Value_.P.tab_size
-    },
-) => Value_.O
-
-export namespace Schema_ {
-    
-    export type I = i_in.List_of_Characters
-    
-    export type O = i_out.Schema
-    
-    export type E = i_generic.Error
-    
-    export namespace P {
-        
-        export type tab_size = number
-        
-    }
-    
-}
-
-export type Schema_ = (
-    context: Schema_.I,
-    abort: _pi.Abort<Schema_.E>,
-    parameters: {
-        readonly 'tab size': Schema_.P.tab_size
-    },
-) => Schema_.O
-
 export { 
+    Schema_ as Schema, 
+    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 
     Number_ as Number, 
     Object_ as Object, 
+    Static_Object_ as Static_Object, 
     String_ as String, 
-    Value_ as Value, 
-    Schema_ as Schema, 
 }

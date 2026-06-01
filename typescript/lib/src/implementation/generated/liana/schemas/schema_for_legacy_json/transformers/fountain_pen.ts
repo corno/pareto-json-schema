@@ -7,6 +7,18 @@ import * as v_serialize from "astn-core/dist/implementation/manual/transformers/
 
 import * as v_marshall from "./astn_sealed_target"
 
+export const Schema: t_signatures.Schema = ($) => v_serialize.Document(
+    v_marshall.Schema(
+        $,
+    ),
+)
+
+export const Value: t_signatures.Value = ($) => v_serialize.Document(
+    v_marshall.Value(
+        $,
+    ),
+)
+
 export const Array: t_signatures.Array = ($) => v_serialize.Document(
     v_marshall.Array(
         $,
@@ -37,20 +49,14 @@ export const Object: t_signatures.Object = ($) => v_serialize.Document(
     ),
 )
 
+export const Static_Object: t_signatures.Static_Object = ($) => v_serialize.Document(
+    v_marshall.Static_Object(
+        $,
+    ),
+)
+
 export const String: t_signatures.String = ($) => v_serialize.Document(
     v_marshall.String(
-        $,
-    ),
-)
-
-export const Value: t_signatures.Value = ($) => v_serialize.Document(
-    v_marshall.Value(
-        $,
-    ),
-)
-
-export const Schema: t_signatures.Schema = ($) => v_serialize.Document(
-    v_marshall.Schema(
         $,
     ),
 )

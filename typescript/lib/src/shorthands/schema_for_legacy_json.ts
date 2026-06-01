@@ -4,7 +4,7 @@ import * as x from "../interface/generated/liana/schemas/schema_for_legacy_json/
 
 import * as sh from 'pareto-core-shorthands/dist/unconstrained'
 
-export const schema  = (
+export const schema = (
     definitions: sh.Raw_Or_Normal_Dictionary<x.Value>,
     root: string,
 ): x.Schema => {
@@ -15,9 +15,9 @@ export const schema  = (
 }
 
 export namespace ao {
-    export const array_list = (definition: x.Value): x.Value.any_of.array => {
+    export const array_dynamic = (definition: x.Value): x.Value.any_of.array => {
         return _p.optional.literal.set({
-            'type': ['list', definition]
+            'type': ['dynamic', definition]
         })
     }
     export const boolean = (): x.Value.any_of.boolean_ => {
@@ -29,16 +29,16 @@ export namespace ao {
     export const number = (): x.Value.any_of.number_ => {
         return _p.optional.literal.set(null)
     }
-    export const object_verbose_group = (properties: sh.Raw_Or_Normal_Dictionary<x.Object.type_.verbose_group.properties.D>): x.Value.any_of.object_ => {
+    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Value.any_of.object_ => {
         return _p.optional.literal.set({
-            'type': ['verbose group', {
+            'type': ['static', {
                 'properties': sh.dictionary.literal(properties),
             }]
         })
     }
-    export const object_dictionary = (definition: x.Value): x.Value.any_of.object_ => {
+    export const object_dynamic = (definition: x.Value): x.Value.any_of.object_ => {
         return _p.optional.literal.set({
-            'type': ['dictionary', definition]
+            'type': ['dynamic', definition]
         })
     }
     export const string = (): x.Value.any_of.string_ => {
@@ -46,7 +46,7 @@ export namespace ao {
     }
 }
 
-export namespace d {
+export namespace v {
     export const any = (): x.Value => {
         return ['any', null]
     }
@@ -71,49 +71,58 @@ export namespace d {
             'else': else_ === undefined ? _p.optional.literal.not_set() : _p.optional.literal.set(else_),
         }]
     }
-    export const array_list = (definition: x.Value): x.Value => {
-        return ['array', {
-            'type': ['list', definition]
-        }]
+    export const array_dynamic = (definition: x.Value): x.Value => {
+        return ['primitive', ['array', {
+            'type': ['dynamic', definition]
+        }]]
     }
     export const boolean = (): x.Value => {
-        return ['boolean', null]
+        return ['primitive', ['boolean', null]]
     }
     export const definition_reference = (name: string): x.Value => {
         return ['definition reference', name]
     }
     export const enum_ = (items: sh.Raw_Or_Normal_Dictionary<null>): x.Value => {
-        return ['string', ['enum', sh.dictionary.literal(items)]]
+        return ['primitive', ['string', ['enum', sh.dictionary.literal(items)]]]
     }
-    export const object_verbose_group = (properties: sh.Raw_Or_Normal_Dictionary<x.Object.type_.verbose_group.properties.D>): x.Value => {
-        return ['object', {
-            'type': ['verbose group', {
+    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Value => {
+        return ['primitive', ['object', {
+            'type': ['static', {
                 'properties': sh.dictionary.literal(properties),
             }]
-        }]
+        }]]
     }
-    export const object_dictionary = (definition: x.Value): x.Value => {
-        return ['object', {
-            'type': ['dictionary', definition]
-        }]
+    export const object_dynamic = (definition: x.Value): x.Value => {
+        return ['primitive', ['object', {
+            'type': ['dynamic', definition]
+        }]]
     }
     export const null_ = (): x.Value => {
-        return ['null', null]
+        return ['primitive', ['null', null]]
     }
     export const number = (): x.Value => {
-        return ['number', null]
+        return ['primitive', ['number', null]]
     }
     export const string = (): x.Value => {
-        return ['string', ['any', null]]
+        return ['primitive', ['string', ['any', null]]]
+    }
+    export const nullable = (
+        value: x.Value
+    ): x.Value => {
+        return ['nullable', value]
     }
 }
 
 export const property = (
     definition: x.Value,
-    optional?: 'optional',
-): x.Object.type_.verbose_group.properties.D => {
+    presence?: 'optional, not nullable' | 'optional and nullable',
+): x.Static_Object.properties.D => {
     return {
         'definition': definition,
-        'optional': optional === 'optional',
+        'presence': presence === 'optional, not nullable'
+            ? ['optional', { 'nullable': false}]
+            : presence === 'optional and nullable'
+                ? ['optional', { 'nullable': true }]
+                : ['required', null],
     }
 }
