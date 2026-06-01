@@ -3,21 +3,21 @@ import * as _p from 'pareto-core/dist/assign'
 
 import _p_change_context from 'pareto-core/dist/_p_change_context'
 
-import * as t_signatures from "../../../../../../interface/generated/liana/schemas/legacy_json_schema/signatures/transformers/boilerplate_for_migrate"
+import * as t_signatures from "../../../../../../interface/generated/liana/schemas/schema_for_legacy_json/signatures/transformers/boilerplate_for_migrate"
 
-import * as t_out from "../../../../../../interface/generated/liana/schemas/legacy_json_schema/data"
+import * as t_out from "../../../../../../interface/generated/liana/schemas/schema_for_legacy_json/data"
 
-export const Array_Definition: t_signatures.Array_Definition = ($) => ({
+export const Array: t_signatures.Array = ($) => ({
     'type': _p_change_context(
         $['type'],
         ($) => _p.decide.state(
             $,
-            ($): t_out.Array_Definition.type_ => {
+            ($): t_out.Array.type_ => {
                 switch ($[0]) {
                     case 'list':
                         return _p.ss(
                             $,
-                            ($) => ['list', Definition(
+                            ($) => ['list', Value(
                                 $,
                             )],
                         )
@@ -31,18 +31,18 @@ export const Array_Definition: t_signatures.Array_Definition = ($) => ({
     ),
 })
 
-export const Boolean_Definition: t_signatures.Boolean_Definition = ($) => null
+export const Boolean: t_signatures.Boolean = ($) => null
 
-export const Null_Definition: t_signatures.Null_Definition = ($) => null
+export const Null: t_signatures.Null = ($) => null
 
-export const Number_Definition: t_signatures.Number_Definition = ($) => null
+export const Number: t_signatures.Number = ($) => null
 
-export const Object_Definition: t_signatures.Object_Definition = ($) => ({
+export const Object: t_signatures.Object = ($) => ({
     'type': _p_change_context(
         $['type'],
         ($) => _p.decide.state(
             $,
-            ($): t_out.Object_Definition.type_ => {
+            ($): t_out.Object.type_ => {
                 switch ($[0]) {
                     case 'verbose group':
                         return _p.ss(
@@ -56,7 +56,7 @@ export const Object_Definition: t_signatures.Object_Definition = ($) => ({
                                         ($, id) => ({
                                             'definition': _p_change_context(
                                                 $['definition'],
-                                                ($) => Definition(
+                                                ($) => Value(
                                                     $,
                                                 ),
                                             ),
@@ -72,7 +72,7 @@ export const Object_Definition: t_signatures.Object_Definition = ($) => ({
                     case 'dictionary':
                         return _p.ss(
                             $,
-                            ($) => ['dictionary', Definition(
+                            ($) => ['dictionary', Value(
                                 $,
                             )],
                         )
@@ -86,9 +86,9 @@ export const Object_Definition: t_signatures.Object_Definition = ($) => ({
     ),
 })
 
-export const String_Definition: t_signatures.String_Definition = ($) => _p.decide.state(
+export const String: t_signatures.String = ($) => _p.decide.state(
     $,
-    ($): t_out.String_Definition => {
+    ($): t_out.String => {
         switch ($[0]) {
             case 'any':
                 return _p.ss(
@@ -112,9 +112,9 @@ export const String_Definition: t_signatures.String_Definition = ($) => _p.decid
     },
 )
 
-export const Definition: t_signatures.Definition = ($) => _p.decide.state(
+export const Value: t_signatures.Value = ($) => _p.decide.state(
     $,
-    ($): t_out.Definition => {
+    ($): t_out.Value => {
         switch ($[0]) {
             case 'any':
                 return _p.ss(
@@ -130,7 +130,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => Array_Definition(
+                                ($) => Array(
                                     $,
                                 ),
                             ),
@@ -140,7 +140,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => Boolean_Definition(
+                                ($) => Boolean(
                                     $,
                                 ),
                             ),
@@ -150,7 +150,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => Null_Definition(
+                                ($) => Null(
                                     $,
                                 ),
                             ),
@@ -160,7 +160,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => Number_Definition(
+                                ($) => Number(
                                     $,
                                 ),
                             ),
@@ -170,7 +170,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => Object_Definition(
+                                ($) => Object(
                                     $,
                                 ),
                             ),
@@ -180,7 +180,7 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
                             ($) => _p.optional.from.optional(
                                 $,
                             ).map(
-                                ($) => String_Definition(
+                                ($) => String(
                                     $,
                                 ),
                             ),
@@ -203,42 +203,42 @@ export const Definition: t_signatures.Definition = ($) => _p.decide.state(
             case 'array':
                 return _p.ss(
                     $,
-                    ($) => ['array', Array_Definition(
+                    ($) => ['array', Array(
                         $,
                     )],
                 )
             case 'boolean':
                 return _p.ss(
                     $,
-                    ($) => ['boolean', Boolean_Definition(
+                    ($) => ['boolean', Boolean(
                         $,
                     )],
                 )
             case 'null':
                 return _p.ss(
                     $,
-                    ($) => ['null', Null_Definition(
+                    ($) => ['null', Null(
                         $,
                     )],
                 )
             case 'number':
                 return _p.ss(
                     $,
-                    ($) => ['number', Number_Definition(
+                    ($) => ['number', Number(
                         $,
                     )],
                 )
             case 'object':
                 return _p.ss(
                     $,
-                    ($) => ['object', Object_Definition(
+                    ($) => ['object', Object(
                         $,
                     )],
                 )
             case 'string':
                 return _p.ss(
                     $,
-                    ($) => ['string', String_Definition(
+                    ($) => ['string', String(
                         $,
                     )],
                 )
@@ -256,7 +256,7 @@ export const Schema: t_signatures.Schema = ($) => ({
         ($) => _p.dictionary.from.dictionary(
             $,
         ).map(
-            ($, id) => Definition(
+            ($, id) => Value(
                 $,
             ),
         ),
@@ -266,117 +266,3 @@ export const Schema: t_signatures.Schema = ($) => ({
         ($) => $,
     ),
 })
-
-export const Error: t_signatures.Error = ($) => ({
-    'path': _p_change_context(
-        $['path'],
-        ($) => $,
-    ),
-    'type': _p_change_context(
-        $['type'],
-        ($) => _p.decide.state(
-            $,
-            ($): t_out.Error.type_ => {
-                switch ($[0]) {
-                    case 'not the right type':
-                        return _p.ss(
-                            $,
-                            ($) => ['not the right type', {
-                                'expected': _p_change_context(
-                                    $['expected'],
-                                    ($) => Value_Type(
-                                        $,
-                                    ),
-                                ),
-                                'actual': _p_change_context(
-                                    $['actual'],
-                                    ($) => Value_Type(
-                                        $,
-                                    ),
-                                ),
-                            }],
-                        )
-                    case 'type not allowed':
-                        return _p.ss(
-                            $,
-                            ($) => ['type not allowed', {
-                                'type': _p_change_context(
-                                    $['type'],
-                                    ($) => Value_Type(
-                                        $,
-                                    ),
-                                ),
-                            }],
-                        )
-                    case 'missing property':
-                        return _p.ss(
-                            $,
-                            ($) => ['missing property', $],
-                        )
-                    case 'superfluous property':
-                        return _p.ss(
-                            $,
-                            ($) => ['superfluous property', {
-                                'name': _p_change_context(
-                                    $['name'],
-                                    ($) => $,
-                                ),
-                                'type': _p_change_context(
-                                    $['type'],
-                                    ($) => Value_Type(
-                                        $,
-                                    ),
-                                ),
-                            }],
-                        )
-                    default:
-                        return _p.au(
-                            $[0],
-                        )
-                }
-            },
-        ),
-    ),
-})
-
-export const Value_Type: t_signatures.Value_Type = ($) => _p.decide.state(
-    $,
-    ($): t_out.Value_Type => {
-        switch ($[0]) {
-            case 'array':
-                return _p.ss(
-                    $,
-                    ($) => ['array', null],
-                )
-            case 'boolean':
-                return _p.ss(
-                    $,
-                    ($) => ['boolean', null],
-                )
-            case 'null':
-                return _p.ss(
-                    $,
-                    ($) => ['null', null],
-                )
-            case 'number':
-                return _p.ss(
-                    $,
-                    ($) => ['number', null],
-                )
-            case 'object':
-                return _p.ss(
-                    $,
-                    ($) => ['object', null],
-                )
-            case 'string':
-                return _p.ss(
-                    $,
-                    ($) => ['string', null],
-                )
-            default:
-                return _p.au(
-                    $[0],
-                )
-        }
-    },
-)

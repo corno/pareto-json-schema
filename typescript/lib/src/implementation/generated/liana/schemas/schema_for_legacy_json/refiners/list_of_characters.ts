@@ -1,13 +1,13 @@
 
 import * as _p from 'pareto-core/dist/assign'
 
-import * as t_signatures from "../../../../../../interface/generated/liana/schemas/legacy_json_schema/signatures/refiners/list_of_characters"
+import * as t_signatures from "../../../../../../interface/generated/liana/schemas/schema_for_legacy_json/signatures/refiners/list_of_characters"
 
 import * as v_deserialize from "astn-core/dist/implementation/manual/refiners/parse_tree/list_of_characters"
 
 import * as v_unmarshall from "./astn_parse_tree"
 
-export const Array_Definition: t_signatures.Array_Definition = ($, abort, $p) => v_unmarshall.Array_Definition(
+export const Array: t_signatures.Array = ($, abort, $p) => v_unmarshall.Array(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -22,7 +22,7 @@ export const Array_Definition: t_signatures.Array_Definition = ($, abort, $p) =>
     ),
 )
 
-export const Boolean_Definition: t_signatures.Boolean_Definition = ($, abort, $p) => v_unmarshall.Boolean_Definition(
+export const Boolean: t_signatures.Boolean = ($, abort, $p) => v_unmarshall.Boolean(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -37,7 +37,7 @@ export const Boolean_Definition: t_signatures.Boolean_Definition = ($, abort, $p
     ),
 )
 
-export const Null_Definition: t_signatures.Null_Definition = ($, abort, $p) => v_unmarshall.Null_Definition(
+export const Null: t_signatures.Null = ($, abort, $p) => v_unmarshall.Null(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -52,7 +52,7 @@ export const Null_Definition: t_signatures.Null_Definition = ($, abort, $p) => v
     ),
 )
 
-export const Number_Definition: t_signatures.Number_Definition = ($, abort, $p) => v_unmarshall.Number_Definition(
+export const Number: t_signatures.Number = ($, abort, $p) => v_unmarshall.Number(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -67,7 +67,7 @@ export const Number_Definition: t_signatures.Number_Definition = ($, abort, $p) 
     ),
 )
 
-export const Object_Definition: t_signatures.Object_Definition = ($, abort, $p) => v_unmarshall.Object_Definition(
+export const Object: t_signatures.Object = ($, abort, $p) => v_unmarshall.Object(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -82,7 +82,7 @@ export const Object_Definition: t_signatures.Object_Definition = ($, abort, $p) 
     ),
 )
 
-export const String_Definition: t_signatures.String_Definition = ($, abort, $p) => v_unmarshall.String_Definition(
+export const String: t_signatures.String = ($, abort, $p) => v_unmarshall.String(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -97,7 +97,7 @@ export const String_Definition: t_signatures.String_Definition = ($, abort, $p) 
     ),
 )
 
-export const Definition: t_signatures.Definition = ($, abort, $p) => v_unmarshall.Definition(
+export const Value: t_signatures.Value = ($, abort, $p) => v_unmarshall.Value(
     v_deserialize.Document(
         $,
         ($) => abort(
@@ -113,36 +113,6 @@ export const Definition: t_signatures.Definition = ($, abort, $p) => v_unmarshal
 )
 
 export const Schema: t_signatures.Schema = ($, abort, $p) => v_unmarshall.Schema(
-    v_deserialize.Document(
-        $,
-        ($) => abort(
-            ['parse error', $],
-        ),
-        {
-            'tab size': $p['tab size'],
-        },
-    )['content'],
-    ($) => abort(
-        ['unmarshall error', $],
-    ),
-)
-
-export const Error: t_signatures.Error = ($, abort, $p) => v_unmarshall.Error(
-    v_deserialize.Document(
-        $,
-        ($) => abort(
-            ['parse error', $],
-        ),
-        {
-            'tab size': $p['tab size'],
-        },
-    )['content'],
-    ($) => abort(
-        ['unmarshall error', $],
-    ),
-)
-
-export const Value_Type: t_signatures.Value_Type = ($, abort, $p) => v_unmarshall.Value_Type(
     v_deserialize.Document(
         $,
         ($) => abort(

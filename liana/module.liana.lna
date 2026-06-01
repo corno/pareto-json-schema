@@ -1,7 +1,7 @@
 (
     `omit (de)serializer`: false
     `schema tree`: | `set` {
-        'legacy json schema': | `schema` (
+        'schema for legacy json': | `schema` (
             `schema imports`: {}
             `resolver imports`: {}
             `globals`: (
@@ -18,7 +18,7 @@
                 }
             )
             `modules`: {
-                'Array Definition': (
+                'Array': (
                     `root value`: | `group` {
                         'type': (
                             `description`: _
@@ -28,7 +28,7 @@
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `component` (
-                                            `type`: | `internal` 'Definition'
+                                            `type`: | `internal` 'Value'
                                             `results`: _
                                         )
                                     )
@@ -38,16 +38,16 @@
                         )
                     }
                 )
-                'Boolean Definition': (
+                'Boolean': (
                     `root value`: | `nothing` ~
                 )
-                'Null Definition': (
+                'Null': (
                     `root value`: | `nothing` ~
                 )
-                'Number Definition': (
+                'Number': (
                     `root value`: | `nothing` ~
                 )
-                'Object Definition': (
+                'Object': (
                     `root value`: | `group` {
                         'type': (
                             `description`: _
@@ -64,7 +64,7 @@
                                                         'definition': (
                                                             `description`: _
                                                             `value`: | `component` (
-                                                                `type`: | `internal` 'Definition'
+                                                                `type`: | `internal` 'Value'
                                                                 `results`: _
                                                             )
                                                         )
@@ -81,7 +81,7 @@
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `component` (
-                                            `type`: | `internal` 'Definition'
+                                            `type`: | `internal` 'Value'
                                             `results`: _
                                         )
                                     )
@@ -91,7 +91,7 @@
                         )
                     }
                 )
-                'String Definition': (
+                'String': (
                     `root value`: | `state` (
                         `options`: {
                             'any': (
@@ -110,7 +110,7 @@
                         `results`: _
                     )
                 )
-                'Definition': (
+                'Value': (
                     `root value`: | `state` (
                         `options`: {
                             'any': (
@@ -125,42 +125,42 @@
                                     'array': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Array Definition'
+                                            `type`: | `internal` 'Array'
                                             `results`: _
                                         )
                                     )
                                     'boolean': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Boolean Definition'
+                                            `type`: | `internal` 'Boolean'
                                             `results`: _
                                         )
                                     )
                                     'null': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Null Definition'
+                                            `type`: | `internal` 'Null'
                                             `results`: _
                                         )
                                     )
                                     'number': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Number Definition'
+                                            `type`: | `internal` 'Number'
                                             `results`: _
                                         )
                                     )
                                     'object': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Object Definition'
+                                            `type`: | `internal` 'Object'
                                             `results`: _
                                         )
                                     )
                                     'string': (
                                         `description`: _
                                         `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'String Definition'
+                                            `type`: | `internal` 'String'
                                             `results`: _
                                         )
                                     )
@@ -179,7 +179,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Array Definition'
+                                    `type`: | `internal` 'Array'
                                     `results`: _
                                 )
                             )
@@ -187,7 +187,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Boolean Definition'
+                                    `type`: | `internal` 'Boolean'
                                     `results`: _
                                 )
                             )
@@ -195,7 +195,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Null Definition'
+                                    `type`: | `internal` 'Null'
                                     `results`: _
                                 )
                             )
@@ -203,7 +203,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Number Definition'
+                                    `type`: | `internal` 'Number'
                                     `results`: _
                                 )
                             )
@@ -211,7 +211,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Object Definition'
+                                    `type`: | `internal` 'Object'
                                     `results`: _
                                 )
                             )
@@ -219,7 +219,7 @@
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `component` (
-                                    `type`: | `internal` 'String Definition'
+                                    `type`: | `internal` 'String'
                                     `results`: _
                                 )
                             )
@@ -233,7 +233,7 @@
                             `description`: _
                             `value`: | `dictionary` (
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Definition'
+                                    `type`: | `internal` 'Value'
                                     `results`: _
                                 )
                             )
@@ -244,6 +244,26 @@
                         )
                     }
                 )
+            }
+            `complexity`: | `unconstrained` ~
+        )
+        'error': | `schema` (
+            `schema imports`: {}
+            `resolver imports`: {}
+            `globals`: (
+                `complexity`: | `unconstrained` ~
+                `text types`: {
+                    'text': (
+                        `type`: | `single line` ~
+                    )
+                }
+                `simple types`: {
+                    'boolean': (
+                        `type`: | `boolean` ~
+                    )
+                }
+            )
+            `modules`: {
                 'Error': (
                     `root value`: | `group` {
                         'path': (
