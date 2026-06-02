@@ -4,125 +4,140 @@ import * as x from "../interface/generated/liana/schemas/schema_for_legacy_json/
 
 import * as sh from 'pareto-core-shorthands/dist/unconstrained'
 
-export const schema = (
-    definitions: sh.Raw_Or_Normal_Dictionary<x.Value>,
-    root: string,
-): x.Schema => {
+export const document = (
+    imports: sh.Raw_Or_Normal_Dictionary<x.Document.imports.D>,
+    definitions: sh.Raw_Or_Normal_Dictionary<x.Definitions.D>,
+    schema: x.Schema,
+): x.Document => {
     return {
-        "definitions": sh.dictionary.literal(definitions),
-        "root": root,
+        'imports': sh.dictionary.literal(imports),
+        'definitions': sh.dictionary.literal(definitions),
+        'schema': schema,
     }
 }
 
-export namespace ao {
-    export const array_dynamic = (definition: x.Value): x.Value.any_of.array => {
+export const definition = (
+    definitions: sh.Raw_Or_Normal_Dictionary<x.Definitions.D>,
+    root: x.Schema,
+): x.Definitions.D => {
+    return {
+        'definitions': sh.dictionary.literal(definitions),
+        'schema': root,
+    }
+}
+
+export namespace m {
+    export const array_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.array => {
         return _p.optional.literal.set({
             'type': ['dynamic', definition]
         })
     }
-    export const boolean = (): x.Value.any_of.boolean_ => {
+    export const boolean = (): x.Schema.type_constraint.multiple.boolean_ => {
         return _p.optional.literal.set(null)
     }
-    export const null_ = (): x.Value.any_of.null_ => {
+    export const null_ = (): x.Schema.type_constraint.multiple.null_ => {
         return _p.optional.literal.set(null)
     }
-    export const number = (): x.Value.any_of.number_ => {
+    export const number = (): x.Schema.type_constraint.multiple.number_ => {
         return _p.optional.literal.set(null)
     }
-    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Value.any_of.object_ => {
+    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema.type_constraint.multiple.object_ => {
         return _p.optional.literal.set({
             'type': ['static', {
                 'properties': sh.dictionary.literal(properties),
             }]
         })
     }
-    export const object_dynamic = (definition: x.Value): x.Value.any_of.object_ => {
+    export const object_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.object_ => {
         return _p.optional.literal.set({
             'type': ['dynamic', definition]
         })
     }
-    export const string = (): x.Value.any_of.string_ => {
+    export const string = (): x.Schema.type_constraint.multiple.string_ => {
         return _p.optional.literal.set(['any', null])
     }
 }
 
 export namespace v {
-    export const any = (): x.Value => {
+    export const any = (): x.Schema => {
         return ['any', null]
     }
-    export const any_of = (
+    export const one_of = (
+        options: sh.Raw_Or_Normal_Dictionary<x.Schema>,
+    ): x.Schema => {
+        return ['one of', sh.dictionary.literal(options)]
+    }
+    export const multiple_types = (
         options: {
-            'object'?: x.Value.any_of.object_
-            'array'?: x.Value.any_of.array,
-            'boolean'?: x.Value.any_of.boolean_,
-            'null'?: x.Value.any_of.null_,
-            'number'?: x.Value.any_of.number_,
-            'string'?: x.Value.any_of.string_,
+            'object'?: x.Schema.type_constraint.multiple.object_
+            'array'?: x.Schema.type_constraint.multiple.array,
+            'boolean'?: x.Schema.type_constraint.multiple.boolean_,
+            'null'?: x.Schema.type_constraint.multiple.null_,
+            'number'?: x.Schema.type_constraint.multiple.number_,
+            'string'?: x.Schema.type_constraint.multiple.string_,
         },
-        else_?: string
-    ): x.Value => {
-        return ['any of', {
+    ): x.Schema => {
+        return ['type constraint', ['multiple', {
             'array': options.array === undefined ? _p.optional.literal.not_set() : options.array,
             'boolean': options.boolean === undefined ? _p.optional.literal.not_set() : options.boolean,
             'null': options.null === undefined ? _p.optional.literal.not_set() : options.null,
             'number': options.number === undefined ? _p.optional.literal.not_set() : options.number,
             'object': options.object === undefined ? _p.optional.literal.not_set() : options.object,
             'string': options.string === undefined ? _p.optional.literal.not_set() : options.string,
-            'else': else_ === undefined ? _p.optional.literal.not_set() : _p.optional.literal.set(else_),
-        }]
-    }
-    export const array_dynamic = (definition: x.Value): x.Value => {
-        return ['primitive', ['array', {
-            'type': ['dynamic', definition]
         }]]
     }
-    export const boolean = (): x.Value => {
-        return ['primitive', ['boolean', null]]
+    export const array_dynamic = (definition: x.Schema): x.Schema => {
+        return ['type constraint', ['single', ['array', {
+            'type': ['dynamic', definition]
+        }]]]
     }
-    export const definition_reference = (name: string): x.Value => {
-        return ['definition reference', name]
+    export const boolean = (): x.Schema => {
+        return ['type constraint', ['single', ['boolean', null]]]
     }
-    export const enum_ = (items: sh.Raw_Or_Normal_Dictionary<null>): x.Value => {
-        return ['primitive', ['string', ['enum', sh.dictionary.literal(items)]]]
+    // export const reference_external = (name: string, steps?: string[]): x.Schema => {
+    //     return ['reference', {
+    //         'document': name,
+    //         'steps': steps === undefined ? _p.optional.literal.not_set() : _p.optional.literal.set(steps),
+    //     }]
+    // }
+    export const reference_internal = (steps: sh.Raw_Or_Normal_List<string>): x.Schema => {
+        return ['reference', {
+            'document': _p.optional.literal.not_set(),
+            'steps': sh.list.literal(steps),
+        }]
     }
-    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Value => {
-        return ['primitive', ['object', {
+    export const enum_ = (items: sh.Raw_Or_Normal_Dictionary<null>): x.Schema => {
+        return ['type constraint', ['single', ['string', ['enum', sh.dictionary.literal(items)]]]]
+    }
+    export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema => {
+        return ['type constraint', ['single', ['object', {
             'type': ['static', {
                 'properties': sh.dictionary.literal(properties),
             }]
-        }]]
+        }]]]
     }
-    export const object_dynamic = (definition: x.Value): x.Value => {
-        return ['primitive', ['object', {
+    export const object_dynamic = (definition: x.Schema): x.Schema => {
+        return ['type constraint', ['single', ['object', {
             'type': ['dynamic', definition]
-        }]]
+        }]]]
     }
-    export const null_ = (): x.Value => {
-        return ['primitive', ['null', null]]
+    export const null_ = (): x.Schema => {
+        return ['type constraint', ['single', ['null', null]]]
     }
-    export const number = (): x.Value => {
-        return ['primitive', ['number', null]]
+    export const number = (): x.Schema => {
+        return ['type constraint', ['single', ['number', null]]]
     }
-    export const string = (): x.Value => {
-        return ['primitive', ['string', ['any', null]]]
-    }
-    export const nullable = (
-        value: x.Value
-    ): x.Value => {
-        return ['nullable', value]
+    export const string = (): x.Schema => {
+        return ['type constraint', ['single', ['string', ['any', null]]]]
     }
 }
 
 export const property = (
-    definition: x.Value,
-    presence?: 'optional, not nullable' | 'optional and nullable',
+    definition: x.Schema,
+    optional?: 'optional',
 ): x.Static_Object.properties.D => {
     return {
-        'definition': definition,
-        'presence': presence === 'optional, not nullable'
-            ? ['optional', { 'nullable': false}]
-            : presence === 'optional and nullable'
-                ? ['optional', { 'nullable': true }]
-                : ['required', null],
+        'schema': definition,
+        'optional': optional === 'optional',    
     }
 }

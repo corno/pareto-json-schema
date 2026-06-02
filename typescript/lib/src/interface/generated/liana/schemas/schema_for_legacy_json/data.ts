@@ -1,147 +1,196 @@
 
 import * as _pi from 'pareto-core/dist/interface'
 
-export namespace Schema_ {
+export namespace Document_ {
     
-    export namespace definitions {
+    export namespace imports {
         
-        export type D = Value_
+        export type D = Schema_
         
     }
     
-    export type definitions = _pi.Dictionary<definitions.D>
+    export type imports = _pi.Dictionary<imports.D>
     
-    export type root = string
+    export type definitions = Definitions_
+    
+    export type schema = Schema_
     
 }
 
-export type Schema_ = {
-    readonly 'definitions': Schema_.definitions
-    readonly 'root': Schema_.root
+export type Document_ = {
+    readonly 'imports': Document_.imports
+    readonly 'definitions': Document_.definitions
+    readonly 'schema': Document_.schema
 }
 
-export namespace Value_ {
+export namespace Definitions_ {
+    
+    export namespace D {
+        
+        export type definitions = Definitions_
+        
+        export type schema = Schema_
+        
+    }
+    
+    export type D = {
+        readonly 'definitions': D.definitions
+        readonly 'schema': D.schema
+    }
+    
+}
+
+export type Definitions_ = _pi.Dictionary<Definitions_.D>
+
+export namespace Schema_ {
     
     export type any_ = null
     
-    export namespace any_of {
+    export namespace one_of {
         
-        export namespace array {
-            
-            export type O = Array_
-            
-        }
+        export type D = Schema_
         
-        export type array = _pi.Optional_Value<array.O>
+    }
+    
+    export type one_of = _pi.Dictionary<one_of.D>
+    
+    export namespace type_constraint {
         
-        export namespace boolean_ {
+        export namespace single {
             
-            export type O = Boolean_
+            export type array = Array_
             
-        }
-        
-        export type boolean_ = _pi.Optional_Value<boolean_.O>
-        
-        export namespace null_ {
+            export type boolean_ = Boolean_
             
-            export type O = Null_
+            export type null_ = Null_
             
-        }
-        
-        export type null_ = _pi.Optional_Value<null_.O>
-        
-        export namespace number_ {
+            export type number_ = Number_
             
-            export type O = Number_
+            export type object_ = Object_
+            
+            export type string_ = String_
             
         }
         
-        export type number_ = _pi.Optional_Value<number_.O>
+        export type single = 
+            | readonly ['array', single.array]
+            | readonly ['boolean', single.boolean_]
+            | readonly ['null', single.null_]
+            | readonly ['number', single.number_]
+            | readonly ['object', single.object_]
+            | readonly ['string', single.string_]
         
-        export namespace object_ {
+        export namespace multiple {
             
-            export type O = Object_
+            export namespace array {
+                
+                export type O = Array_
+                
+            }
+            
+            export type array = _pi.Optional_Value<array.O>
+            
+            export namespace boolean_ {
+                
+                export type O = Boolean_
+                
+            }
+            
+            export type boolean_ = _pi.Optional_Value<boolean_.O>
+            
+            export namespace null_ {
+                
+                export type O = Null_
+                
+            }
+            
+            export type null_ = _pi.Optional_Value<null_.O>
+            
+            export namespace number_ {
+                
+                export type O = Number_
+                
+            }
+            
+            export type number_ = _pi.Optional_Value<number_.O>
+            
+            export namespace object_ {
+                
+                export type O = Object_
+                
+            }
+            
+            export type object_ = _pi.Optional_Value<object_.O>
+            
+            export namespace string_ {
+                
+                export type O = String_
+                
+            }
+            
+            export type string_ = _pi.Optional_Value<string_.O>
             
         }
         
-        export type object_ = _pi.Optional_Value<object_.O>
-        
-        export namespace string_ {
-            
-            export type O = String_
-            
+        export type multiple = {
+            readonly 'array': multiple.array
+            readonly 'boolean': multiple.boolean_
+            readonly 'null': multiple.null_
+            readonly 'number': multiple.number_
+            readonly 'object': multiple.object_
+            readonly 'string': multiple.string_
         }
         
-        export type string_ = _pi.Optional_Value<string_.O>
+    }
+    
+    export type type_constraint = 
+        | readonly ['single', type_constraint.single]
+        | readonly ['multiple', type_constraint.multiple]
+    
+    export namespace reference {
         
-        export namespace else_ {
+        export namespace document {
             
             export type O = string
             
         }
         
-        export type else_ = _pi.Optional_Value<else_.O>
+        export type document = _pi.Optional_Value<document.O>
+        
+        export namespace steps {
+            
+            export type L = string
+            
+        }
+        
+        export type steps = _pi.List<steps.L>
         
     }
     
-    export type any_of = {
-        readonly 'array': any_of.array
-        readonly 'boolean': any_of.boolean_
-        readonly 'null': any_of.null_
-        readonly 'number': any_of.number_
-        readonly 'object': any_of.object_
-        readonly 'string': any_of.string_
-        readonly 'else': any_of.else_
+    export type reference = {
+        readonly 'document': reference.document
+        readonly 'steps': reference.steps
     }
-    
-    export type definition_reference = string
-    
-    export namespace primitive {
-        
-        export type array = Array_
-        
-        export type boolean_ = Boolean_
-        
-        export type null_ = Null_
-        
-        export type number_ = Number_
-        
-        export type object_ = Object_
-        
-        export type string_ = String_
-        
-    }
-    
-    export type primitive = 
-        | readonly ['array', primitive.array]
-        | readonly ['boolean', primitive.boolean_]
-        | readonly ['null', primitive.null_]
-        | readonly ['number', primitive.number_]
-        | readonly ['object', primitive.object_]
-        | readonly ['string', primitive.string_]
-    
-    export type nullable = Value_
     
 }
 
-export type Value_ = 
-    | readonly ['any', Value_.any_]
-    | readonly ['any of', Value_.any_of]
-    | readonly ['definition reference', Value_.definition_reference]
-    | readonly ['primitive', Value_.primitive]
-    | readonly ['nullable', Value_.nullable]
+export type Schema_ = 
+    | readonly ['any', Schema_.any_]
+    | readonly ['one of', Schema_.one_of]
+    | readonly ['type constraint', Schema_.type_constraint]
+    | readonly ['reference', Schema_.reference]
 
 export namespace Array_ {
     
     export namespace type_ {
         
-        export type dynamic = Value_
+        export type dynamic = Schema_
         
         export namespace static_ {
             
             export namespace properties {
                 
-                export type D = Value_
+                export type D = Schema_
                 
             }
             
@@ -177,13 +226,13 @@ export namespace Object_ {
         
         export type static_ = Static_Object_
         
-        export type dynamic = Value_
+        export type dynamic = Schema_
         
         export namespace mixed {
             
             export type static_ = Static_Object_
             
-            export type dynamic = Value_
+            export type dynamic = Schema_
             
         }
         
@@ -211,33 +260,15 @@ export namespace Static_Object_ {
         
         export namespace D {
             
-            export type definition = Value_
+            export type schema = Schema_
             
-            export namespace presence {
-                
-                export type required = null
-                
-                export namespace optional {
-                    
-                    export type nullable = boolean
-                    
-                }
-                
-                export type optional = {
-                    readonly 'nullable': optional.nullable
-                }
-                
-            }
-            
-            export type presence = 
-                | readonly ['required', presence.required]
-                | readonly ['optional', presence.optional]
+            export type optional = boolean
             
         }
         
         export type D = {
-            readonly 'definition': D.definition
-            readonly 'presence': D.presence
+            readonly 'schema': D.schema
+            readonly 'optional': D.optional
         }
         
     }
@@ -269,8 +300,9 @@ export type String_ =
     | readonly ['enum', String_.enum_]
 
 export { 
+    Document_ as Document, 
+    Definitions_ as Definitions, 
     Schema_ as Schema, 
-    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 

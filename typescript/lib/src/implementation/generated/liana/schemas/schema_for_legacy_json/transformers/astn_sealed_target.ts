@@ -11,29 +11,55 @@ import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_
 
 import * as v_primitives_to_text from "liana-core/dist/implementation/manual/transformers/primitives/text"
 
-export const Schema: t_signatures.Schema = ($) => ['group', ['verbose', _p.dictionary.literal(
+export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.dictionary.literal(
     {
-        "definitions": _p_change_context(
-            $['definitions'],
+        "imports": _p_change_context(
+            $['imports'],
             ($) => ['dictionary', _p.dictionary.from.dictionary(
                 $,
             ).map(
-                ($, id) => Value(
+                ($, id) => Schema(
                     $,
                 ),
             )],
         ),
-        "root": _p_change_context(
-            $['root'],
-            ($) => ['text', {
-                'delimiter': ['quote', null],
-                'value': $,
-            }],
+        "definitions": _p_change_context(
+            $['definitions'],
+            ($) => Definitions(
+                $,
+            ),
+        ),
+        "schema": _p_change_context(
+            $['schema'],
+            ($) => Schema(
+                $,
+            ),
         ),
     },
 )]]
 
-export const Value: t_signatures.Value = ($) => ['state', _p.decide.state(
+export const Definitions: t_signatures.Definitions = ($) => ['dictionary', _p.dictionary.from.dictionary(
+    $,
+).map(
+    ($, id) => ['group', ['verbose', _p.dictionary.literal(
+        {
+            "definitions": _p_change_context(
+                $['definitions'],
+                ($) => Definitions(
+                    $,
+                ),
+            ),
+            "schema": _p_change_context(
+                $['schema'],
+                ($) => Schema(
+                    $,
+                ),
+            ),
+        },
+    )]],
+)]
+
+export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
     $,
     ($): t_out.Value.state => {
         switch ($[0]) {
@@ -45,166 +71,176 @@ export const Value: t_signatures.Value = ($) => ['state', _p.decide.state(
                         'value': ['nothing', null],
                     }),
                 )
-            case 'any of':
+            case 'one of':
                 return _p.ss(
                     $,
                     ($) => ({
-                        'option': 'any of',
-                        'value': ['group', ['verbose', _p.dictionary.literal(
-                            {
-                                "array": _p_change_context(
-                                    $['array'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', Array(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "boolean": _p_change_context(
-                                    $['boolean'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', Boolean(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "null": _p_change_context(
-                                    $['null'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', Null(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "number": _p_change_context(
-                                    $['number'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', Number(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "object": _p_change_context(
-                                    $['object'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', Object(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "string": _p_change_context(
-                                    $['string'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', String(
-                                            $,
-                                        )],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "else": _p_change_context(
-                                    $['else'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', ['text', {
-                                            'delimiter': ['quote', null],
-                                            'value': $,
-                                        }]],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                            },
-                        )]],
+                        'option': 'one of',
+                        'value': ['dictionary', _p.dictionary.from.dictionary(
+                            $,
+                        ).map(
+                            ($, id) => Schema(
+                                $,
+                            ),
+                        )],
                     }),
                 )
-            case 'definition reference':
+            case 'type constraint':
                 return _p.ss(
                     $,
                     ($) => ({
-                        'option': 'definition reference',
-                        'value': ['text', {
-                            'delimiter': ['quote', null],
-                            'value': $,
-                        }],
-                    }),
-                )
-            case 'primitive':
-                return _p.ss(
-                    $,
-                    ($) => ({
-                        'option': 'primitive',
+                        'option': 'type constraint',
                         'value': ['state', _p.decide.state(
                             $,
                             ($): t_out.Value.state => {
                                 switch ($[0]) {
-                                    case 'array':
+                                    case 'single':
                                         return _p.ss(
                                             $,
                                             ($) => ({
-                                                'option': 'array',
-                                                'value': Array(
+                                                'option': 'single',
+                                                'value': ['state', _p.decide.state(
                                                     $,
-                                                ),
+                                                    ($): t_out.Value.state => {
+                                                        switch ($[0]) {
+                                                            case 'array':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'array',
+                                                                        'value': Array(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            case 'boolean':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'boolean',
+                                                                        'value': Boolean(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            case 'null':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'null',
+                                                                        'value': Null(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            case 'number':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'number',
+                                                                        'value': Number(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            case 'object':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'object',
+                                                                        'value': Object(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            case 'string':
+                                                                return _p.ss(
+                                                                    $,
+                                                                    ($) => ({
+                                                                        'option': 'string',
+                                                                        'value': String(
+                                                                            $,
+                                                                        ),
+                                                                    }),
+                                                                )
+                                                            default:
+                                                                return _p.au(
+                                                                    $[0],
+                                                                )
+                                                        }
+                                                    },
+                                                )],
                                             }),
                                         )
-                                    case 'boolean':
+                                    case 'multiple':
                                         return _p.ss(
                                             $,
                                             ($) => ({
-                                                'option': 'boolean',
-                                                'value': Boolean(
-                                                    $,
-                                                ),
-                                            }),
-                                        )
-                                    case 'null':
-                                        return _p.ss(
-                                            $,
-                                            ($) => ({
-                                                'option': 'null',
-                                                'value': Null(
-                                                    $,
-                                                ),
-                                            }),
-                                        )
-                                    case 'number':
-                                        return _p.ss(
-                                            $,
-                                            ($) => ({
-                                                'option': 'number',
-                                                'value': Number(
-                                                    $,
-                                                ),
-                                            }),
-                                        )
-                                    case 'object':
-                                        return _p.ss(
-                                            $,
-                                            ($) => ({
-                                                'option': 'object',
-                                                'value': Object(
-                                                    $,
-                                                ),
-                                            }),
-                                        )
-                                    case 'string':
-                                        return _p.ss(
-                                            $,
-                                            ($) => ({
-                                                'option': 'string',
-                                                'value': String(
-                                                    $,
-                                                ),
+                                                'option': 'multiple',
+                                                'value': ['group', ['verbose', _p.dictionary.literal(
+                                                    {
+                                                        "array": _p_change_context(
+                                                            $['array'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', Array(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                        "boolean": _p_change_context(
+                                                            $['boolean'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', Boolean(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                        "null": _p_change_context(
+                                                            $['null'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', Null(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                        "number": _p_change_context(
+                                                            $['number'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', Number(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                        "object": _p_change_context(
+                                                            $['object'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', Object(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                        "string": _p_change_context(
+                                                            $['string'],
+                                                            ($) => ['optional', _p.decide.optional(
+                                                                $,
+                                                                ($): t_out.Value.optional => ['set', String(
+                                                                    $,
+                                                                )],
+                                                                () => ['not set', null],
+                                                            )],
+                                                        ),
+                                                    },
+                                                )]],
                                             }),
                                         )
                                     default:
@@ -216,14 +252,37 @@ export const Value: t_signatures.Value = ($) => ['state', _p.decide.state(
                         )],
                     }),
                 )
-            case 'nullable':
+            case 'reference':
                 return _p.ss(
                     $,
                     ($) => ({
-                        'option': 'nullable',
-                        'value': Value(
-                            $,
-                        ),
+                        'option': 'reference',
+                        'value': ['group', ['verbose', _p.dictionary.literal(
+                            {
+                                "document": _p_change_context(
+                                    $['document'],
+                                    ($) => ['optional', _p.decide.optional(
+                                        $,
+                                        ($): t_out.Value.optional => ['set', ['text', {
+                                            'delimiter': ['quote', null],
+                                            'value': $,
+                                        }]],
+                                        () => ['not set', null],
+                                    )],
+                                ),
+                                "steps": _p_change_context(
+                                    $['steps'],
+                                    ($) => ['list', _p.list.from.list(
+                                        $,
+                                    ).map(
+                                        ($) => ['text', {
+                                            'delimiter': ['quote', null],
+                                            'value': $,
+                                        }],
+                                    )],
+                                ),
+                            },
+                        )]],
                     }),
                 )
             default:
@@ -247,7 +306,7 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.diction
                                 $,
                                 ($) => ({
                                     'option': 'dynamic',
-                                    'value': Value(
+                                    'value': Schema(
                                         $,
                                     ),
                                 }),
@@ -264,7 +323,7 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.diction
                                                 ($) => ['dictionary', _p.dictionary.from.dictionary(
                                                     $,
                                                 ).map(
-                                                    ($, id) => Value(
+                                                    ($, id) => Schema(
                                                         $,
                                                     ),
                                                 )],
@@ -313,7 +372,7 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.dicti
                                 $,
                                 ($) => ({
                                     'option': 'dynamic',
-                                    'value': Value(
+                                    'value': Schema(
                                         $,
                                     ),
                                 }),
@@ -333,7 +392,7 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.dicti
                                             ),
                                             "dynamic": _p_change_context(
                                                 $['dynamic'],
-                                                ($) => Value(
+                                                ($) => Schema(
                                                     $,
                                                 ),
                                             ),
@@ -361,53 +420,20 @@ export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verb
             ).map(
                 ($, id) => ['group', ['verbose', _p.dictionary.literal(
                     {
-                        "definition": _p_change_context(
-                            $['definition'],
-                            ($) => Value(
+                        "schema": _p_change_context(
+                            $['schema'],
+                            ($) => Schema(
                                 $,
                             ),
                         ),
-                        "presence": _p_change_context(
-                            $['presence'],
-                            ($) => ['state', _p.decide.state(
-                                $,
-                                ($): t_out.Value.state => {
-                                    switch ($[0]) {
-                                        case 'required':
-                                            return _p.ss(
-                                                $,
-                                                ($) => ({
-                                                    'option': 'required',
-                                                    'value': ['nothing', null],
-                                                }),
-                                            )
-                                        case 'optional':
-                                            return _p.ss(
-                                                $,
-                                                ($) => ({
-                                                    'option': 'optional',
-                                                    'value': ['group', ['verbose', _p.dictionary.literal(
-                                                        {
-                                                            "nullable": _p_change_context(
-                                                                $['nullable'],
-                                                                ($) => ['text', {
-                                                                    'delimiter': ['none', null],
-                                                                    'value': v_primitives_to_text.true_false(
-                                                                        $,
-                                                                    ),
-                                                                }],
-                                                            ),
-                                                        },
-                                                    )]],
-                                                }),
-                                            )
-                                        default:
-                                            return _p.au(
-                                                $[0],
-                                            )
-                                    }
-                                },
-                            )],
+                        "optional": _p_change_context(
+                            $['optional'],
+                            ($) => ['text', {
+                                'delimiter': ['none', null],
+                                'value': v_primitives_to_text.true_false(
+                                    $,
+                                ),
+                            }],
                         ),
                     },
                 )]],

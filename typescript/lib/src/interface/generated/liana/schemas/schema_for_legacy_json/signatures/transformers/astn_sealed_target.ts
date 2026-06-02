@@ -5,6 +5,38 @@ import * as i_out from "astn-core/dist/interface/generated/liana/schemas/sealed_
 
 import * as i_in from "../../data"
 
+export namespace Document_ {
+    
+    export type I = i_in.Document
+    
+    export type O = i_out.Value
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Document_ = (
+    context: Document_.I,
+) => Document_.O
+
+export namespace Definitions_ {
+    
+    export type I = i_in.Definitions
+    
+    export type O = i_out.Value
+    
+    export namespace P {
+        
+    }
+    
+}
+
+export type Definitions_ = (
+    context: Definitions_.I,
+) => Definitions_.O
+
 export namespace Schema_ {
     
     export type I = i_in.Schema
@@ -20,22 +52,6 @@ export namespace Schema_ {
 export type Schema_ = (
     context: Schema_.I,
 ) => Schema_.O
-
-export namespace Value_ {
-    
-    export type I = i_in.Value
-    
-    export type O = i_out.Value
-    
-    export namespace P {
-        
-    }
-    
-}
-
-export type Value_ = (
-    context: Value_.I,
-) => Value_.O
 
 export namespace Array_ {
     
@@ -150,8 +166,9 @@ export type String_ = (
 ) => String_.O
 
 export { 
+    Document_ as Document, 
+    Definitions_ as Definitions, 
     Schema_ as Schema, 
-    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 

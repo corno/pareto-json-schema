@@ -7,6 +7,54 @@ import * as i_in from "pareto-fountain-pen/dist/interface/generated/liana/schema
 
 import * as i_out from "../../data"
 
+export namespace Document_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Document
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Document_ = (
+    context: Document_.I,
+    abort: _pi.Abort<Document_.E>,
+    parameters: {
+        readonly 'tab size': Document_.P.tab_size
+    },
+) => Document_.O
+
+export namespace Definitions_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Definitions
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Definitions_ = (
+    context: Definitions_.I,
+    abort: _pi.Abort<Definitions_.E>,
+    parameters: {
+        readonly 'tab size': Definitions_.P.tab_size
+    },
+) => Definitions_.O
+
 export namespace Schema_ {
     
     export type I = i_in.List_of_Characters
@@ -30,30 +78,6 @@ export type Schema_ = (
         readonly 'tab size': Schema_.P.tab_size
     },
 ) => Schema_.O
-
-export namespace Value_ {
-    
-    export type I = i_in.List_of_Characters
-    
-    export type O = i_out.Value
-    
-    export type E = i_generic.Error
-    
-    export namespace P {
-        
-        export type tab_size = number
-        
-    }
-    
-}
-
-export type Value_ = (
-    context: Value_.I,
-    abort: _pi.Abort<Value_.E>,
-    parameters: {
-        readonly 'tab size': Value_.P.tab_size
-    },
-) => Value_.O
 
 export namespace Array_ {
     
@@ -224,8 +248,9 @@ export type String_ = (
 ) => String_.O
 
 export { 
+    Document_ as Document, 
+    Definitions_ as Definitions, 
     Schema_ as Schema, 
-    Value_ as Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 
