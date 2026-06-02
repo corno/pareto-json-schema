@@ -1,14 +1,16 @@
 import * as _pi from 'pareto-core/dist/interface'
 
 
-import * as d_json from "pareto-json/dist/interface/generated/liana/schemas/json_with_guaranteed_unique_keys/data"
+import * as d_json from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"
 
 export type Schema =
     | ['boolean', null]
-    | ['object', {
-        'const': _pi.Optional_Value<d_json.Value>
-        'type': _pi.Optional_Value<Type>
-    }]
+    | ['object', Schema_Object]
+
+export type Schema_Object = {
+    'const': _pi.Optional_Value<d_json.Value>
+    'type': _pi.Optional_Value<Type>
+}
 
 export type Type =
     | ['array', _pi.List<Primitive>]
