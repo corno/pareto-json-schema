@@ -52,6 +52,21 @@ export const Schema: t_signatures.Schema = ($, abort, $p) => v_unmarshall.Schema
     ),
 )
 
+export const Const_Value: t_signatures.Const_Value = ($, abort, $p) => v_unmarshall.Const_Value(
+    v_deserialize.Document(
+        $,
+        ($) => abort(
+            ['parse error', $],
+        ),
+        {
+            'tab size': $p['tab size'],
+        },
+    )['content'],
+    ($) => abort(
+        ['unmarshall error', $],
+    ),
+)
+
 export const Array: t_signatures.Array = ($, abort, $p) => v_unmarshall.Array(
     v_deserialize.Document(
         $,

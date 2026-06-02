@@ -46,6 +46,8 @@ export namespace Schema_ {
     
     export type any_ = null
     
+    export type const_ = Const_Value_
+    
     export namespace one_of {
         
         export type D = Schema_
@@ -53,6 +55,31 @@ export namespace Schema_ {
     }
     
     export type one_of = _pi.Dictionary<one_of.D>
+    
+    export namespace reference {
+        
+        export namespace document {
+            
+            export type O = string
+            
+        }
+        
+        export type document = _pi.Optional_Value<document.O>
+        
+        export namespace steps {
+            
+            export type L = string
+            
+        }
+        
+        export type steps = _pi.List<steps.L>
+        
+    }
+    
+    export type reference = {
+        readonly 'document': reference.document
+        readonly 'steps': reference.steps
+    }
     
     export namespace type_constraint {
         
@@ -147,38 +174,50 @@ export namespace Schema_ {
         | readonly ['single', type_constraint.single]
         | readonly ['multiple', type_constraint.multiple]
     
-    export namespace reference {
-        
-        export namespace document {
-            
-            export type O = string
-            
-        }
-        
-        export type document = _pi.Optional_Value<document.O>
-        
-        export namespace steps {
-            
-            export type L = string
-            
-        }
-        
-        export type steps = _pi.List<steps.L>
-        
-    }
-    
-    export type reference = {
-        readonly 'document': reference.document
-        readonly 'steps': reference.steps
-    }
-    
 }
 
 export type Schema_ = 
     | readonly ['any', Schema_.any_]
+    | readonly ['const', Schema_.const_]
     | readonly ['one of', Schema_.one_of]
-    | readonly ['type constraint', Schema_.type_constraint]
     | readonly ['reference', Schema_.reference]
+    | readonly ['type constraint', Schema_.type_constraint]
+
+export namespace Const_Value_ {
+    
+    export namespace array {
+        
+        export type L = Const_Value_
+        
+    }
+    
+    export type array = _pi.List<array.L>
+    
+    export type boolean_ = boolean
+    
+    export type null_ = null
+    
+    export type number_ = number
+    
+    export namespace object_ {
+        
+        export type D = Const_Value_
+        
+    }
+    
+    export type object_ = _pi.Dictionary<object_.D>
+    
+    export type string_ = string
+    
+}
+
+export type Const_Value_ = 
+    | readonly ['array', Const_Value_.array]
+    | readonly ['boolean', Const_Value_.boolean_]
+    | readonly ['null', Const_Value_.null_]
+    | readonly ['number', Const_Value_.number_]
+    | readonly ['object', Const_Value_.object_]
+    | readonly ['string', Const_Value_.string_]
 
 export namespace Array_ {
     
@@ -303,6 +342,7 @@ export {
     Document_ as Document, 
     Definitions_ as Definitions, 
     Schema_ as Schema, 
+    Const_Value_ as Const_Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 

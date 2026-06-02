@@ -79,6 +79,30 @@ export type Schema_ = (
     },
 ) => Schema_.O
 
+export namespace Const_Value_ {
+    
+    export type I = i_in.List_of_Characters
+    
+    export type O = i_out.Const_Value
+    
+    export type E = i_generic.Error
+    
+    export namespace P {
+        
+        export type tab_size = number
+        
+    }
+    
+}
+
+export type Const_Value_ = (
+    context: Const_Value_.I,
+    abort: _pi.Abort<Const_Value_.E>,
+    parameters: {
+        readonly 'tab size': Const_Value_.P.tab_size
+    },
+) => Const_Value_.O
+
 export namespace Array_ {
     
     export type I = i_in.List_of_Characters
@@ -251,6 +275,7 @@ export {
     Document_ as Document, 
     Definitions_ as Definitions, 
     Schema_ as Schema, 
+    Const_Value_ as Const_Value, 
     Array_ as Array, 
     Boolean_ as Boolean, 
     Null_ as Null, 

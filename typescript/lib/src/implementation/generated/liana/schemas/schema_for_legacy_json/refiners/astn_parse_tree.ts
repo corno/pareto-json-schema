@@ -219,6 +219,16 @@ export const Schema: t_signatures.Schema = ($, abort) => _p_change_context(
                             ),
                         )],
                     )
+                case 'const':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['const', Const_Value(
+                            $,
+                            ($) => abort(
+                                $,
+                            ),
+                        )],
+                    )
                 case 'one of':
                     return _p_change_context(
                         $['value'],
@@ -241,6 +251,100 @@ export const Schema: t_signatures.Schema = ($, abort) => _p_change_context(
                                         $,
                                     ),
                                 ),
+                            ),
+                        )],
+                    )
+                case 'reference':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['reference', _p_change_context(
+                            v_unmarshalled_from_parse_tree.Verbose_Group(
+                                $,
+                                ($) => abort(
+                                    $,
+                                ),
+                                {
+                                    'expected properties': _p.dictionary.literal(
+                                        {
+                                            "document": null,
+                                            "steps": null,
+                                        },
+                                    ),
+                                    'subdocument context': _p.optional.literal.not_set(),
+                                },
+                            ),
+                            ($) => _p_variables(
+                                () => {
+                                    
+                                    const var_verbose_group_range = v_parse_tree_to_location.Value(
+                                        $['value'],
+                                        {
+                                            'subdocument context': _p.optional.literal.not_set(),
+                                        },
+                                    )
+                                    return {
+                                        'document': _p_change_context(
+                                            v_unmarshalled_from_parse_tree.Property(
+                                                $,
+                                                ($) => abort(
+                                                    $,
+                                                ),
+                                                {
+                                                    'id': 'document',
+                                                    'subdocument context': _p.optional.literal.not_set(),
+                                                },
+                                            ),
+                                            ($) => _p.optional.from.optional(
+                                                v_unmarshalled_from_parse_tree.Optional(
+                                                    $,
+                                                    ($) => abort(
+                                                        $,
+                                                    ),
+                                                )['optional'],
+                                            ).map(
+                                                ($) => v_unmarshalled_from_parse_tree.Text(
+                                                    $,
+                                                    ($) => abort(
+                                                        $,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                        'steps': _p_change_context(
+                                            v_unmarshalled_from_parse_tree.Property(
+                                                $,
+                                                ($) => abort(
+                                                    $,
+                                                ),
+                                                {
+                                                    'id': 'steps',
+                                                    'subdocument context': _p.optional.literal.not_set(),
+                                                },
+                                            ),
+                                            ($) => _p.list.from.list(
+                                                v_unmarshalled_from_parse_tree.List(
+                                                    $,
+                                                    ($) => abort(
+                                                        $,
+                                                    ),
+                                                    {
+                                                        'subdocument context': _p.optional.literal.not_set(),
+                                                    },
+                                                )['items'],
+                                            ).map(
+                                                ($) => _p_change_context(
+                                                    $['value'],
+                                                    ($) => v_unmarshalled_from_parse_tree.Text(
+                                                        $,
+                                                        ($) => abort(
+                                                            $,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    }
+                                },
                             ),
                         )],
                     )
@@ -566,97 +670,131 @@ export const Schema: t_signatures.Schema = ($, abort) => _p_change_context(
                             ),
                         )],
                     )
-                case 'reference':
+                default:
+                    return abort(
+                        ['liana', {
+                            'type': ['state', ['unknown option', $['option']['token']['value']]],
+                            'range': v_parse_tree_to_location.Value(
+                                $['value'],
+                                {
+                                    'subdocument context': _p.optional.literal.not_set(),
+                                },
+                            ),
+                        }],
+                    )
+            }
+        },
+    ),
+)
+
+export const Const_Value: t_signatures.Const_Value = ($, abort) => _p_change_context(
+    v_unmarshalled_from_parse_tree.State(
+        $,
+        ($) => abort(
+            $,
+        ),
+    ),
+    ($) => _p.decide.text(
+        $['option']['token']['value'],
+        ($t): t_out.Const_Value => {
+            switch ($t) {
+                case 'array':
                     return _p_change_context(
                         $['value'],
-                        ($) => ['reference', _p_change_context(
-                            v_unmarshalled_from_parse_tree.Verbose_Group(
+                        ($) => ['array', _p.list.from.list(
+                            v_unmarshalled_from_parse_tree.List(
                                 $,
                                 ($) => abort(
                                     $,
                                 ),
                                 {
-                                    'expected properties': _p.dictionary.literal(
-                                        {
-                                            "document": null,
-                                            "steps": null,
-                                        },
+                                    'subdocument context': _p.optional.literal.not_set(),
+                                },
+                            )['items'],
+                        ).map(
+                            ($) => _p_change_context(
+                                $['value'],
+                                ($) => Const_Value(
+                                    $,
+                                    ($) => abort(
+                                        $,
                                     ),
+                                ),
+                            ),
+                        )],
+                    )
+                case 'boolean':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['boolean', v_unmarshalled_from_parse_tree.Boolean(
+                            $,
+                            ($) => abort(
+                                $,
+                            ),
+                            {
+                                'type': ['true/false', null],
+                                'subdocument context': _p.optional.literal.not_set(),
+                            },
+                        )],
+                    )
+                case 'null':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['null', v_unmarshalled_from_parse_tree.Nothing(
+                            $,
+                            ($) => abort(
+                                $,
+                            ),
+                        )],
+                    )
+                case 'number':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['number', v_unmarshalled_from_parse_tree.Number(
+                            $,
+                            ($) => abort(
+                                $,
+                            ),
+                            {
+                                'type': ['fractional decimal', {
+                                    'digits': 0,
+                                }],
+                                'subdocument context': _p.optional.literal.not_set(),
+                            },
+                        )],
+                    )
+                case 'object':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['object', _p_change_context(
+                            v_unmarshalled_from_parse_tree.Dictionary(
+                                $,
+                                ($) => abort(
+                                    $,
+                                ),
+                                {
                                     'subdocument context': _p.optional.literal.not_set(),
                                 },
                             ),
-                            ($) => _p_variables(
-                                () => {
-                                    
-                                    const var_verbose_group_range = v_parse_tree_to_location.Value(
-                                        $['value'],
-                                        {
-                                            'subdocument context': _p.optional.literal.not_set(),
-                                        },
-                                    )
-                                    return {
-                                        'document': _p_change_context(
-                                            v_unmarshalled_from_parse_tree.Property(
-                                                $,
-                                                ($) => abort(
-                                                    $,
-                                                ),
-                                                {
-                                                    'id': 'document',
-                                                    'subdocument context': _p.optional.literal.not_set(),
-                                                },
-                                            ),
-                                            ($) => _p.optional.from.optional(
-                                                v_unmarshalled_from_parse_tree.Optional(
-                                                    $,
-                                                    ($) => abort(
-                                                        $,
-                                                    ),
-                                                )['optional'],
-                                            ).map(
-                                                ($) => v_unmarshalled_from_parse_tree.Text(
-                                                    $,
-                                                    ($) => abort(
-                                                        $,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        'steps': _p_change_context(
-                                            v_unmarshalled_from_parse_tree.Property(
-                                                $,
-                                                ($) => abort(
-                                                    $,
-                                                ),
-                                                {
-                                                    'id': 'steps',
-                                                    'subdocument context': _p.optional.literal.not_set(),
-                                                },
-                                            ),
-                                            ($) => _p.list.from.list(
-                                                v_unmarshalled_from_parse_tree.List(
-                                                    $,
-                                                    ($) => abort(
-                                                        $,
-                                                    ),
-                                                    {
-                                                        'subdocument context': _p.optional.literal.not_set(),
-                                                    },
-                                                )['items'],
-                                            ).map(
-                                                ($) => _p_change_context(
-                                                    $['value'],
-                                                    ($) => v_unmarshalled_from_parse_tree.Text(
-                                                        $,
-                                                        ($) => abort(
-                                                            $,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    }
-                                },
+                            ($) => _p.dictionary.from.dictionary(
+                                $['entries'],
+                            ).map(
+                                ($, id) => Const_Value(
+                                    $,
+                                    ($) => abort(
+                                        $,
+                                    ),
+                                ),
+                            ),
+                        )],
+                    )
+                case 'string':
+                    return _p_change_context(
+                        $['value'],
+                        ($) => ['string', v_unmarshalled_from_parse_tree.Text(
+                            $,
+                            ($) => abort(
+                                $,
                             ),
                         )],
                     )

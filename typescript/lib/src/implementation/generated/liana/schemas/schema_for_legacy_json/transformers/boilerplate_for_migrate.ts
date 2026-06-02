@@ -60,6 +60,13 @@ export const Schema: t_signatures.Schema = ($) => _p.decide.state(
                     $,
                     ($) => ['any', null],
                 )
+            case 'const':
+                return _p.ss(
+                    $,
+                    ($) => ['const', Const_Value(
+                        $,
+                    )],
+                )
             case 'one of':
                 return _p.ss(
                     $,
@@ -70,6 +77,28 @@ export const Schema: t_signatures.Schema = ($) => _p.decide.state(
                             $,
                         ),
                     )],
+                )
+            case 'reference':
+                return _p.ss(
+                    $,
+                    ($) => ['reference', {
+                        'document': _p_change_context(
+                            $['document'],
+                            ($) => _p.optional.from.optional(
+                                $,
+                            ).map(
+                                ($) => $,
+                            ),
+                        ),
+                        'steps': _p_change_context(
+                            $['steps'],
+                            ($) => _p.list.from.list(
+                                $,
+                            ).map(
+                                ($) => $,
+                            ),
+                        ),
+                    }],
                 )
             case 'type constraint':
                 return _p.ss(
@@ -209,27 +238,59 @@ export const Schema: t_signatures.Schema = ($) => _p.decide.state(
                         },
                     )],
                 )
-            case 'reference':
+            default:
+                return _p.au(
+                    $[0],
+                )
+        }
+    },
+)
+
+export const Const_Value: t_signatures.Const_Value = ($) => _p.decide.state(
+    $,
+    ($): t_out.Const_Value => {
+        switch ($[0]) {
+            case 'array':
                 return _p.ss(
                     $,
-                    ($) => ['reference', {
-                        'document': _p_change_context(
-                            $['document'],
-                            ($) => _p.optional.from.optional(
-                                $,
-                            ).map(
-                                ($) => $,
-                            ),
+                    ($) => ['array', _p.list.from.list(
+                        $,
+                    ).map(
+                        ($) => Const_Value(
+                            $,
                         ),
-                        'steps': _p_change_context(
-                            $['steps'],
-                            ($) => _p.list.from.list(
-                                $,
-                            ).map(
-                                ($) => $,
-                            ),
+                    )],
+                )
+            case 'boolean':
+                return _p.ss(
+                    $,
+                    ($) => ['boolean', $],
+                )
+            case 'null':
+                return _p.ss(
+                    $,
+                    ($) => ['null', null],
+                )
+            case 'number':
+                return _p.ss(
+                    $,
+                    ($) => ['number', $],
+                )
+            case 'object':
+                return _p.ss(
+                    $,
+                    ($) => ['object', _p.dictionary.from.dictionary(
+                        $,
+                    ).map(
+                        ($, id) => Const_Value(
+                            $,
                         ),
-                    }],
+                    )],
+                )
+            case 'string':
+                return _p.ss(
+                    $,
+                    ($) => ['string', $],
                 )
             default:
                 return _p.au(

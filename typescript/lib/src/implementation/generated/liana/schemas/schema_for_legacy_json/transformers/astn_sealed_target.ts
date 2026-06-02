@@ -71,6 +71,16 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                         'value': ['nothing', null],
                     }),
                 )
+            case 'const':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'const',
+                        'value': Const_Value(
+                            $,
+                        ),
+                    }),
+                )
             case 'one of':
                 return _p.ss(
                     $,
@@ -83,6 +93,39 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                 $,
                             ),
                         )],
+                    }),
+                )
+            case 'reference':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'reference',
+                        'value': ['group', ['verbose', _p.dictionary.literal(
+                            {
+                                "document": _p_change_context(
+                                    $['document'],
+                                    ($) => ['optional', _p.decide.optional(
+                                        $,
+                                        ($): t_out.Value.optional => ['set', ['text', {
+                                            'delimiter': ['quote', null],
+                                            'value': $,
+                                        }]],
+                                        () => ['not set', null],
+                                    )],
+                                ),
+                                "steps": _p_change_context(
+                                    $['steps'],
+                                    ($) => ['list', _p.list.from.list(
+                                        $,
+                                    ).map(
+                                        ($) => ['text', {
+                                            'delimiter': ['quote', null],
+                                            'value': $,
+                                        }],
+                                    )],
+                                ),
+                            },
+                        )]],
                     }),
                 )
             case 'type constraint':
@@ -252,37 +295,92 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                         )],
                     }),
                 )
-            case 'reference':
+            default:
+                return _p.au(
+                    $[0],
+                )
+        }
+    },
+)]
+
+export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.state(
+    $,
+    ($): t_out.Value.state => {
+        switch ($[0]) {
+            case 'array':
                 return _p.ss(
                     $,
                     ($) => ({
-                        'option': 'reference',
-                        'value': ['group', ['verbose', _p.dictionary.literal(
-                            {
-                                "document": _p_change_context(
-                                    $['document'],
-                                    ($) => ['optional', _p.decide.optional(
-                                        $,
-                                        ($): t_out.Value.optional => ['set', ['text', {
-                                            'delimiter': ['quote', null],
-                                            'value': $,
-                                        }]],
-                                        () => ['not set', null],
-                                    )],
-                                ),
-                                "steps": _p_change_context(
-                                    $['steps'],
-                                    ($) => ['list', _p.list.from.list(
-                                        $,
-                                    ).map(
-                                        ($) => ['text', {
-                                            'delimiter': ['quote', null],
-                                            'value': $,
-                                        }],
-                                    )],
-                                ),
-                            },
-                        )]],
+                        'option': 'array',
+                        'value': ['list', _p.list.from.list(
+                            $,
+                        ).map(
+                            ($) => Const_Value(
+                                $,
+                            ),
+                        )],
+                    }),
+                )
+            case 'boolean':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'boolean',
+                        'value': ['text', {
+                            'delimiter': ['none', null],
+                            'value': v_primitives_to_text.true_false(
+                                $,
+                            ),
+                        }],
+                    }),
+                )
+            case 'null':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'null',
+                        'value': ['nothing', null],
+                    }),
+                )
+            case 'number':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'number',
+                        'value': ['text', {
+                            'delimiter': ['none', null],
+                            'value': v_primitives_to_text.fractional_decimal(
+                                $,
+                                {
+                                    'number of fractional digits': 0,
+                                },
+                            ),
+                        }],
+                    }),
+                )
+            case 'object':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'object',
+                        'value': ['dictionary', _p.dictionary.from.dictionary(
+                            $,
+                        ).map(
+                            ($, id) => Const_Value(
+                                $,
+                            ),
+                        )],
+                    }),
+                )
+            case 'string':
+                return _p.ss(
+                    $,
+                    ($) => ({
+                        'option': 'string',
+                        'value': ['text', {
+                            'delimiter': ['quote', null],
+                            'value': $,
+                        }],
                     }),
                 )
             default:

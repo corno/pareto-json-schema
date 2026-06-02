@@ -25,6 +25,12 @@ export const Schema: t_signatures.Schema = ($) => v_serialize.Document(
     ),
 )
 
+export const Const_Value: t_signatures.Const_Value = ($) => v_serialize.Document(
+    v_marshall.Const_Value(
+        $,
+    ),
+)
+
 export const Array: t_signatures.Array = ($) => v_serialize.Document(
     v_marshall.Array(
         $,
