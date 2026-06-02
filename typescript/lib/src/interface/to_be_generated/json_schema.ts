@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core/dist/interface'
 
 
-import * as d_json from "pareto-json/dist/interface/generated/liana/schemas/json/data"
+import * as d_json from "pareto-json/dist/interface/generated/liana/schemas/json_with_guaranteed_unique_keys/data"
 
 export type Schema =
     | ['boolean', null]
