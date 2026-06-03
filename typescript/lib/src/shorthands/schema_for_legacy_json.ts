@@ -7,22 +7,12 @@ import * as sh from 'pareto-core-shorthands/dist/unconstrained'
 export const document = (
     imports: sh.Raw_Or_Normal_Dictionary<x.Document.imports.D>,
     definitions: sh.Raw_Or_Normal_Dictionary<x.Definitions.D>,
-    schema: x.Schema,
+    root: string,
 ): x.Document => {
     return {
         'imports': sh.dictionary.literal(imports),
         'definitions': sh.dictionary.literal(definitions),
-        'schema': schema,
-    }
-}
-
-export const definition = (
-    definitions: sh.Raw_Or_Normal_Dictionary<x.Definitions.D>,
-    root: x.Schema,
-): x.Definitions.D => {
-    return {
-        'definitions': sh.dictionary.literal(definitions),
-        'schema': root,
+        'root': root,
     }
 }
 
@@ -100,10 +90,10 @@ export namespace v {
     //         'steps': steps === undefined ? _p.optional.literal.not_set() : _p.optional.literal.set(steps),
     //     }]
     // }
-    export const reference_internal = (steps: sh.Raw_Or_Normal_List<string>): x.Schema => {
+    export const reference_internal = (definition: string): x.Schema => {
         return ['reference', {
             'document': _p.optional.literal.not_set(),
-            'steps': sh.list.literal(steps),
+            'definition': definition,
         }]
     }
     export const enum_ = (items: sh.Raw_Or_Normal_Dictionary<null>): x.Schema => {

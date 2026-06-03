@@ -6,8 +6,6 @@ import * as d_in from "pareto-json/dist/interface/to_be_generated/json_with_pars
 import * as d_out from "../../../../interface/to_be_generated/json_schema"
 import * as d_function from "pareto-json/dist/interface/to_be_generated/unmarshalled_from_json"
 
-import * as d_location from "astn-core/dist/interface/generated/liana/schemas/location/data"
-
 //dependencies
 import * as r_json_y from "pareto-json/dist/implementation/manual/refiners/json_y/json_with_parse_info"
 import * as r_json_x from "pareto-json/dist/implementation/manual/refiners/json_x/json_with_parse_info"
@@ -28,22 +26,78 @@ export const Schema: _pi.Refiner<
                     abort,
                     {
                         'expected properties': _p.dictionary.literal({
+
+                            //core
                             "$id": null,
-                            "$defs": null,
                             "$schema": null,
+                            "$ref": null,   
+                            "$anchor": null,
+                            "$dynamicRef": null,
+                            "$dynamicAnchor": null,
+                            "$vocabulary": null,
+                            "$comment": null,
+                            "$defs": null,
+                            //applicator
+                            "prefixItems": null,
+                            "items": null,
+                            "contains": null,
                             "additionalProperties": null,
-                            "const": null,
-                            "maxProperties": null,
-                            "minLength": null,
-                            "minProperties": null,
                             "properties": null,
-                            "title": null,
-                            "type": null,
-                            "uniqueItems": null,
+                            "patternProperties": null,
+                            "dependentSchemas": null,
+                            "propertyNames": null,
+                            "if": null,
+                            "then": null,
+                            "else": null,
                             "oneOf": null,
                             "allOf": null,
                             "anyOf": null,
+                            "not": null,
+                            //unevaluated
+                            "unevaluatedItems": null,
+                            "unevaluatedProperties": null,
+                            //validation
+                            "type": null,
+                            "const": null,
+                            "enum": null,
+                            "multipleOf": null,
+                            "maximum": null,
+                            "exclusiveMaximum": null,
+                            "minimum": null,
+                            "exclusiveMinimum": null,
+                            "maxLength": null,
+                            "minLength": null,
+                            "pattern": null,
+                            "maxItems": null,
+                            "minItems": null,
+                            "uniqueItems": null,
+                            "maxContains": null,
+                            "minContains": null,
+                            "maxProperties": null,
+                            "minProperties": null,
                             "required": null,
+                            "dependentRequired": null,
+                            //meta-data
+                            "title": null,
+                            "description": null,
+                            "default": null,
+                            "deprecated": null,
+                            "readOnly": null,
+                            "writeOnly": null,
+                            "examples": null,
+                            //format-annotation
+                            "format": null,
+                            //content
+                            "contentEncoding": null,
+                            "contentMediaType": null,
+                            "contentSchema": null,
+                            //deprecated
+                            "definitions": null,
+                            "dependencies": null,
+                            "$recursiveAnchor": null,
+                            "$recursiveRef": null,
+
+
                         })
                     }
                 ),
@@ -174,6 +228,10 @@ export const Schema: _pi.Refiner<
                     'allOf': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("allOf")
                     ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
+
+                    'not': _p.optional.from.optional(
+                        $.properties.__get_possible_entry_deprecated("not")
+                    ).map(($) => Schema($.value, abort)),
 
                     /******** unevaluated ********/
 

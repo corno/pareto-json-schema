@@ -18,7 +18,7 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.d
             ($) => ['dictionary', _p.dictionary.from.dictionary(
                 $,
             ).map(
-                ($, id) => Schema(
+                ($, id) => Document(
                     $,
                 ),
             )],
@@ -29,11 +29,12 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.d
                 $,
             ),
         ),
-        "schema": _p_change_context(
-            $['schema'],
-            ($) => Schema(
-                $,
-            ),
+        "root": _p_change_context(
+            $['root'],
+            ($) => ['text', {
+                'delimiter': ['quote', null],
+                'value': $,
+            }],
         ),
     },
 )]]
@@ -41,22 +42,9 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.d
 export const Definitions: t_signatures.Definitions = ($) => ['dictionary', _p.dictionary.from.dictionary(
     $,
 ).map(
-    ($, id) => ['group', ['verbose', _p.dictionary.literal(
-        {
-            "definitions": _p_change_context(
-                $['definitions'],
-                ($) => Definitions(
-                    $,
-                ),
-            ),
-            "schema": _p_change_context(
-                $['schema'],
-                ($) => Schema(
-                    $,
-                ),
-            ),
-        },
-    )]],
+    ($, id) => Schema(
+        $,
+    ),
 )]
 
 export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
@@ -113,16 +101,12 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                         () => ['not set', null],
                                     )],
                                 ),
-                                "steps": _p_change_context(
-                                    $['steps'],
-                                    ($) => ['list', _p.list.from.list(
-                                        $,
-                                    ).map(
-                                        ($) => ['text', {
-                                            'delimiter': ['quote', null],
-                                            'value': $,
-                                        }],
-                                    )],
+                                "definition": _p_change_context(
+                                    $['definition'],
+                                    ($) => ['text', {
+                                        'delimiter': ['quote', null],
+                                        'value': $,
+                                    }],
                                 ),
                             },
                         )]],

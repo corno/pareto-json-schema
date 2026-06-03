@@ -35,7 +35,7 @@ export type Schema_Object = {
     'oneOf': _pi.Optional_Value<Schema_Array>
     'allOf': _pi.Optional_Value<Schema_Array>
     'anyOf': _pi.Optional_Value<Schema_Array>
-    //not
+    'not': _pi.Optional_Value<Schema>
 
     /******** unevaluated ********/
     'unevaluatedItems': _pi.Optional_Value<Schema>

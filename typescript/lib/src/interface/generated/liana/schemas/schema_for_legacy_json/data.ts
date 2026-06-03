@@ -5,7 +5,7 @@ export namespace Document_ {
     
     export namespace imports {
         
-        export type D = Schema_
+        export type D = Document_
         
     }
     
@@ -13,30 +13,19 @@ export namespace Document_ {
     
     export type definitions = Definitions_
     
-    export type schema = Schema_
+    export type root = string
     
 }
 
 export type Document_ = {
     readonly 'imports': Document_.imports
     readonly 'definitions': Document_.definitions
-    readonly 'schema': Document_.schema
+    readonly 'root': Document_.root
 }
 
 export namespace Definitions_ {
     
-    export namespace D {
-        
-        export type definitions = Definitions_
-        
-        export type schema = Schema_
-        
-    }
-    
-    export type D = {
-        readonly 'definitions': D.definitions
-        readonly 'schema': D.schema
-    }
+    export type D = Schema_
     
 }
 
@@ -66,19 +55,13 @@ export namespace Schema_ {
         
         export type document = _pi.Optional_Value<document.O>
         
-        export namespace steps {
-            
-            export type L = string
-            
-        }
-        
-        export type steps = _pi.List<steps.L>
+        export type definition = string
         
     }
     
     export type reference = {
         readonly 'document': reference.document
-        readonly 'steps': reference.steps
+        readonly 'definition': reference.definition
     }
     
     export namespace type_constraint {

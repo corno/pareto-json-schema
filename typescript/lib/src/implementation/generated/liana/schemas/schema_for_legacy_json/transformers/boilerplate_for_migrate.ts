@@ -13,7 +13,7 @@ export const Document: t_signatures.Document = ($) => ({
         ($) => _p.dictionary.from.dictionary(
             $,
         ).map(
-            ($, id) => Schema(
+            ($, id) => Document(
                 $,
             ),
         ),
@@ -24,31 +24,18 @@ export const Document: t_signatures.Document = ($) => ({
             $,
         ),
     ),
-    'schema': _p_change_context(
-        $['schema'],
-        ($) => Schema(
-            $,
-        ),
+    'root': _p_change_context(
+        $['root'],
+        ($) => $,
     ),
 })
 
 export const Definitions: t_signatures.Definitions = ($) => _p.dictionary.from.dictionary(
     $,
 ).map(
-    ($, id) => ({
-        'definitions': _p_change_context(
-            $['definitions'],
-            ($) => Definitions(
-                $,
-            ),
-        ),
-        'schema': _p_change_context(
-            $['schema'],
-            ($) => Schema(
-                $,
-            ),
-        ),
-    }),
+    ($, id) => Schema(
+        $,
+    ),
 )
 
 export const Schema: t_signatures.Schema = ($) => _p.decide.state(
@@ -90,13 +77,9 @@ export const Schema: t_signatures.Schema = ($) => _p.decide.state(
                                 ($) => $,
                             ),
                         ),
-                        'steps': _p_change_context(
-                            $['steps'],
-                            ($) => _p.list.from.list(
-                                $,
-                            ).map(
-                                ($) => $,
-                            ),
+                        'definition': _p_change_context(
+                            $['definition'],
+                            ($) => $,
                         ),
                     }],
                 )
