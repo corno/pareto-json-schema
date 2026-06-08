@@ -132,7 +132,7 @@ export const Schema: _pi.Refiner<
                     '$vocabulary': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("$vocabulary")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -146,7 +146,7 @@ export const Schema: _pi.Refiner<
                     '$defs': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("$defs")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -174,7 +174,7 @@ export const Schema: _pi.Refiner<
                     'properties': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("properties")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -184,7 +184,7 @@ export const Schema: _pi.Refiner<
                     'patternProperties': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("patternProperties")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -194,7 +194,7 @@ export const Schema: _pi.Refiner<
                     'dependentSchemas': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependentSchemas")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -335,7 +335,7 @@ export const Schema: _pi.Refiner<
                     'dependentRequired': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependentRequired")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -396,7 +396,7 @@ export const Schema: _pi.Refiner<
                     'definitions': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("definitions")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
@@ -406,7 +406,7 @@ export const Schema: _pi.Refiner<
                     'dependencies': _p.optional.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependencies")
                     ).map(($) => _p_cc(
-                        r_json_y.Object_With_Unique_Keys(
+                        r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
