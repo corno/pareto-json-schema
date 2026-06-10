@@ -7,35 +7,63 @@
             `globals`: (
                 `complexity`: | `unconstrained` ~
                 `text types`: {
-                    'text': (
+                    'temp_ref': (
                         `type`: | `single line` ~
+                        `link`: | `no` ~
+                    )
+                    'string': (
+                        `type`: | `single line` ~
+                        `link`: | `no` ~
                     )
                 }
                 `simple types`: {
                     'boolean': (
                         `type`: | `boolean` ~
                     )
+                    'number': (
+                        `type`: | `number` (
+                            `precision`: | `exact` (
+                                `number of fractional digits`: * 0
+                                `type`: | `integer` ~
+                            )
+                        )
+                    )
                 }
             )
             `modules`: {
-                'Schema': (
+                'Document': (
                     `root value`: | `group` {
-                        'definitions': (
+                        'imports': (
                             `description`: _
                             `value`: | `dictionary` (
                                 `value`: | `component` (
-                                    `type`: | `internal` 'Value'
+                                    `type`: | `internal` 'Document'
                                     `results`: _
                                 )
                             )
                         )
+                        'definitions': (
+                            `description`: _
+                            `value`: | `component` (
+                                `type`: | `internal` 'Definitions'
+                                `results`: _
+                            )
+                        )
                         'root': (
                             `description`: _
-                            `value`: | `text` | `global` 'text'
+                            `value`: | `text` | `global` 'temp_ref'
                         )
                     }
                 )
-                'Value': (
+                'Definitions': (
+                    `root value`: | `dictionary` (
+                        `value`: | `component` (
+                            `type`: | `internal` 'Schema'
+                            `results`: _
+                        )
+                    )
+                )
+                'Schema': (
                     `root value`: | `state` (
                         `options`: {
                             'any': (
@@ -43,127 +71,199 @@
                                 `description`: _
                                 `value`: | `nothing` ~
                             )
-                            'any of': (
+                            'const': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Const Value'
+                                    `results`: _
+                                )
+                            )
+                            'one of': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `dictionary` (
+                                    `value`: | `component` (
+                                        `type`: | `internal` 'Schema'
+                                        `results`: _
+                                    )
+                                )
+                            )
+                            'reference': (
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `group` {
-                                    'array': (
+                                    'document': (
                                         `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Array'
-                                            `results`: _
-                                        )
+                                        `value`: | `optional` | `text` | `global` 'temp_ref'
                                     )
-                                    'boolean': (
+                                    'definition': (
                                         `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Boolean'
-                                            `results`: _
-                                        )
-                                    )
-                                    'null': (
-                                        `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Null'
-                                            `results`: _
-                                        )
-                                    )
-                                    'number': (
-                                        `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Number'
-                                            `results`: _
-                                        )
-                                    )
-                                    'object': (
-                                        `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'Object'
-                                            `results`: _
-                                        )
-                                    )
-                                    'string': (
-                                        `description`: _
-                                        `value`: | `optional` | `component` (
-                                            `type`: | `internal` 'String'
-                                            `results`: _
-                                        )
-                                    )
-                                    'else': (
-                                        `description`: _
-                                        `value`: | `optional` | `text` | `global` 'text'
+                                        `value`: | `text` | `global` 'temp_ref'
                                     )
                                 }
                             )
-                            'definition reference': (
-                                `constraints`: _
-                                `description`: _
-                                `value`: | `text` | `global` 'text'
-                            )
-                            'primitive': (
+                            'type constraint': (
                                 `constraints`: _
                                 `description`: _
                                 `value`: | `state` (
                                     `options`: {
-                                        'array': (
+                                        'single': (
                                             `constraints`: _
                                             `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'Array'
+                                            `value`: | `state` (
+                                                `options`: {
+                                                    'array': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'Array'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                    'boolean': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'Boolean'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                    'null': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'Null'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                    'number': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'Number'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                    'object': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'Object'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                    'string': (
+                                                        `constraints`: _
+                                                        `description`: _
+                                                        `value`: | `component` (
+                                                            `type`: | `internal` 'String'
+                                                            `results`: _
+                                                        )
+                                                    )
+                                                }
                                                 `results`: _
                                             )
                                         )
-                                        'boolean': (
+                                        'multiple': (
                                             `constraints`: _
                                             `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'Boolean'
-                                                `results`: _
-                                            )
-                                        )
-                                        'null': (
-                                            `constraints`: _
-                                            `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'Null'
-                                                `results`: _
-                                            )
-                                        )
-                                        'number': (
-                                            `constraints`: _
-                                            `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'Number'
-                                                `results`: _
-                                            )
-                                        )
-                                        'object': (
-                                            `constraints`: _
-                                            `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'Object'
-                                                `results`: _
-                                            )
-                                        )
-                                        'string': (
-                                            `constraints`: _
-                                            `description`: _
-                                            `value`: | `component` (
-                                                `type`: | `internal` 'String'
-                                                `results`: _
-                                            )
+                                            `value`: | `group` {
+                                                'array': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'Array'
+                                                        `results`: _
+                                                    )
+                                                )
+                                                'boolean': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'Boolean'
+                                                        `results`: _
+                                                    )
+                                                )
+                                                'null': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'Null'
+                                                        `results`: _
+                                                    )
+                                                )
+                                                'number': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'Number'
+                                                        `results`: _
+                                                    )
+                                                )
+                                                'object': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'Object'
+                                                        `results`: _
+                                                    )
+                                                )
+                                                'string': (
+                                                    `description`: _
+                                                    `value`: | `optional` | `component` (
+                                                        `type`: | `internal` 'String'
+                                                        `results`: _
+                                                    )
+                                                )
+                                            }
                                         )
                                     }
                                     `results`: _
                                 )
                             )
-                            'nullable': (
+                        }
+                        `results`: _
+                    )
+                )
+                'Const Value': (
+                    `root value`: | `state` (
+                        `options`: {
+                            'array': (
                                 `constraints`: _
                                 `description`: _
-                                `value`: | `component` (
-                                    `type`: | `internal` 'Value'
+                                `value`: | `list` (
+                                    `value`: | `component` (
+                                        `type`: | `internal` 'Const Value'
+                                        `results`: _
+                                    )
                                     `results`: _
                                 )
+                            )
+                            'boolean': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `simple` | `global` 'boolean'
+                            )
+                            'null': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
+                            )
+                            'number': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `simple` | `global` 'number'
+                            )
+                            'object': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `dictionary` (
+                                    `value`: | `component` (
+                                        `type`: | `internal` 'Const Value'
+                                        `results`: _
+                                    )
+                                )
+                            )
+                            'string': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `text` | `global` 'string'
                             )
                         }
                         `results`: _
@@ -179,7 +279,7 @@
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `component` (
-                                            `type`: | `internal` 'Value'
+                                            `type`: | `internal` 'Schema'
                                             `results`: _
                                         )
                                     )
@@ -191,7 +291,7 @@
                                                 `description`: _
                                                 `value`: | `dictionary` (
                                                     `value`: | `component` (
-                                                        `type`: | `internal` 'Value'
+                                                        `type`: | `internal` 'Schema'
                                                         `results`: _
                                                     )
                                                 )
@@ -231,7 +331,7 @@
                                         `constraints`: _
                                         `description`: _
                                         `value`: | `component` (
-                                            `type`: | `internal` 'Value'
+                                            `type`: | `internal` 'Schema'
                                             `results`: _
                                         )
                                     )
@@ -249,7 +349,7 @@
                                             'dynamic': (
                                                 `description`: _
                                                 `value`: | `component` (
-                                                    `type`: | `internal` 'Value'
+                                                    `type`: | `internal` 'Schema'
                                                     `results`: _
                                                 )
                                             )
@@ -267,35 +367,16 @@
                             `description`: _
                             `value`: | `dictionary` (
                                 `value`: | `group` {
-                                    'definition': (
+                                    'schema': (
                                         `description`: _
                                         `value`: | `component` (
-                                            `type`: | `internal` 'Value'
+                                            `type`: | `internal` 'Schema'
                                             `results`: _
                                         )
                                     )
-                                    'presence': (
+                                    'optional': (
                                         `description`: _
-                                        `value`: | `state` (
-                                            `options`: {
-                                                'required': (
-                                                    `constraints`: _
-                                                    `description`: _
-                                                    `value`: | `nothing` ~
-                                                )
-                                                'optional': (
-                                                    `constraints`: _
-                                                    `description`: _
-                                                    `value`: | `group` {
-                                                        'nullable': (
-                                                            `description`: _
-                                                            `value`: | `simple` | `global` 'boolean'
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                            `results`: _
-                                        )
+                                        `value`: | `simple` | `global` 'boolean'
                                     )
                                 }
                             )
