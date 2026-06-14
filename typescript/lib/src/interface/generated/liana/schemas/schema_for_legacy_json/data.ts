@@ -1,5 +1,6 @@
 
-import * as _pi from 'pareto-core/dist/interface'
+import * as p_i from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
 
 export namespace Document_ {
     
@@ -9,7 +10,7 @@ export namespace Document_ {
         
     }
     
-    export type imports = _pi.Dictionary<imports.D>
+    export type imports = p_di.Dictionary<imports.D>
     
     export type definitions = Definitions_
     
@@ -29,7 +30,7 @@ export namespace Definitions_ {
     
 }
 
-export type Definitions_ = _pi.Dictionary<Definitions_.D>
+export type Definitions_ = p_di.Dictionary<Definitions_.D>
 
 export namespace Schema_ {
     
@@ -43,7 +44,7 @@ export namespace Schema_ {
         
     }
     
-    export type one_of = _pi.Dictionary<one_of.D>
+    export type one_of = p_di.Dictionary<one_of.D>
     
     export namespace reference {
         
@@ -53,7 +54,7 @@ export namespace Schema_ {
             
         }
         
-        export type document = _pi.Optional_Value<document.O>
+        export type document = p_di.Optional_Value<document.O>
         
         export type definition = string
         
@@ -98,7 +99,7 @@ export namespace Schema_ {
                 
             }
             
-            export type array = _pi.Optional_Value<array.O>
+            export type array = p_di.Optional_Value<array.O>
             
             export namespace boolean_ {
                 
@@ -106,7 +107,7 @@ export namespace Schema_ {
                 
             }
             
-            export type boolean_ = _pi.Optional_Value<boolean_.O>
+            export type boolean_ = p_di.Optional_Value<boolean_.O>
             
             export namespace null_ {
                 
@@ -114,7 +115,7 @@ export namespace Schema_ {
                 
             }
             
-            export type null_ = _pi.Optional_Value<null_.O>
+            export type null_ = p_di.Optional_Value<null_.O>
             
             export namespace number_ {
                 
@@ -122,7 +123,7 @@ export namespace Schema_ {
                 
             }
             
-            export type number_ = _pi.Optional_Value<number_.O>
+            export type number_ = p_di.Optional_Value<number_.O>
             
             export namespace object_ {
                 
@@ -130,7 +131,7 @@ export namespace Schema_ {
                 
             }
             
-            export type object_ = _pi.Optional_Value<object_.O>
+            export type object_ = p_di.Optional_Value<object_.O>
             
             export namespace string_ {
                 
@@ -138,7 +139,7 @@ export namespace Schema_ {
                 
             }
             
-            export type string_ = _pi.Optional_Value<string_.O>
+            export type string_ = p_di.Optional_Value<string_.O>
             
         }
         
@@ -174,7 +175,7 @@ export namespace Const_Value_ {
         
     }
     
-    export type array = _pi.List<array.L>
+    export type array = p_di.List<array.L>
     
     export type boolean_ = boolean
     
@@ -188,7 +189,7 @@ export namespace Const_Value_ {
         
     }
     
-    export type object_ = _pi.Dictionary<object_.D>
+    export type object_ = p_di.Dictionary<object_.D>
     
     export type string_ = string
     
@@ -216,7 +217,7 @@ export namespace Array_ {
                 
             }
             
-            export type properties = _pi.Dictionary<properties.D>
+            export type properties = p_di.Dictionary<properties.D>
             
         }
         
@@ -295,7 +296,7 @@ export namespace Static_Object_ {
         
     }
     
-    export type properties = _pi.Dictionary<properties.D>
+    export type properties = p_di.Dictionary<properties.D>
     
 }
 
@@ -313,7 +314,7 @@ export namespace String_ {
         
     }
     
-    export type enum_ = _pi.Dictionary<enum_.D>
+    export type enum_ = p_di.Dictionary<enum_.D>
     
 }
 

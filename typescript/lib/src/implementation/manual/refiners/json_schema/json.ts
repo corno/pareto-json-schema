@@ -1,6 +1,6 @@
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ri from 'pareto-core/dist/refiner/interface'
 import * as pt from 'pareto-core/dist/assign'
-import p_change_context from 'pareto-core/dist/_p_change_context'
+import p_change_context from 'pareto-core/dist/specials/change_context'
 
 import * as d_in from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"
 import * as d_out from "../../../../interface/to_be_generated/json_schema"
@@ -11,7 +11,7 @@ import * as r_json_y from "pareto-json/dist/implementation/manual/refiners/json_
 import * as r_json_x from "pareto-json/dist/implementation/manual/refiners/json_x/json_with_parse_info"
 
 
-export const Schema: pi.Refiner<
+export const Schema: p_ri.Refiner<
     d_out.Schema,
     d_function.Error,
     d_in.Value
@@ -441,19 +441,19 @@ export const Schema: pi.Refiner<
     })
 }
 
-export const Schema_Array: pi.Refiner<
+export const Schema_Array: p_ri.Refiner<
     d_out.Schema_Array,
     d_function.Error,
     d_in.Array
 > = ($, abort) => $.items.__l_map(($) => Schema($, abort))
 
-export const String_Array: pi.Refiner<
+export const String_Array: p_ri.Refiner<
     d_out.String_Array,
     d_function.Error,
     d_in.Array
 > = ($, abort) => $.items.__l_map(($) => r_json_x.String($, abort).token.value)
 
-export const Simple_Types: pi.Refiner<
+export const Simple_Types: p_ri.Refiner<
     d_out.Simple_Types,
     d_function.Error,
     d_in.String

@@ -1,5 +1,5 @@
 
-import * as _pi from 'pareto-core/dist/interface'
+import * as p_i from 'pareto-core/dist/interface'
 
 import * as i_generic from "liana-core/dist/interface/to_be_generated/unmarshall"
 
@@ -23,7 +23,7 @@ export namespace Document_ {
 
 export type Document_ = (
     context: Document_.I,
-    abort: _pi.Abort<Document_.E>,
+    abort: p_i.Abort<Document_.E>,
 ) => Document_.O
 
 export namespace Definitions_ {
@@ -42,7 +42,7 @@ export namespace Definitions_ {
 
 export type Definitions_ = (
     context: Definitions_.I,
-    abort: _pi.Abort<Definitions_.E>,
+    abort: p_i.Abort<Definitions_.E>,
 ) => Definitions_.O
 
 export namespace Schema_ {
@@ -61,7 +61,7 @@ export namespace Schema_ {
 
 export type Schema_ = (
     context: Schema_.I,
-    abort: _pi.Abort<Schema_.E>,
+    abort: p_i.Abort<Schema_.E>,
 ) => Schema_.O
 
 export namespace Const_Value_ {
@@ -80,7 +80,7 @@ export namespace Const_Value_ {
 
 export type Const_Value_ = (
     context: Const_Value_.I,
-    abort: _pi.Abort<Const_Value_.E>,
+    abort: p_i.Abort<Const_Value_.E>,
 ) => Const_Value_.O
 
 export namespace Array_ {
@@ -99,7 +99,7 @@ export namespace Array_ {
 
 export type Array_ = (
     context: Array_.I,
-    abort: _pi.Abort<Array_.E>,
+    abort: p_i.Abort<Array_.E>,
 ) => Array_.O
 
 export namespace Boolean_ {
@@ -118,7 +118,7 @@ export namespace Boolean_ {
 
 export type Boolean_ = (
     context: Boolean_.I,
-    abort: _pi.Abort<Boolean_.E>,
+    abort: p_i.Abort<Boolean_.E>,
 ) => Boolean_.O
 
 export namespace Null_ {
@@ -137,7 +137,7 @@ export namespace Null_ {
 
 export type Null_ = (
     context: Null_.I,
-    abort: _pi.Abort<Null_.E>,
+    abort: p_i.Abort<Null_.E>,
 ) => Null_.O
 
 export namespace Number_ {
@@ -156,7 +156,7 @@ export namespace Number_ {
 
 export type Number_ = (
     context: Number_.I,
-    abort: _pi.Abort<Number_.E>,
+    abort: p_i.Abort<Number_.E>,
 ) => Number_.O
 
 export namespace Object_ {
@@ -175,7 +175,7 @@ export namespace Object_ {
 
 export type Object_ = (
     context: Object_.I,
-    abort: _pi.Abort<Object_.E>,
+    abort: p_i.Abort<Object_.E>,
 ) => Object_.O
 
 export namespace Static_Object_ {
@@ -194,7 +194,7 @@ export namespace Static_Object_ {
 
 export type Static_Object_ = (
     context: Static_Object_.I,
-    abort: _pi.Abort<Static_Object_.E>,
+    abort: p_i.Abort<Static_Object_.E>,
 ) => Static_Object_.O
 
 export namespace String_ {
@@ -213,7 +213,7 @@ export namespace String_ {
 
 export type String_ = (
     context: String_.I,
-    abort: _pi.Abort<String_.E>,
+    abort: p_i.Abort<String_.E>,
 ) => String_.O
 
 export { 
