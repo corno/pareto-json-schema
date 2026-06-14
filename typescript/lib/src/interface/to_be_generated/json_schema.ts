@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 
 import * as d_json from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"
@@ -10,95 +10,95 @@ export type Schema =
 export type Schema_Object = {
 
     /******** core ********/
-    '$id': _pi.Optional_Value<string>
-    '$schema': _pi.Optional_Value<string>
-    '$ref': _pi.Optional_Value<string>
-    '$anchor': _pi.Optional_Value<string>
-    '$dynamicRef': _pi.Optional_Value<string>
-    '$dynamicAnchor': _pi.Optional_Value<string>
-    '$vocabulary': _pi.Optional_Value<_pi.Dictionary<boolean>>
-    '$comment': _pi.Optional_Value<string>
-    '$defs': _pi.Optional_Value<_pi.Dictionary<Schema>>
+    '$id': pi.Optional_Value<string>
+    '$schema': pi.Optional_Value<string>
+    '$ref': pi.Optional_Value<string>
+    '$anchor': pi.Optional_Value<string>
+    '$dynamicRef': pi.Optional_Value<string>
+    '$dynamicAnchor': pi.Optional_Value<string>
+    '$vocabulary': pi.Optional_Value<pi.Dictionary<boolean>>
+    '$comment': pi.Optional_Value<string>
+    '$defs': pi.Optional_Value<pi.Dictionary<Schema>>
 
     /******** applicator********/
-    'prefixItems': _pi.Optional_Value<Schema_Array>
-    'items': _pi.Optional_Value<Schema>
-    'contains': _pi.Optional_Value<Schema>
-    'additionalProperties': _pi.Optional_Value<Schema>
-    'properties': _pi.Optional_Value<Properties>
-    'patternProperties': _pi.Optional_Value<_pi.Dictionary<Schema>>
-    'dependentSchemas': _pi.Optional_Value<_pi.Dictionary<Schema>>
-    'propertyNames': _pi.Optional_Value<Schema>
-    'if': _pi.Optional_Value<Schema>
-    'then': _pi.Optional_Value<Schema>
-    'else': _pi.Optional_Value<Schema>
-    'oneOf': _pi.Optional_Value<Schema_Array>
-    'allOf': _pi.Optional_Value<Schema_Array>
-    'anyOf': _pi.Optional_Value<Schema_Array>
-    'not': _pi.Optional_Value<Schema>
+    'prefixItems': pi.Optional_Value<Schema_Array>
+    'items': pi.Optional_Value<Schema>
+    'contains': pi.Optional_Value<Schema>
+    'additionalProperties': pi.Optional_Value<Schema>
+    'properties': pi.Optional_Value<Properties>
+    'patternProperties': pi.Optional_Value<pi.Dictionary<Schema>>
+    'dependentSchemas': pi.Optional_Value<pi.Dictionary<Schema>>
+    'propertyNames': pi.Optional_Value<Schema>
+    'if': pi.Optional_Value<Schema>
+    'then': pi.Optional_Value<Schema>
+    'else': pi.Optional_Value<Schema>
+    'oneOf': pi.Optional_Value<Schema_Array>
+    'allOf': pi.Optional_Value<Schema_Array>
+    'anyOf': pi.Optional_Value<Schema_Array>
+    'not': pi.Optional_Value<Schema>
 
     /******** unevaluated ********/
-    'unevaluatedItems': _pi.Optional_Value<Schema>
-    'unevaluatedProperties': _pi.Optional_Value<Schema>
+    'unevaluatedItems': pi.Optional_Value<Schema>
+    'unevaluatedProperties': pi.Optional_Value<Schema>
 
     /******** validation ********/
-    'type': _pi.Optional_Value<Type>
-    'const': _pi.Optional_Value<d_json.Value>
-    'enum': _pi.Optional_Value<_pi.List<d_json.Value>>
-    'multipleOf': _pi.Optional_Value<number>
-    'maximum': _pi.Optional_Value<number>
-    'exclusiveMaximum': _pi.Optional_Value<number>
-    'minimum': _pi.Optional_Value<number>
-    'exclusiveMinimum': _pi.Optional_Value<number>
-    'maxLength': _pi.Optional_Value<number>
-    'minLength': _pi.Optional_Value<number>
-    'pattern': _pi.Optional_Value<string>
-    'maxItems': _pi.Optional_Value<number>
-    'minItems': _pi.Optional_Value<number>
-    'uniqueItems': _pi.Optional_Value<boolean>
-    'maxContains': _pi.Optional_Value<number>
-    'minContains': _pi.Optional_Value<number>
-    'maxProperties': _pi.Optional_Value<number>
-    'minProperties': _pi.Optional_Value<number>
-    'required': _pi.Optional_Value<String_Array>
-    'dependentRequired': _pi.Optional_Value<_pi.Dictionary<String_Array>>
+    'type': pi.Optional_Value<Type>
+    'const': pi.Optional_Value<d_json.Value>
+    'enum': pi.Optional_Value<pi.List<d_json.Value>>
+    'multipleOf': pi.Optional_Value<number>
+    'maximum': pi.Optional_Value<number>
+    'exclusiveMaximum': pi.Optional_Value<number>
+    'minimum': pi.Optional_Value<number>
+    'exclusiveMinimum': pi.Optional_Value<number>
+    'maxLength': pi.Optional_Value<number>
+    'minLength': pi.Optional_Value<number>
+    'pattern': pi.Optional_Value<string>
+    'maxItems': pi.Optional_Value<number>
+    'minItems': pi.Optional_Value<number>
+    'uniqueItems': pi.Optional_Value<boolean>
+    'maxContains': pi.Optional_Value<number>
+    'minContains': pi.Optional_Value<number>
+    'maxProperties': pi.Optional_Value<number>
+    'minProperties': pi.Optional_Value<number>
+    'required': pi.Optional_Value<String_Array>
+    'dependentRequired': pi.Optional_Value<pi.Dictionary<String_Array>>
 
     /******** meta-data********/
-    'title': _pi.Optional_Value<string>
-    'description': _pi.Optional_Value<string>
-    'default': _pi.Optional_Value<d_json.Value>
-    'deprecated': _pi.Optional_Value<boolean>
-    'readOnly': _pi.Optional_Value<boolean>
-    'writeOnly': _pi.Optional_Value<boolean>
-    'examples': _pi.Optional_Value<_pi.List<d_json.Value>>
+    'title': pi.Optional_Value<string>
+    'description': pi.Optional_Value<string>
+    'default': pi.Optional_Value<d_json.Value>
+    'deprecated': pi.Optional_Value<boolean>
+    'readOnly': pi.Optional_Value<boolean>
+    'writeOnly': pi.Optional_Value<boolean>
+    'examples': pi.Optional_Value<pi.List<d_json.Value>>
 
     /******** format-annotation ********/
-    'format': _pi.Optional_Value<string>
+    'format': pi.Optional_Value<string>
 
     /******** content********/
-    'contentEncoding': _pi.Optional_Value<string>
-    'contentMediaType': _pi.Optional_Value<string>
-    'contentSchema': _pi.Optional_Value<Schema>
+    'contentEncoding': pi.Optional_Value<string>
+    'contentMediaType': pi.Optional_Value<string>
+    'contentSchema': pi.Optional_Value<Schema>
 
     /******** deprecated********/
-    'definitions': _pi.Optional_Value<_pi.Dictionary<Schema>>
-    'dependencies': _pi.Optional_Value<_pi.Dictionary<
+    'definitions': pi.Optional_Value<pi.Dictionary<Schema>>
+    'dependencies': pi.Optional_Value<pi.Dictionary<
         | ['schema', Schema]
         | ['array', String_Array]
     >>
-    '$recursiveAnchor': _pi.Optional_Value<string>
-    '$recursiveRef': _pi.Optional_Value<string>
+    '$recursiveAnchor': pi.Optional_Value<string>
+    '$recursiveRef': pi.Optional_Value<string>
 }
 
-export type Properties = _pi.Dictionary<Schema>
+export type Properties = pi.Dictionary<Schema>
 
 export type Type =
-    | ['array', _pi.List<Simple_Types>]
+    | ['array', pi.List<Simple_Types>]
     | ['single', Simple_Types]
 
-export type String_Array = _pi.List<string>
+export type String_Array = pi.List<string>
 
-export type Schema_Array = _pi.List<Schema>
+export type Schema_Array = pi.List<Schema>
 
 export type Simple_Types =
     | ['array', null]

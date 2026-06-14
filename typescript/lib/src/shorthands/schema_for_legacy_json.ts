@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/assign'
+import * as pt from 'pareto-core/dist/assign'
 
 import * as x from "../interface/generated/liana/schemas/schema_for_legacy_json/data"
 
@@ -18,33 +18,33 @@ export const document = (
 
 export namespace m {
     export const array_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.array => {
-        return _p.optional.literal.set({
+        return pt.optional.literal.set({
             'type': ['dynamic', definition]
         })
     }
     export const boolean = (): x.Schema.type_constraint.multiple.boolean_ => {
-        return _p.optional.literal.set(null)
+        return pt.optional.literal.set(null)
     }
     export const null_ = (): x.Schema.type_constraint.multiple.null_ => {
-        return _p.optional.literal.set(null)
+        return pt.optional.literal.set(null)
     }
     export const number = (): x.Schema.type_constraint.multiple.number_ => {
-        return _p.optional.literal.set(null)
+        return pt.optional.literal.set(null)
     }
     export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema.type_constraint.multiple.object_ => {
-        return _p.optional.literal.set({
+        return pt.optional.literal.set({
             'type': ['static', {
                 'properties': sh.dictionary.literal(properties),
             }]
         })
     }
     export const object_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.object_ => {
-        return _p.optional.literal.set({
+        return pt.optional.literal.set({
             'type': ['dynamic', definition]
         })
     }
     export const string = (): x.Schema.type_constraint.multiple.string_ => {
-        return _p.optional.literal.set(['any', null])
+        return pt.optional.literal.set(['any', null])
     }
 }
 
@@ -68,12 +68,12 @@ export namespace v {
         },
     ): x.Schema => {
         return ['type constraint', ['multiple', {
-            'array': options.array === undefined ? _p.optional.literal.not_set() : options.array,
-            'boolean': options.boolean === undefined ? _p.optional.literal.not_set() : options.boolean,
-            'null': options.null === undefined ? _p.optional.literal.not_set() : options.null,
-            'number': options.number === undefined ? _p.optional.literal.not_set() : options.number,
-            'object': options.object === undefined ? _p.optional.literal.not_set() : options.object,
-            'string': options.string === undefined ? _p.optional.literal.not_set() : options.string,
+            'array': options.array === undefined ? pt.optional.literal.not_set() : options.array,
+            'boolean': options.boolean === undefined ? pt.optional.literal.not_set() : options.boolean,
+            'null': options.null === undefined ? pt.optional.literal.not_set() : options.null,
+            'number': options.number === undefined ? pt.optional.literal.not_set() : options.number,
+            'object': options.object === undefined ? pt.optional.literal.not_set() : options.object,
+            'string': options.string === undefined ? pt.optional.literal.not_set() : options.string,
         }]]
     }
     export const array_dynamic = (definition: x.Schema): x.Schema => {
@@ -87,12 +87,12 @@ export namespace v {
     // export const reference_external = (name: string, steps?: string[]): x.Schema => {
     //     return ['reference', {
     //         'document': name,
-    //         'steps': steps === undefined ? _p.optional.literal.not_set() : _p.optional.literal.set(steps),
+    //         'steps': steps === undefined ? pt.optional.literal.not_set() : pt.optional.literal.set(steps),
     //     }]
     // }
     export const reference_internal = (definition: string): x.Schema => {
         return ['reference', {
-            'document': _p.optional.literal.not_set(),
+            'document': pt.optional.literal.not_set(),
             'definition': definition,
         }]
     }
