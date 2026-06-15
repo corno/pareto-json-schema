@@ -1,4 +1,4 @@
-import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_di from 'pareto-core/dist/interface/data'
 
 
 import * as d_json from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"

@@ -1,5 +1,5 @@
-import * as pt from 'pareto-core/dist/assign'
-import * as p_ri from 'pareto-core/dist/refiner/interface'
+import * as p_ from 'pareto-core/dist/implementation/refiner'
+import * as p_i from 'pareto-core/dist/interface/refiner'
 
 
 import * as d_out from "../../../../interface/generated/liana/schemas/schema_for_legacy_json/data"
@@ -10,12 +10,12 @@ export namespace d_function {
     export type Error = null
 }
 
-export const Document: p_ri.Refiner<
+export const Document: p_i.Refiner<
     d_out.Document,
     d_function.Error,
     d_in.Schema
     > = ($, abort) => ({
-        'imports': pt.literal.dictionary({}),
-        'definitions': pt.literal.dictionary({}),
+        'imports': p_.literal.dictionary({}),
+        'definitions': p_.literal.dictionary({}),
         'root': ""
     })
