@@ -15,7 +15,7 @@ export const Document: p_ri.Refiner<
     d_function.Error,
     d_in.Schema
     > = ($, abort) => ({
-        'imports': pt.dictionary.literal({}),
-        'definitions': pt.dictionary.literal({}),
+        'imports': pt.literal.dictionary({}),
+        'definitions': pt.literal.dictionary({}),
         'root': ""
     })

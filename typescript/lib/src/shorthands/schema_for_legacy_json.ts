@@ -10,41 +10,41 @@ export const document = (
     root: string,
 ): x.Document => {
     return {
-        'imports': sh.dictionary.literal(imports),
-        'definitions': sh.dictionary.literal(definitions),
+        'imports': sh.dictionary(imports),
+        'definitions': sh.dictionary(definitions),
         'root': root,
     }
 }
 
 export namespace m {
     export const array_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.array => {
-        return pt.optional.literal.set({
+        return pt.literal.set({
             'type': ['dynamic', definition]
         })
     }
     export const boolean = (): x.Schema.type_constraint.multiple.boolean_ => {
-        return pt.optional.literal.set(null)
+        return pt.literal.set(null)
     }
     export const null_ = (): x.Schema.type_constraint.multiple.null_ => {
-        return pt.optional.literal.set(null)
+        return pt.literal.set(null)
     }
     export const number = (): x.Schema.type_constraint.multiple.number_ => {
-        return pt.optional.literal.set(null)
+        return pt.literal.set(null)
     }
     export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema.type_constraint.multiple.object_ => {
-        return pt.optional.literal.set({
+        return pt.literal.set({
             'type': ['static', {
-                'properties': sh.dictionary.literal(properties),
+                'properties': sh.dictionary(properties),
             }]
         })
     }
     export const object_dynamic = (definition: x.Schema): x.Schema.type_constraint.multiple.object_ => {
-        return pt.optional.literal.set({
+        return pt.literal.set({
             'type': ['dynamic', definition]
         })
     }
     export const string = (): x.Schema.type_constraint.multiple.string_ => {
-        return pt.optional.literal.set(['any', null])
+        return pt.literal.set(['any', null])
     }
 }
 
@@ -55,7 +55,7 @@ export namespace v {
     export const one_of = (
         options: sh.Raw_Or_Normal_Dictionary<x.Schema>,
     ): x.Schema => {
-        return ['one of', sh.dictionary.literal(options)]
+        return ['one of', sh.dictionary(options)]
     }
     export const multiple_types = (
         options: {
@@ -68,12 +68,12 @@ export namespace v {
         },
     ): x.Schema => {
         return ['type constraint', ['multiple', {
-            'array': options.array === undefined ? pt.optional.literal.not_set() : options.array,
-            'boolean': options.boolean === undefined ? pt.optional.literal.not_set() : options.boolean,
-            'null': options.null === undefined ? pt.optional.literal.not_set() : options.null,
-            'number': options.number === undefined ? pt.optional.literal.not_set() : options.number,
-            'object': options.object === undefined ? pt.optional.literal.not_set() : options.object,
-            'string': options.string === undefined ? pt.optional.literal.not_set() : options.string,
+            'array': options.array === undefined ? pt.literal.not_set() : options.array,
+            'boolean': options.boolean === undefined ? pt.literal.not_set() : options.boolean,
+            'null': options.null === undefined ? pt.literal.not_set() : options.null,
+            'number': options.number === undefined ? pt.literal.not_set() : options.number,
+            'object': options.object === undefined ? pt.literal.not_set() : options.object,
+            'string': options.string === undefined ? pt.literal.not_set() : options.string,
         }]]
     }
     export const array_dynamic = (definition: x.Schema): x.Schema => {
@@ -87,22 +87,22 @@ export namespace v {
     // export const reference_external = (name: string, steps?: string[]): x.Schema => {
     //     return ['reference', {
     //         'document': name,
-    //         'steps': steps === undefined ? pt.optional.literal.not_set() : pt.optional.literal.set(steps),
+    //         'steps': steps === undefined ? pt.literal.not_set() : pt.literal.set(steps),
     //     }]
     // }
     export const reference_internal = (definition: string): x.Schema => {
         return ['reference', {
-            'document': pt.optional.literal.not_set(),
+            'document': pt.literal.not_set(),
             'definition': definition,
         }]
     }
     export const enum_ = (items: sh.Raw_Or_Normal_Dictionary<null>): x.Schema => {
-        return ['type constraint', ['single', ['string', ['enum', sh.dictionary.literal(items)]]]]
+        return ['type constraint', ['single', ['string', ['enum', sh.dictionary(items)]]]]
     }
     export const object_static = (properties: sh.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema => {
         return ['type constraint', ['single', ['object', {
             'type': ['static', {
-                'properties': sh.dictionary.literal(properties),
+                'properties': sh.dictionary(properties),
             }]
         }]]]
     }

@@ -11,7 +11,7 @@ import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_
 
 import * as v_primitives_to_text from "liana-core/dist/implementation/manual/transformers/primitives/text"
 
-export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.dictionary.literal(
+export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.literal.dictionary(
     {
         "imports": _p_change_context(
             $['imports'],
@@ -88,7 +88,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     $,
                     ($) => ({
                         'option': 'reference',
-                        'value': ['group', ['verbose', _p.dictionary.literal(
+                        'value': ['group', ['verbose', _p.literal.dictionary(
                             {
                                 "document": _p_change_context(
                                     $['document'],
@@ -204,7 +204,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                             $,
                                             ($) => ({
                                                 'option': 'multiple',
-                                                'value': ['group', ['verbose', _p.dictionary.literal(
+                                                'value': ['group', ['verbose', _p.literal.dictionary(
                                                     {
                                                         "array": _p_change_context(
                                                             $['array'],
@@ -375,7 +375,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
     },
 )]
 
-export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.dictionary.literal(
+export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.literal.dictionary(
     {
         "type": _p_change_context(
             $['type'],
@@ -398,7 +398,7 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.diction
                                 $,
                                 ($) => ({
                                     'option': 'static',
-                                    'value': ['group', ['verbose', _p.dictionary.literal(
+                                    'value': ['group', ['verbose', _p.literal.dictionary(
                                         {
                                             "properties": _p_change_context(
                                                 $['properties'],
@@ -431,7 +431,7 @@ export const Null: t_signatures.Null = ($) => ['nothing', null]
 
 export const Number: t_signatures.Number = ($) => ['nothing', null]
 
-export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.dictionary.literal(
+export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.literal.dictionary(
     {
         "type": _p_change_context(
             $['type'],
@@ -464,7 +464,7 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.dicti
                                 $,
                                 ($) => ({
                                     'option': 'mixed',
-                                    'value': ['group', ['verbose', _p.dictionary.literal(
+                                    'value': ['group', ['verbose', _p.literal.dictionary(
                                         {
                                             "static": _p_change_context(
                                                 $['static'],
@@ -493,14 +493,14 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.dicti
     },
 )]]
 
-export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', _p.dictionary.literal(
+export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', _p.literal.dictionary(
     {
         "properties": _p_change_context(
             $['properties'],
             ($) => ['dictionary', _p.dictionary.from.dictionary(
                 $,
             ).map(
-                ($, id) => ['group', ['verbose', _p.dictionary.literal(
+                ($, id) => ['group', ['verbose', _p.literal.dictionary(
                     {
                         "schema": _p_change_context(
                             $['schema'],

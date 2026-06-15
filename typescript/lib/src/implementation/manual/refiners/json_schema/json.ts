@@ -25,7 +25,7 @@ export const Schema: p_ri.Refiner<
                     $,
                     abort,
                     {
-                        'expected properties': pt.dictionary.literal({
+                        'expected properties': pt.literal.dictionary({
 
                             //core
                             "$id": null,
@@ -253,7 +253,7 @@ export const Schema: p_ri.Refiner<
                             case 'array': return pt.ss($, ($) => ['array', $.items.__l_map(($) => Simple_Types(r_json_x.String($, abort), abort))])
                             default: return abort({
                                 'type': ['unexpected type', {
-                                    'expected': pt.list.literal(['string', 'array'])
+                                    'expected': pt.literal.list(['string', 'array'])
                                 }],
                                 'range': range,
                             })
@@ -433,7 +433,7 @@ export const Schema: p_ri.Refiner<
             )])
             default: return abort({
                 'type': ['unexpected type', {
-                    'expected': pt.list.literal(['boolean', 'object'])
+                    'expected': pt.literal.list(['boolean', 'object'])
                 }],
                 'range': range,
             })
@@ -467,7 +467,7 @@ export const Simple_Types: p_ri.Refiner<
         case "null": return ['null', null]
         default: return abort({
             'type': ['unexpected enum value', {
-                'expected': pt.list.literal(['string', 'number', 'boolean', 'object', 'array', 'null'])
+                'expected': pt.literal.list(['string', 'number', 'boolean', 'object', 'array', 'null'])
             }],
             'range': $.range,
         })
