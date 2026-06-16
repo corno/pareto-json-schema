@@ -3,9 +3,9 @@ import * as p_temp from 'pareto-core/dist/assign'
 import * as p_i from 'pareto-core/dist/interface/refiner'
 import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
-import * as d_in from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"
+import * as d_in from "pareto-json/dist/interface/data/json_with_parse_info"
 import * as d_out from "../../../../interface/data/json_schema"
-import * as d_function from "pareto-json/dist/interface/to_be_generated/unmarshalled_from_json"
+import * as d_function from "pareto-json/dist/interface/data/unmarshalled_from_json"
 
 //dependencies
 import * as r_json_y from "pareto-json/dist/implementation/manual/refiners/json_y/json_with_parse_info"

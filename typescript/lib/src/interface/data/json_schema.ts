@@ -1,7 +1,7 @@
 import * as p_di from 'pareto-core/dist/interface/data'
 
 
-import * as d_json from "pareto-json/dist/interface/to_be_generated/json_with_parse_info"
+import * as d_json from "pareto-json/dist/interface/data/json_with_parse_info"
 
 export type Schema =
     | ['boolean', boolean]
