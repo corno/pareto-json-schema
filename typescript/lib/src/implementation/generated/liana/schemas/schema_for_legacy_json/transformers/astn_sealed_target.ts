@@ -1,7 +1,10 @@
 
-import * as _p from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
+import * as p_di from 'pareto-core/dist/interface/data'
+const p_decide_state = <State, B>($: State,  assign: ($: State) => B) => assign($)
+const p_decide_optional = <OV extends p_di.Value, B extends p_di.Value>($: p_di.Optional_Value<OV>,  assign: ($: OV) => B,  otherwise: () => B) => $.__decide(assign, otherwise)
 
-import _p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
 import _p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
 
@@ -11,11 +14,11 @@ import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_
 
 import * as v_primitives_to_text from "liana-core/dist/implementation/manual/transformers/primitives/text"
 
-export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.literal.dictionary(
+export const Document: t_signatures.Document = ($) => ['group', ['verbose', p_.literal.dictionary(
     {
-        "imports": _p_change_context(
+        "imports": p_change_context(
             $['imports'],
-            ($) => ['dictionary', _p.dictionary.from.dictionary(
+            ($) => ['dictionary', p_.from.dictionary(
                 $,
             ).map(
                 ($, id) => Document(
@@ -23,13 +26,13 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.l
                 ),
             )],
         ),
-        "definitions": _p_change_context(
+        "definitions": p_change_context(
             $['definitions'],
             ($) => Definitions(
                 $,
             ),
         ),
-        "root": _p_change_context(
+        "root": p_change_context(
             $['root'],
             ($) => ['text', {
                 'delimiter': ['quote', null],
@@ -39,7 +42,7 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', _p.l
     },
 )]]
 
-export const Definitions: t_signatures.Definitions = ($) => ['dictionary', _p.dictionary.from.dictionary(
+export const Definitions: t_signatures.Definitions = ($) => ['dictionary', p_.from.dictionary(
     $,
 ).map(
     ($, id) => Schema(
@@ -47,12 +50,12 @@ export const Definitions: t_signatures.Definitions = ($) => ['dictionary', _p.di
     ),
 )]
 
-export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
+export const Schema: t_signatures.Schema = ($) => ['state', p_decide_state(
     $,
     ($): t_out.Value.state => {
         switch ($[0]) {
             case 'any':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'any',
@@ -60,7 +63,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     }),
                 )
             case 'const':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'const',
@@ -70,11 +73,11 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     }),
                 )
             case 'one of':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'one of',
-                        'value': ['dictionary', _p.dictionary.from.dictionary(
+                        'value': ['dictionary', p_.from.dictionary(
                             $,
                         ).map(
                             ($, id) => Schema(
@@ -84,15 +87,15 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     }),
                 )
             case 'reference':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'reference',
-                        'value': ['group', ['verbose', _p.literal.dictionary(
+                        'value': ['group', ['verbose', p_.literal.dictionary(
                             {
-                                "document": _p_change_context(
+                                "document": p_change_context(
                                     $['document'],
-                                    ($) => ['optional', _p.decide.optional(
+                                    ($) => ['optional', p_decide_optional(
                                         $,
                                         ($): t_out.Value.optional => ['set', ['text', {
                                             'delimiter': ['quote', null],
@@ -101,7 +104,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                         () => ['not set', null],
                                     )],
                                 ),
-                                "definition": _p_change_context(
+                                "definition": p_change_context(
                                     $['definition'],
                                     ($) => ['text', {
                                         'delimiter': ['quote', null],
@@ -113,25 +116,25 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     }),
                 )
             case 'type constraint':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'type constraint',
-                        'value': ['state', _p.decide.state(
+                        'value': ['state', p_decide_state(
                             $,
                             ($): t_out.Value.state => {
                                 switch ($[0]) {
                                     case 'single':
-                                        return _p.ss(
+                                        return p_.ss(
                                             $,
                                             ($) => ({
                                                 'option': 'single',
-                                                'value': ['state', _p.decide.state(
+                                                'value': ['state', p_decide_state(
                                                     $,
                                                     ($): t_out.Value.state => {
                                                         switch ($[0]) {
                                                             case 'array':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'array',
@@ -141,7 +144,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             case 'boolean':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'boolean',
@@ -151,7 +154,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             case 'null':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'null',
@@ -161,7 +164,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             case 'number':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'number',
@@ -171,7 +174,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             case 'object':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'object',
@@ -181,7 +184,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             case 'string':
-                                                                return _p.ss(
+                                                                return p_.ss(
                                                                     $,
                                                                     ($) => ({
                                                                         'option': 'string',
@@ -191,7 +194,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                     }),
                                                                 )
                                                             default:
-                                                                return _p.au(
+                                                                return p_.au(
                                                                     $[0],
                                                                 )
                                                         }
@@ -200,15 +203,15 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                             }),
                                         )
                                     case 'multiple':
-                                        return _p.ss(
+                                        return p_.ss(
                                             $,
                                             ($) => ({
                                                 'option': 'multiple',
-                                                'value': ['group', ['verbose', _p.literal.dictionary(
+                                                'value': ['group', ['verbose', p_.literal.dictionary(
                                                     {
-                                                        "array": _p_change_context(
+                                                        "array": p_change_context(
                                                             $['array'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', Array(
                                                                     $,
@@ -216,9 +219,9 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                 () => ['not set', null],
                                                             )],
                                                         ),
-                                                        "boolean": _p_change_context(
+                                                        "boolean": p_change_context(
                                                             $['boolean'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', Boolean(
                                                                     $,
@@ -226,9 +229,9 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                 () => ['not set', null],
                                                             )],
                                                         ),
-                                                        "null": _p_change_context(
+                                                        "null": p_change_context(
                                                             $['null'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', Null(
                                                                     $,
@@ -236,9 +239,9 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                 () => ['not set', null],
                                                             )],
                                                         ),
-                                                        "number": _p_change_context(
+                                                        "number": p_change_context(
                                                             $['number'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', Number(
                                                                     $,
@@ -246,9 +249,9 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                 () => ['not set', null],
                                                             )],
                                                         ),
-                                                        "object": _p_change_context(
+                                                        "object": p_change_context(
                                                             $['object'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', Object(
                                                                     $,
@@ -256,9 +259,9 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                                                 () => ['not set', null],
                                                             )],
                                                         ),
-                                                        "string": _p_change_context(
+                                                        "string": p_change_context(
                                                             $['string'],
-                                                            ($) => ['optional', _p.decide.optional(
+                                                            ($) => ['optional', p_decide_optional(
                                                                 $,
                                                                 ($): t_out.Value.optional => ['set', String(
                                                                     $,
@@ -271,7 +274,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                                             }),
                                         )
                                     default:
-                                        return _p.au(
+                                        return p_.au(
                                             $[0],
                                         )
                                 }
@@ -280,23 +283,23 @@ export const Schema: t_signatures.Schema = ($) => ['state', _p.decide.state(
                     }),
                 )
             default:
-                return _p.au(
+                return p_.au(
                     $[0],
                 )
         }
     },
 )]
 
-export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.state(
+export const Const_Value: t_signatures.Const_Value = ($) => ['state', p_decide_state(
     $,
     ($): t_out.Value.state => {
         switch ($[0]) {
             case 'array':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'array',
-                        'value': ['list', _p.list.from.list(
+                        'value': ['list', p_.from.list(
                             $,
                         ).map(
                             ($) => Const_Value(
@@ -306,7 +309,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             case 'boolean':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'boolean',
@@ -319,7 +322,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             case 'null':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'null',
@@ -327,7 +330,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             case 'number':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'number',
@@ -343,11 +346,11 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             case 'object':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'object',
-                        'value': ['dictionary', _p.dictionary.from.dictionary(
+                        'value': ['dictionary', p_.from.dictionary(
                             $,
                         ).map(
                             ($, id) => Const_Value(
@@ -357,7 +360,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             case 'string':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'string',
@@ -368,23 +371,23 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', _p.decide.
                     }),
                 )
             default:
-                return _p.au(
+                return p_.au(
                     $[0],
                 )
         }
     },
 )]
 
-export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.literal.dictionary(
+export const Array: t_signatures.Array = ($) => ['group', ['verbose', p_.literal.dictionary(
     {
-        "type": _p_change_context(
+        "type": p_change_context(
             $['type'],
-            ($) => ['state', _p.decide.state(
+            ($) => ['state', p_decide_state(
                 $,
                 ($): t_out.Value.state => {
                     switch ($[0]) {
                         case 'dynamic':
-                            return _p.ss(
+                            return p_.ss(
                                 $,
                                 ($) => ({
                                     'option': 'dynamic',
@@ -394,15 +397,15 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.literal
                                 }),
                             )
                         case 'static':
-                            return _p.ss(
+                            return p_.ss(
                                 $,
                                 ($) => ({
                                     'option': 'static',
-                                    'value': ['group', ['verbose', _p.literal.dictionary(
+                                    'value': ['group', ['verbose', p_.literal.dictionary(
                                         {
-                                            "properties": _p_change_context(
+                                            "properties": p_change_context(
                                                 $['properties'],
-                                                ($) => ['dictionary', _p.dictionary.from.dictionary(
+                                                ($) => ['dictionary', p_.from.dictionary(
                                                     $,
                                                 ).map(
                                                     ($, id) => Schema(
@@ -415,7 +418,7 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', _p.literal
                                 }),
                             )
                         default:
-                            return _p.au(
+                            return p_.au(
                                 $[0],
                             )
                     }
@@ -431,16 +434,16 @@ export const Null: t_signatures.Null = ($) => ['nothing', null]
 
 export const Number: t_signatures.Number = ($) => ['nothing', null]
 
-export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.literal.dictionary(
+export const Object: t_signatures.Object = ($) => ['group', ['verbose', p_.literal.dictionary(
     {
-        "type": _p_change_context(
+        "type": p_change_context(
             $['type'],
-            ($) => ['state', _p.decide.state(
+            ($) => ['state', p_decide_state(
                 $,
                 ($): t_out.Value.state => {
                     switch ($[0]) {
                         case 'static':
-                            return _p.ss(
+                            return p_.ss(
                                 $,
                                 ($) => ({
                                     'option': 'static',
@@ -450,7 +453,7 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.liter
                                 }),
                             )
                         case 'dynamic':
-                            return _p.ss(
+                            return p_.ss(
                                 $,
                                 ($) => ({
                                     'option': 'dynamic',
@@ -460,19 +463,19 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.liter
                                 }),
                             )
                         case 'mixed':
-                            return _p.ss(
+                            return p_.ss(
                                 $,
                                 ($) => ({
                                     'option': 'mixed',
-                                    'value': ['group', ['verbose', _p.literal.dictionary(
+                                    'value': ['group', ['verbose', p_.literal.dictionary(
                                         {
-                                            "static": _p_change_context(
+                                            "static": p_change_context(
                                                 $['static'],
                                                 ($) => Static_Object(
                                                     $,
                                                 ),
                                             ),
-                                            "dynamic": _p_change_context(
+                                            "dynamic": p_change_context(
                                                 $['dynamic'],
                                                 ($) => Schema(
                                                     $,
@@ -483,7 +486,7 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.liter
                                 }),
                             )
                         default:
-                            return _p.au(
+                            return p_.au(
                                 $[0],
                             )
                     }
@@ -493,22 +496,22 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', _p.liter
     },
 )]]
 
-export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', _p.literal.dictionary(
+export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', p_.literal.dictionary(
     {
-        "properties": _p_change_context(
+        "properties": p_change_context(
             $['properties'],
-            ($) => ['dictionary', _p.dictionary.from.dictionary(
+            ($) => ['dictionary', p_.from.dictionary(
                 $,
             ).map(
-                ($, id) => ['group', ['verbose', _p.literal.dictionary(
+                ($, id) => ['group', ['verbose', p_.literal.dictionary(
                     {
-                        "schema": _p_change_context(
+                        "schema": p_change_context(
                             $['schema'],
                             ($) => Schema(
                                 $,
                             ),
                         ),
-                        "optional": _p_change_context(
+                        "optional": p_change_context(
                             $['optional'],
                             ($) => ['text', {
                                 'delimiter': ['none', null],
@@ -524,12 +527,12 @@ export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verb
     },
 )]]
 
-export const String: t_signatures.String = ($) => ['state', _p.decide.state(
+export const String: t_signatures.String = ($) => ['state', p_decide_state(
     $,
     ($): t_out.Value.state => {
         switch ($[0]) {
             case 'any':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'any',
@@ -537,11 +540,11 @@ export const String: t_signatures.String = ($) => ['state', _p.decide.state(
                     }),
                 )
             case 'enum':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ({
                         'option': 'enum',
-                        'value': ['dictionary', _p.dictionary.from.dictionary(
+                        'value': ['dictionary', p_.from.dictionary(
                             $,
                         ).map(
                             ($, id) => ['nothing', null],
@@ -549,7 +552,7 @@ export const String: t_signatures.String = ($) => ['state', _p.decide.state(
                     }),
                 )
             default:
-                return _p.au(
+                return p_.au(
                     $[0],
                 )
         }

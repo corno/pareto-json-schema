@@ -1,5 +1,4 @@
 import * as p_ from 'pareto-core/dist/implementation/refiner'
-import * as p_temp from 'pareto-core/dist/assign'
 import * as p_i from 'pareto-core/dist/interface/refiner'
 import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
@@ -18,7 +17,7 @@ export const Schema: p_i.Refiner<
     d_in.Value
 > = ($, abort) => {
     const range = $.range
-    return p_.decide.state($.type, ($) => {
+    return p_.from.state($.type).decide(($) => {
         switch ($[0]) {
             case 'boolean': return p_.ss($, ($) => ['boolean', $.value])
             case 'object': return p_.ss($, ($): d_out.Schema => ['object', p_change_context(
@@ -106,152 +105,152 @@ export const Schema: p_i.Refiner<
 
                     /******** core ********/
 
-                    '$id': p_temp.optional.from.optional(
+                    '$id': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$id")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$schema': p_temp.optional.from.optional(
+                    '$schema': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$schema")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$ref': p_temp.optional.from.optional(
+                    '$ref': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$ref")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$anchor': p_temp.optional.from.optional(
+                    '$anchor': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$anchor")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$dynamicRef': p_temp.optional.from.optional(
+                    '$dynamicRef': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$dynamicRef")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$dynamicAnchor': p_temp.optional.from.optional(
+                    '$dynamicAnchor': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$dynamicAnchor")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$vocabulary': p_temp.optional.from.optional(
+                    '$vocabulary': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$vocabulary")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => r_json_x.Boolean($.value, abort).value)
+                        ($) => $.properties.__d_map_deprecated(($) => r_json_x.Boolean($.value, abort).value)
                     )),
 
-                    '$comment': p_temp.optional.from.optional(
+                    '$comment': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$comment")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$defs': p_temp.optional.from.optional(
+                    '$defs': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$defs")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => Schema($.value, abort))
+                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
                     )),
 
                     /******** applicator ********/
 
-                    'prefixItems': p_temp.optional.from.optional(
+                    'prefixItems': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("prefixItems")
                     ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'items': p_temp.optional.from.optional(
+                    'items': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("items")
                     ).map(($) => Schema($.value, abort)),
 
-                    'contains': p_temp.optional.from.optional(
+                    'contains': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("contains")
                     ).map(($) => Schema($.value, abort)),
 
-                    'additionalProperties': p_temp.optional.from.optional(
+                    'additionalProperties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("additionalProperties")
                     ).map(($) => Schema($.value, abort)),
 
-                    'properties': p_temp.optional.from.optional(
+                    'properties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("properties")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => Schema($.value, abort))
+                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
                     )),
 
-                    'patternProperties': p_temp.optional.from.optional(
+                    'patternProperties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("patternProperties")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => Schema($.value, abort))
+                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
                     )),
 
-                    'dependentSchemas': p_temp.optional.from.optional(
+                    'dependentSchemas': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependentSchemas")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => Schema($.value, abort))
+                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
                     )),
 
-                    'propertyNames': p_temp.optional.from.optional(
+                    'propertyNames': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("propertyNames")
                     ).map(($) => Schema($.value, abort)),
 
-                    'if': p_temp.optional.from.optional(
+                    'if': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("if")
                     ).map(($) => Schema($.value, abort)),
 
-                    'then': p_temp.optional.from.optional(
+                    'then': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("then")
                     ).map(($) => Schema($.value, abort)),
 
-                    'else': p_temp.optional.from.optional(
+                    'else': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("else")
                     ).map(($) => Schema($.value, abort)),
 
-                    'oneOf': p_temp.optional.from.optional(
+                    'oneOf': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("oneOf")
                     ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'anyOf': p_temp.optional.from.optional(
+                    'anyOf': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("anyOf")
                     ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'allOf': p_temp.optional.from.optional(
+                    'allOf': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("allOf")
                     ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'not': p_temp.optional.from.optional(
+                    'not': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("not")
                     ).map(($) => Schema($.value, abort)),
 
                     /******** unevaluated ********/
 
-                    'unevaluatedItems': p_temp.optional.from.optional(
+                    'unevaluatedItems': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("unevaluatedItems")
                     ).map(($) => Schema($.value, abort)),
 
-                    'unevaluatedProperties': p_temp.optional.from.optional(
+                    'unevaluatedProperties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("unevaluatedProperties")
                     ).map(($) => Schema($.value, abort)),
 
                     /******** validation ********/
 
-                    'type': p_temp.optional.from.optional(
+                    'type': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("type")
-                    ).map(($): d_out.Type => p_.decide.state($.value.type, ($) => {
+                    ).map(($): d_out.Type => p_.from.state($.value.type).decide(($) => {
                         switch ($[0]) {
                             case 'string': return p_.ss($, ($) => ['single', Simple_Types($, abort)])
-                            case 'array': return p_.ss($, ($) => ['array', $.items.__l_map(($) => Simple_Types(r_json_x.String($, abort), abort))])
+                            case 'array': return p_.ss($, ($) => ['array', $.items.__l_map_deprecated(($) => Simple_Types(r_json_x.String($, abort), abort))])
                             default: return abort({
                                 'type': ['unexpected type', {
                                     'expected': p_.literal.list(['string', 'array'])
@@ -261,159 +260,159 @@ export const Schema: p_i.Refiner<
                         }
                     })),
 
-                    'const': p_temp.optional.from.optional(
+                    'const': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("const")
                     ).map(($) => $.value),
 
-                    'enum': p_temp.optional.from.optional(
+                    'enum': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("enum")
                     ).map(($) => r_json_x.Array($.value, abort).items),
 
-                    'multipleOf': p_temp.optional.from.optional(
+                    'multipleOf': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("multipleOf")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'maximum': p_temp.optional.from.optional(
+                    'maximum': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("maximum")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'exclusiveMaximum': p_temp.optional.from.optional(
+                    'exclusiveMaximum': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("exclusiveMaximum")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'minimum': p_temp.optional.from.optional(
+                    'minimum': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("minimum")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'exclusiveMinimum': p_temp.optional.from.optional(
+                    'exclusiveMinimum': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("exclusiveMinimum")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'maxLength': p_temp.optional.from.optional(
+                    'maxLength': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("maxLength")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'minLength': p_temp.optional.from.optional(
+                    'minLength': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("minLength")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'pattern': p_temp.optional.from.optional(
+                    'pattern': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("pattern")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    'maxItems': p_temp.optional.from.optional(
+                    'maxItems': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("maxItems")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'minItems': p_temp.optional.from.optional(
+                    'minItems': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("minItems")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'uniqueItems': p_temp.optional.from.optional(
+                    'uniqueItems': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("uniqueItems")
                     ).map(($) => r_json_x.Boolean($.value, abort).value),
 
-                    'maxContains': p_temp.optional.from.optional(
+                    'maxContains': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("maxContains")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'minContains': p_temp.optional.from.optional(
+                    'minContains': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("minContains")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'maxProperties': p_temp.optional.from.optional(
+                    'maxProperties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("maxProperties")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'minProperties': p_temp.optional.from.optional(
+                    'minProperties': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("minProperties")
                     ).map(($) => r_json_x.Number($.value, abort).value),
 
-                    'required': p_temp.optional.from.optional(
+                    'required': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("required")
                     ).map(($) => String_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'dependentRequired': p_temp.optional.from.optional(
+                    'dependentRequired': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependentRequired")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => String_Array(r_json_x.Array($.value, abort), abort))
+                        ($) => $.properties.__d_map_deprecated(($) => String_Array(r_json_x.Array($.value, abort), abort))
                     )),
 
                     /******** meta-data ********/
 
-                    'title': p_temp.optional.from.optional(
+                    'title': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("title")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    'description': p_temp.optional.from.optional(
+                    'description': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("description")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    'default': p_temp.optional.from.optional(
+                    'default': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("default")
                     ).map(($) => $.value),
 
-                    'deprecated': p_temp.optional.from.optional(
+                    'deprecated': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("deprecated")
                     ).map(($) => r_json_x.Boolean($.value, abort).value),
 
-                    'readOnly': p_temp.optional.from.optional(
+                    'readOnly': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("readOnly")
                     ).map(($) => r_json_x.Boolean($.value, abort).value),
 
-                    'writeOnly': p_temp.optional.from.optional(
+                    'writeOnly': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("writeOnly")
                     ).map(($) => r_json_x.Boolean($.value, abort).value),
 
-                    'examples': p_temp.optional.from.optional(
+                    'examples': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("examples")
                     ).map(($) => r_json_x.Array($.value, abort).items),
 
                     /******** format-annotation ********/
 
-                    'format': p_temp.optional.from.optional(
+                    'format': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("format")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
                     /******** content ********/
 
-                    'contentEncoding': p_temp.optional.from.optional(
+                    'contentEncoding': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("contentEncoding")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    'contentMediaType': p_temp.optional.from.optional(
+                    'contentMediaType': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("contentMediaType")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    'contentSchema': p_temp.optional.from.optional(
+                    'contentSchema': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("contentSchema")
                     ).map(($) => Schema($.value, abort)),
 
                     /******** deprecated ********/
-                    'definitions': p_temp.optional.from.optional(
+                    'definitions': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("definitions")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => Schema($.value, abort))
+                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
                     )),
 
-                    'dependencies': p_temp.optional.from.optional(
+                    'dependencies': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("dependencies")
                     ).map(($) => p_change_context(
                         r_json_y.Object_With_Unique_Keys_From_Object(
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map(($) => {
+                        ($) => $.properties.__d_map_deprecated(($) => {
                             const x = $
-                            return p_.decide.state($.value.type, ($) => {
+                            return p_.from.state($.value.type).decide(($) => {
                                 switch ($[0]) {
                                     case 'array': return p_.ss($, ($) => ['array', String_Array($, abort)])
                                     default: return ['schema', Schema(x.value, abort)]
@@ -422,11 +421,11 @@ export const Schema: p_i.Refiner<
                         })
                     )),
 
-                    '$recursiveAnchor': p_temp.optional.from.optional(
+                    '$recursiveAnchor': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$recursiveAnchor")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
-                    '$recursiveRef': p_temp.optional.from.optional(
+                    '$recursiveRef': p_.from.optional(
                         $.properties.__get_possible_entry_deprecated("$recursiveRef")
                     ).map(($) => r_json_x.String($.value, abort).token.value),
 
@@ -446,13 +445,13 @@ export const Schema_Array: p_i.Refiner<
     d_out.Schema_Array,
     d_function.Error,
     d_in.Array
-> = ($, abort) => $.items.__l_map(($) => Schema($, abort))
+> = ($, abort) => $.items.__l_map_deprecated(($) => Schema($, abort))
 
 export const String_Array: p_i.Refiner<
     d_out.String_Array,
     d_function.Error,
     d_in.Array
-> = ($, abort) => $.items.__l_map(($) => r_json_x.String($, abort).token.value)
+> = ($, abort) => $.items.__l_map_deprecated(($) => r_json_x.String($, abort).token.value)
 
 export const Simple_Types: p_i.Refiner<
     d_out.Simple_Types,
