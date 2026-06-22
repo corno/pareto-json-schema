@@ -136,7 +136,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => r_json_x.Boolean($.value, abort).value)
+                        ($) => p_.from.dictionary($.properties).map(($) => r_json_x.Boolean($.value, abort).value)
                     )),
 
                     '$comment': p_.from.optional(
@@ -150,7 +150,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
                     )),
 
                     /******** applicator ********/
@@ -178,7 +178,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
                     )),
 
                     'patternProperties': p_.from.optional(
@@ -188,7 +188,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
                     )),
 
                     'dependentSchemas': p_.from.optional(
@@ -198,7 +198,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
                     )),
 
                     'propertyNames': p_.from.optional(
@@ -344,7 +344,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => String_Array(r_json_x.Array($.value, abort), abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => String_Array(r_json_x.Array($.value, abort), abort))
                     )),
 
                     /******** meta-data ********/
@@ -405,7 +405,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => Schema($.value, abort))
+                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
                     )),
 
                     'dependencies': p_.from.optional(
@@ -415,7 +415,7 @@ export const Schema: p_i.Refiner<
                             r_json_x.Object($.value, abort),
                             abort
                         ),
-                        ($) => $.properties.__d_map_deprecated(($) => {
+                        ($) => p_.from.dictionary($.properties).map(($) => {
                             const x = $
                             return p_.from.state($.value.type).decide(($) => {
                                 switch ($[0]) {

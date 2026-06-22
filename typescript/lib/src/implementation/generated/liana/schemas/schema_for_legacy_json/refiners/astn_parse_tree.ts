@@ -147,7 +147,7 @@ export const Schema: t_signatures.Schema = ($, abort) => p_change_context(
     ),
     ($) => p_.from.text(
         $['option']['token']['value'],
-    ).state($, 
+    ).to_state($, 
         ($, $t): t_out.Schema => {
             switch ($t) {
                 case 'any':
@@ -286,7 +286,7 @@ export const Schema: t_signatures.Schema = ($, abort) => p_change_context(
                             ),
                             ($) => p_.from.text(
                                 $['option']['token']['value'],
-                            ).state($, 
+                            ).to_state($, 
                                 ($, $t): t_out.Schema.type_constraint => {
                                     switch ($t) {
                                         case 'single':
@@ -301,7 +301,7 @@ export const Schema: t_signatures.Schema = ($, abort) => p_change_context(
                                                     ),
                                                     ($) => p_.from.text(
                                                         $['option']['token']['value'],
-                                                    ).state($, 
+                                                    ).to_state($, 
                                                         ($, $t): t_out.Schema.type_constraint.single => {
                                                             switch ($t) {
                                                                 case 'array':
@@ -624,7 +624,7 @@ export const Const_Value: t_signatures.Const_Value = ($, abort) => p_change_cont
     ),
     ($) => p_.from.text(
         $['option']['token']['value'],
-    ).state(
+    ).to_state(
         $,
         ($, $t): t_out.Const_Value => {
             switch ($t) {
@@ -790,7 +790,7 @@ export const Array: t_signatures.Array = ($, abort) => p_change_context(
                         ),
                         ($) => p_.from.text(
                             $['option']['token']['value'],
-                        ).state(
+                        ).to_state(
                             $,
                             ($, $t): t_out.Array.type_ => {
                                 switch ($t) {
@@ -958,7 +958,7 @@ export const Object: t_signatures.Object = ($, abort) => p_change_context(
                         ),
                         ($) => p_.from.text(
                             $['option']['token']['value'],
-                        ).state($, 
+                        ).to_state($, 
                             ($, $t): t_out.Object.type_ => {
                                 switch ($t) {
                                     case 'static':
@@ -1209,7 +1209,7 @@ export const String: t_signatures.String = ($, abort) => p_change_context(
     ),
     ($) => p_.from.text(
         $['option']['token']['value'],
-    ).state($, 
+    ).to_state($, 
         ($, $t): t_out.String => {
             switch ($t) {
                 case 'any':
