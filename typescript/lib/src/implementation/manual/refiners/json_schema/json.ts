@@ -17,446 +17,459 @@ export const Schema: p_i.Refiner<
     d_in.Value
 > = ($, abort) => {
     const range = $.range
-    return p_.from.state($.type).decide(($) => {
-        switch ($[0]) {
-            case 'boolean': return p_.ss($, ($) => ['boolean', $.value])
-            case 'object': return p_.ss($, ($): d_out.Schema => ['object', p_change_context(
-                r_json_x.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
-                    $,
-                    abort,
-                    {
-                        'expected properties': p_.literal.dictionary({
+    return p_.from.state($.type).decide(
+        ($) => {
+            switch ($[0]) {
+                case 'boolean': return p_.ss($, ($) => ['boolean', $.value])
+                case 'object': return p_.ss($, ($): d_out.Schema => ['object', p_change_context(
+                    r_json_x.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
+                        $,
+                        abort,
+                        {
+                            'expected properties': p_.literal.dictionary({
 
-                            //core
-                            "$id": null,
-                            "$schema": null,
-                            "$ref": null,
-                            "$anchor": null,
-                            "$dynamicRef": null,
-                            "$dynamicAnchor": null,
-                            "$vocabulary": null,
-                            "$comment": null,
-                            "$defs": null,
-                            //applicator
-                            "prefixItems": null,
-                            "items": null,
-                            "contains": null,
-                            "additionalProperties": null,
-                            "properties": null,
-                            "patternProperties": null,
-                            "dependentSchemas": null,
-                            "propertyNames": null,
-                            "if": null,
-                            "then": null,
-                            "else": null,
-                            "oneOf": null,
-                            "allOf": null,
-                            "anyOf": null,
-                            "not": null,
-                            //unevaluated
-                            "unevaluatedItems": null,
-                            "unevaluatedProperties": null,
-                            //validation
-                            "type": null,
-                            "const": null,
-                            "enum": null,
-                            "multipleOf": null,
-                            "maximum": null,
-                            "exclusiveMaximum": null,
-                            "minimum": null,
-                            "exclusiveMinimum": null,
-                            "maxLength": null,
-                            "minLength": null,
-                            "pattern": null,
-                            "maxItems": null,
-                            "minItems": null,
-                            "uniqueItems": null,
-                            "maxContains": null,
-                            "minContains": null,
-                            "maxProperties": null,
-                            "minProperties": null,
-                            "required": null,
-                            "dependentRequired": null,
-                            //meta-data
-                            "title": null,
-                            "description": null,
-                            "default": null,
-                            "deprecated": null,
-                            "readOnly": null,
-                            "writeOnly": null,
-                            "examples": null,
-                            //format-annotation
-                            "format": null,
-                            //content
-                            "contentEncoding": null,
-                            "contentMediaType": null,
-                            "contentSchema": null,
-                            //deprecated
-                            "definitions": null,
-                            "dependencies": null,
-                            "$recursiveAnchor": null,
-                            "$recursiveRef": null,
+                                //core
+                                "$id": null,
+                                "$schema": null,
+                                "$ref": null,
+                                "$anchor": null,
+                                "$dynamicRef": null,
+                                "$dynamicAnchor": null,
+                                "$vocabulary": null,
+                                "$comment": null,
+                                "$defs": null,
+                                //applicator
+                                "prefixItems": null,
+                                "items": null,
+                                "contains": null,
+                                "additionalProperties": null,
+                                "properties": null,
+                                "patternProperties": null,
+                                "dependentSchemas": null,
+                                "propertyNames": null,
+                                "if": null,
+                                "then": null,
+                                "else": null,
+                                "oneOf": null,
+                                "allOf": null,
+                                "anyOf": null,
+                                "not": null,
+                                //unevaluated
+                                "unevaluatedItems": null,
+                                "unevaluatedProperties": null,
+                                //validation
+                                "type": null,
+                                "const": null,
+                                "enum": null,
+                                "multipleOf": null,
+                                "maximum": null,
+                                "exclusiveMaximum": null,
+                                "minimum": null,
+                                "exclusiveMinimum": null,
+                                "maxLength": null,
+                                "minLength": null,
+                                "pattern": null,
+                                "maxItems": null,
+                                "minItems": null,
+                                "uniqueItems": null,
+                                "maxContains": null,
+                                "minContains": null,
+                                "maxProperties": null,
+                                "minProperties": null,
+                                "required": null,
+                                "dependentRequired": null,
+                                //meta-data
+                                "title": null,
+                                "description": null,
+                                "default": null,
+                                "deprecated": null,
+                                "readOnly": null,
+                                "writeOnly": null,
+                                "examples": null,
+                                //format-annotation
+                                "format": null,
+                                //content
+                                "contentEncoding": null,
+                                "contentMediaType": null,
+                                "contentSchema": null,
+                                //deprecated
+                                "definitions": null,
+                                "dependencies": null,
+                                "$recursiveAnchor": null,
+                                "$recursiveRef": null,
 
 
-                        })
-                    }
-                ),
-                ($): d_out.Schema_Object => ({
-
-                    /******** core ********/
-
-                    '$id': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$id")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$schema': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$schema")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$ref': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$ref")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$anchor': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$anchor")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$dynamicRef': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$dynamicRef")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$dynamicAnchor': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$dynamicAnchor")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$vocabulary': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$vocabulary")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => r_json_x.Boolean($.value, abort).value)
-                    )),
-
-                    '$comment': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$comment")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
-
-                    '$defs': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$defs")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
-                    )),
-
-                    /******** applicator ********/
-
-                    'prefixItems': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("prefixItems")
-                    ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
-
-                    'items': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("items")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'contains': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("contains")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'additionalProperties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("additionalProperties")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'properties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("properties")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
-                    )),
-
-                    'patternProperties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("patternProperties")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
-                    )),
-
-                    'dependentSchemas': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("dependentSchemas")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
-                    )),
-
-                    'propertyNames': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("propertyNames")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'if': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("if")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'then': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("then")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'else': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("else")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'oneOf': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("oneOf")
-                    ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
-
-                    'anyOf': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("anyOf")
-                    ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
-
-                    'allOf': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("allOf")
-                    ).map(($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
-
-                    'not': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("not")
-                    ).map(($) => Schema($.value, abort)),
-
-                    /******** unevaluated ********/
-
-                    'unevaluatedItems': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("unevaluatedItems")
-                    ).map(($) => Schema($.value, abort)),
-
-                    'unevaluatedProperties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("unevaluatedProperties")
-                    ).map(($) => Schema($.value, abort)),
-
-                    /******** validation ********/
-
-                    'type': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("type")
-                    ).map(($): d_out.Type => p_.from.state($.value.type).decide(($) => {
-                        switch ($[0]) {
-                            case 'string': return p_.ss($, ($) => ['single', Simple_Types($, abort)])
-                            case 'array': return p_.ss($, ($) => ['array', p_.from.list($.items).map(
-                                ($) => Simple_Types(
-                                    r_json_x.String($, abort),
-                                    abort
-                                ))
-                            ])
-                            default: return abort({
-                                'type': ['unexpected type', {
-                                    'expected': p_.literal.list(['string', 'array'])
-                                }],
-                                'range': range,
                             })
                         }
-                    })),
+                    ),
+                    ($): d_out.Schema_Object => ({
 
-                    'const': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("const")
-                    ).map(($) => $.value),
+                        /******** core ********/
 
-                    'enum': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("enum")
-                    ).map(($) => r_json_x.Array($.value, abort).items),
+                        '$id': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$id")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'multipleOf': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("multipleOf")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$schema': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$schema")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'maximum': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("maximum")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$ref': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$ref")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'exclusiveMaximum': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("exclusiveMaximum")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$anchor': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$anchor")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'minimum': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("minimum")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$dynamicRef': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$dynamicRef")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'exclusiveMinimum': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("exclusiveMinimum")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$dynamicAnchor': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$dynamicAnchor")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'maxLength': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("maxLength")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$vocabulary': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$vocabulary")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => r_json_x.Boolean($.value, abort).value)
+                            )),
 
-                    'minLength': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("minLength")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        '$comment': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$comment")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
 
-                    'pattern': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("pattern")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        '$defs': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$defs")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => Schema($.value, abort))
+                            )),
 
-                    'maxItems': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("maxItems")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        /******** applicator ********/
 
-                    'minItems': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("minItems")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        'prefixItems': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("prefixItems")
+                        ).map(
+                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'uniqueItems': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("uniqueItems")
-                    ).map(($) => r_json_x.Boolean($.value, abort).value),
+                        'items': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("items")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'maxContains': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("maxContains")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        'contains': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("contains")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'minContains': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("minContains")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        'additionalProperties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("additionalProperties")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'maxProperties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("maxProperties")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        'properties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("properties")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => Schema($.value, abort))
+                            )),
 
-                    'minProperties': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("minProperties")
-                    ).map(($) => r_json_x.Number($.value, abort).value),
+                        'patternProperties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("patternProperties")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => Schema($.value, abort))
+                            )),
 
-                    'required': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("required")
-                    ).map(($) => String_Array(r_json_x.Array($.value, abort), abort)),
+                        'dependentSchemas': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("dependentSchemas")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => Schema($.value, abort))
+                            )),
 
-                    'dependentRequired': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("dependentRequired")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => String_Array(r_json_x.Array($.value, abort), abort))
-                    )),
+                        'propertyNames': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("propertyNames")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    /******** meta-data ********/
+                        'if': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("if")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'title': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("title")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'then': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("then")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'description': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("description")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'else': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("else")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'default': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("default")
-                    ).map(($) => $.value),
+                        'oneOf': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("oneOf")
+                        ).map(
+                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'deprecated': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("deprecated")
-                    ).map(($) => r_json_x.Boolean($.value, abort).value),
+                        'anyOf': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("anyOf")
+                        ).map(
+                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'readOnly': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("readOnly")
-                    ).map(($) => r_json_x.Boolean($.value, abort).value),
+                        'allOf': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("allOf")
+                        ).map(
+                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
 
-                    'writeOnly': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("writeOnly")
-                    ).map(($) => r_json_x.Boolean($.value, abort).value),
+                        'not': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("not")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'examples': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("examples")
-                    ).map(($) => r_json_x.Array($.value, abort).items),
+                        /******** unevaluated ********/
 
-                    /******** format-annotation ********/
+                        'unevaluatedItems': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("unevaluatedItems")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    'format': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("format")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'unevaluatedProperties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("unevaluatedProperties")
+                        ).map(
+                            ($) => Schema($.value, abort)),
 
-                    /******** content ********/
+                        /******** validation ********/
 
-                    'contentEncoding': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("contentEncoding")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'type': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("type")
+                        ).map(
+                            ($): d_out.Type => p_.from.state($.value.type).decide(
+                                ($) => {
+                                    switch ($[0]) {
+                                        case 'string': return p_.ss($, ($) => ['single', Simple_Types($, abort)])
+                                        case 'array': return p_.ss($, ($) => ['array', p_.from.list($.items).map(
+                                            ($) => Simple_Types(
+                                                r_json_x.String($, abort),
+                                                abort
+                                            ))
+                                        ])
+                                        default: return abort({
+                                            'type': ['unexpected type', {
+                                                'expected': p_.literal.list(['string', 'array'])
+                                            }],
+                                            'range': range,
+                                        })
+                                    }
+                                })),
 
-                    'contentMediaType': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("contentMediaType")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'const': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("const")
+                        ).map(
+                            ($) => $.value),
 
-                    'contentSchema': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("contentSchema")
-                    ).map(($) => Schema($.value, abort)),
+                        'enum': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("enum")
+                        ).map(
+                            ($) => r_json_x.Array($.value, abort).items),
 
-                    /******** deprecated ********/
-                    'definitions': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("definitions")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => Schema($.value, abort))
-                    )),
+                        'multipleOf': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("multipleOf")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
 
-                    'dependencies': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("dependencies")
-                    ).map(($) => p_change_context(
-                        r_json_y.Object_With_Unique_Keys_From_Object(
-                            r_json_x.Object($.value, abort),
-                            abort
-                        ),
-                        ($) => p_.from.dictionary($.properties).map(($) => {
-                            const x = $
-                            return p_.from.state($.value.type).decide(($) => {
-                                switch ($[0]) {
-                                    case 'array': return p_.ss($, ($) => ['array', String_Array($, abort)])
-                                    default: return ['schema', Schema(x.value, abort)]
-                                }
-                            })
-                        })
-                    )),
+                        'maximum': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("maximum")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
 
-                    '$recursiveAnchor': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$recursiveAnchor")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'exclusiveMaximum': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("exclusiveMaximum")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
 
-                    '$recursiveRef': p_.from.optional(
-                        p_.from.dictionary($.properties).get_possible_entry("$recursiveRef")
-                    ).map(($) => r_json_x.String($.value, abort).token.value),
+                        'minimum': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("minimum")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
 
+                        'exclusiveMinimum': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("exclusiveMinimum")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'maxLength': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("maxLength")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'minLength': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("minLength")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'pattern': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("pattern")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        'maxItems': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("maxItems")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'minItems': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("minItems")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'uniqueItems': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("uniqueItems")
+                        ).map(
+                            ($) => r_json_x.Boolean($.value, abort).value),
+
+                        'maxContains': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("maxContains")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'minContains': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("minContains")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'maxProperties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("maxProperties")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'minProperties': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("minProperties")
+                        ).map(
+                            ($) => r_json_x.Number($.value, abort).value),
+
+                        'required': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("required")
+                        ).map(
+                            ($) => String_Array(r_json_x.Array($.value, abort), abort)),
+
+                        'dependentRequired': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("dependentRequired")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => String_Array(r_json_x.Array($.value, abort), abort))
+                            )),
+
+                        /******** meta-data ********/
+
+                        'title': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("title")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        'description': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("description")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        'default': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("default")
+                        ).map(
+                            ($) => $.value),
+
+                        'deprecated': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("deprecated")
+                        ).map(
+                            ($) => r_json_x.Boolean($.value, abort).value),
+
+                        'readOnly': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("readOnly")
+                        ).map(
+                            ($) => r_json_x.Boolean($.value, abort).value),
+
+                        'writeOnly': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("writeOnly")
+                        ).map(
+                            ($) => r_json_x.Boolean($.value, abort).value),
+
+                        'examples': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("examples")
+                        ).map(
+                            ($) => r_json_x.Array($.value, abort).items),
+
+                        /******** format-annotation ********/
+
+                        'format': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("format")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        /******** content ********/
+
+                        'contentEncoding': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("contentEncoding")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        'contentMediaType': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("contentMediaType")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        'contentSchema': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("contentSchema")
+                        ).map(
+                            ($) => Schema($.value, abort)),
+
+                        /******** deprecated ********/
+                        'definitions': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("definitions")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => Schema($.value, abort))
+                            )),
+
+                        'dependencies': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("dependencies")
+                        ).map(
+                            ($) => p_change_context(
+                                r_json_y.Object_With_Unique_Keys_From_Object(
+                                    r_json_x.Object($.value, abort),
+                                    abort
+                                ),
+                                ($) => p_.from.dictionary($.properties).map(
+                                    ($) => {
+                                        const x = $
+                                        return p_.from.state($.value.type).decide(
+                                            ($) => {
+                                                switch ($[0]) {
+                                                    case 'array': return p_.ss($, ($) => ['array', String_Array($, abort)])
+                                                    default: return ['schema', Schema(x.value, abort)]
+                                                }
+                                            })
+                                    })
+                            )),
+
+                        '$recursiveAnchor': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$recursiveAnchor")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                        '$recursiveRef': p_.from.optional(p_.from.dictionary($.properties).get_possible_entry("$recursiveRef")
+                        ).map(
+                            ($) => r_json_x.String($.value, abort).token.value),
+
+                    })
+                )])
+                default: return abort({
+                    'type': ['unexpected type', {
+                        'expected': p_.literal.list(['boolean', 'object'])
+                    }],
+                    'range': range,
                 })
-            )])
-            default: return abort({
-                'type': ['unexpected type', {
-                    'expected': p_.literal.list(['boolean', 'object'])
-                }],
-                'range': range,
-            })
-        }
-    })
+            }
+        })
 }
 
 export const Schema_Array: p_i.Refiner<
     d_out.Schema_Array,
     d_function.Error,
     d_in.Array
-> = ($, abort) => p_.from.list($.items).map(($) => Schema($, abort))
+> = ($, abort) => p_.from.list($.items).map(
+    ($) => Schema($, abort))
 
 export const String_Array: p_i.Refiner<
     d_out.String_Array,
     d_function.Error,
     d_in.Array
-> = ($, abort) => p_.from.list($.items).map(($) => r_json_x.String($, abort).token.value)
+> = ($, abort) => p_.from.list($.items).map(
+    ($) => r_json_x.String($, abort).token.value)
 
 export const Simple_Types: p_i.Refiner<
     d_out.Simple_Types,

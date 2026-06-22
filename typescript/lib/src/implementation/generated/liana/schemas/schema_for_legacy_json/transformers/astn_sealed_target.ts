@@ -18,8 +18,7 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', p_.l
     {
         "imports": p_change_context(
             $['imports'],
-            ($) => ['dictionary', p_.from.dictionary(
-                $,
+            ($) => ['dictionary', p_.from.dictionary($,
             ).map(
                 ($, id) => Document(
                     $,
@@ -42,8 +41,7 @@ export const Document: t_signatures.Document = ($) => ['group', ['verbose', p_.l
     },
 )]]
 
-export const Definitions: t_signatures.Definitions = ($) => ['dictionary', p_.from.dictionary(
-    $,
+export const Definitions: t_signatures.Definitions = ($) => ['dictionary', p_.from.dictionary($,
 ).map(
     ($, id) => Schema(
         $,
@@ -77,8 +75,7 @@ export const Schema: t_signatures.Schema = ($) => ['state', p_decide_state(
                     $,
                     ($) => ({
                         'option': 'one of',
-                        'value': ['dictionary', p_.from.dictionary(
-                            $,
+                        'value': ['dictionary', p_.from.dictionary($,
                         ).map(
                             ($, id) => Schema(
                                 $,
@@ -299,8 +296,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', p_decide_s
                     $,
                     ($) => ({
                         'option': 'array',
-                        'value': ['list', p_.from.list(
-                            $,
+                        'value': ['list', p_.from.list($,
                         ).map(
                             ($) => Const_Value(
                                 $,
@@ -350,8 +346,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => ['state', p_decide_s
                     $,
                     ($) => ({
                         'option': 'object',
-                        'value': ['dictionary', p_.from.dictionary(
-                            $,
+                        'value': ['dictionary', p_.from.dictionary($,
                         ).map(
                             ($, id) => Const_Value(
                                 $,
@@ -405,8 +400,7 @@ export const Array: t_signatures.Array = ($) => ['group', ['verbose', p_.literal
                                         {
                                             "properties": p_change_context(
                                                 $['properties'],
-                                                ($) => ['dictionary', p_.from.dictionary(
-                                                    $,
+                                                ($) => ['dictionary', p_.from.dictionary($,
                                                 ).map(
                                                     ($, id) => Schema(
                                                         $,
@@ -500,8 +494,7 @@ export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verb
     {
         "properties": p_change_context(
             $['properties'],
-            ($) => ['dictionary', p_.from.dictionary(
-                $,
+            ($) => ['dictionary', p_.from.dictionary($,
             ).map(
                 ($, id) => ['group', ['verbose', p_.literal.dictionary(
                     {
@@ -544,8 +537,7 @@ export const String: t_signatures.String = ($) => ['state', p_decide_state(
                     $,
                     ($) => ({
                         'option': 'enum',
-                        'value': ['dictionary', p_.from.dictionary(
-                            $,
+                        'value': ['dictionary', p_.from.dictionary($,
                         ).map(
                             ($, id) => ['nothing', null],
                         )],

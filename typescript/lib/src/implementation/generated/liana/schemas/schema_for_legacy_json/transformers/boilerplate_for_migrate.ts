@@ -13,8 +13,7 @@ import * as t_out from "../../../../../../interface/generated/liana/schemas/sche
 export const Document: t_signatures.Document = ($) => ({
     'imports': p_change_context(
         $['imports'],
-        ($) => p_.from.dictionary(
-            $,
+        ($) => p_.from.dictionary($,
         ).map(
             ($, id) => Document(
                 $,
@@ -33,8 +32,7 @@ export const Document: t_signatures.Document = ($) => ({
     ),
 })
 
-export const Definitions: t_signatures.Definitions = ($) => p_.from.dictionary(
-    $,
+export const Definitions: t_signatures.Definitions = ($) => p_.from.dictionary($,
 ).map(
     ($, id) => Schema(
         $,
@@ -60,8 +58,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
             case 'one of':
                 return p_.ss(
                     $,
-                    ($) => ['one of', p_.from.dictionary(
-                        $,
+                    ($) => ['one of', p_.from.dictionary($,
                     ).map(
                         ($, id) => Schema(
                             $,
@@ -74,8 +71,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                     ($) => ['reference', {
                         'document': p_change_context(
                             $['document'],
-                            ($) => p_.from.optional(
-                                $,
+                            ($) => p_.from.optional($,
                             ).map(
                                 ($) => $,
                             ),
@@ -156,8 +152,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                         ($) => ['multiple', {
                                             'array': p_change_context(
                                                 $['array'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => Array(
                                                         $,
@@ -166,8 +161,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                             ),
                                             'boolean': p_change_context(
                                                 $['boolean'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => Boolean(
                                                         $,
@@ -176,8 +170,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                             ),
                                             'null': p_change_context(
                                                 $['null'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => Null(
                                                         $,
@@ -186,8 +179,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                             ),
                                             'number': p_change_context(
                                                 $['number'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => Number(
                                                         $,
@@ -196,8 +188,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                             ),
                                             'object': p_change_context(
                                                 $['object'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => Object(
                                                         $,
@@ -206,8 +197,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                             ),
                                             'string': p_change_context(
                                                 $['string'],
-                                                ($) => p_.from.optional(
-                                                    $,
+                                                ($) => p_.from.optional($,
                                                 ).map(
                                                     ($) => String(
                                                         $,
@@ -239,8 +229,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => p_decide_state(
             case 'array':
                 return p_.ss(
                     $,
-                    ($) => ['array', p_.from.list(
-                        $,
+                    ($) => ['array', p_.from.list($,
                     ).map(
                         ($) => Const_Value(
                             $,
@@ -265,8 +254,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => p_decide_state(
             case 'object':
                 return p_.ss(
                     $,
-                    ($) => ['object', p_.from.dictionary(
-                        $,
+                    ($) => ['object', p_.from.dictionary($,
                     ).map(
                         ($, id) => Const_Value(
                             $,
@@ -306,8 +294,7 @@ export const Array: t_signatures.Array = ($) => ({
                             ($) => ['static', {
                                 'properties': p_change_context(
                                     $['properties'],
-                                    ($) => p_.from.dictionary(
-                                        $,
+                                    ($) => p_.from.dictionary($,
                                     ).map(
                                         ($, id) => Schema(
                                             $,
@@ -384,8 +371,7 @@ export const Object: t_signatures.Object = ($) => ({
 export const Static_Object: t_signatures.Static_Object = ($) => ({
     'properties': p_change_context(
         $['properties'],
-        ($) => p_.from.dictionary(
-            $,
+        ($) => p_.from.dictionary($,
         ).map(
             ($, id) => ({
                 'schema': p_change_context(
@@ -415,8 +401,7 @@ export const String: t_signatures.String = ($) => p_decide_state(
             case 'enum':
                 return p_.ss(
                     $,
-                    ($) => ['enum', p_.from.dictionary(
-                        $,
+                    ($) => ['enum', p_.from.dictionary($,
                     ).map(
                         ($, id) => null,
                     )],
