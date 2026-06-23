@@ -1,8 +1,8 @@
 
 import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_di from 'pareto-core/dist/interface/data'
-const p_decide_state = <State, B>($: State,  assign: ($: State) => B) => assign($)
-const p_decide_optional = <OV extends p_di.Value, B extends p_di.Value>($: p_di.Optional_Value<OV>,  assign: ($: OV) => B,  otherwise: () => B) => p_.from.optional($).decide(assign, otherwise)
+const p_decide_state = <State, B>($: State, assign: ($: State) => B) => assign($)
+const p_decide_optional = <OV extends p_di.Value, B extends p_di.Value>($: p_di.Optional_Value<OV>, assign: ($: OV) => B, otherwise: () => B) => p_.from.optional($).decide(assign, otherwise)
 
 import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
@@ -490,35 +490,32 @@ export const Object: t_signatures.Object = ($) => ['group', ['verbose', p_.liter
     },
 )]]
 
-export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', p_.literal.dictionary(
-    {
-        "properties": p_change_context(
-            $['properties'],
-            ($) => ['dictionary', p_.from.dictionary($,
-            ).map(
-                ($, id) => ['group', ['verbose', p_.literal.dictionary(
-                    {
-                        "schema": p_change_context(
-                            $['schema'],
-                            ($) => Schema(
+export const Static_Object: t_signatures.Static_Object = ($) => ['group', ['verbose', p_.literal.dictionary({
+    "properties": p_change_context(
+        $['properties'],
+        ($): t_out.Value => ['dictionary', p_.from.dictionary($).map(
+            ($, id): t_out.Value => ['group', ['verbose', p_.literal.dictionary(
+                {
+                    "schema": p_change_context(
+                        $['schema'],
+                        ($) => Schema(
+                            $,
+                        ),
+                    ),
+                    "optional": p_change_context(
+                        $['optional'],
+                        ($) => ['text', {
+                            'delimiter': ['none', null],
+                            'value': v_primitives_to_text.true_false(
                                 $,
                             ),
-                        ),
-                        "optional": p_change_context(
-                            $['optional'],
-                            ($) => ['text', {
-                                'delimiter': ['none', null],
-                                'value': v_primitives_to_text.true_false(
-                                    $,
-                                ),
-                            }],
-                        ),
-                    },
-                )]],
-            )],
-        ),
-    },
-)]]
+                        }],
+                    ),
+                },
+            )]],
+        )],
+    ),
+})]]
 
 export const String: t_signatures.String = ($) => ['state', p_decide_state(
     $,
@@ -537,9 +534,8 @@ export const String: t_signatures.String = ($) => ['state', p_decide_state(
                     $,
                     ($) => ({
                         'option': 'enum',
-                        'value': ['dictionary', p_.from.dictionary($,
-                        ).map(
-                            ($, id) => ['nothing', null],
+                        'value': ['dictionary', p_.from.dictionary($).map(
+                            ($, id): t_out.Value => ['nothing', null],
                         )],
                     }),
                 )
