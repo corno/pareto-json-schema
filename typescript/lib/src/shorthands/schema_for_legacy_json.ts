@@ -1,11 +1,11 @@
-import * as p_ from 'pareto-core-shorthands/dist/unconstrained'
+import * as p_ from 'pareto-core-shorthands/dist/unconstrained_manual'
 
 import * as x from "../interface/generated/liana/schemas/schema_for_legacy_json/data"
 
 
 export const document = (
-    imports: p_.Raw_Or_Normal_Dictionary<x.Document.imports.D>,
-    definitions: p_.Raw_Or_Normal_Dictionary<x.Definitions.D>,
+    imports: p_.Raw_Dictionary<x.Document.imports.D>,
+    definitions: p_.Raw_Dictionary<x.Definitions.D>,
     root: string,
 ): x.Document => {
     return {
@@ -30,7 +30,7 @@ export namespace m {
     export const number = (): x.Schema.type_constraint.multiple.number_ => {
         return p_.optional.set(null)
     }
-    export const object_static = (properties: p_.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema.type_constraint.multiple.object_ => {
+    export const object_static = (properties: p_.Raw_Dictionary<x.Static_Object.properties.D>): x.Schema.type_constraint.multiple.object_ => {
         return p_.optional.set({
             'type': ['static', {
                 'properties': p_.dictionary(properties),
@@ -52,7 +52,7 @@ export namespace v {
         return ['any', null]
     }
     export const one_of = (
-        options: p_.Raw_Or_Normal_Dictionary<x.Schema>,
+        options: p_.Raw_Dictionary<x.Schema>,
     ): x.Schema => {
         return ['one of', p_.dictionary(options)]
     }
@@ -95,10 +95,10 @@ export namespace v {
             'definition': definition,
         }]
     }
-    export const enum_ = (items: p_.Raw_Or_Normal_Dictionary<null>): x.Schema => {
+    export const enum_ = (items: p_.Raw_Dictionary<null>): x.Schema => {
         return ['type constraint', ['single', ['string', ['enum', p_.dictionary(items)]]]]
     }
-    export const object_static = (properties: p_.Raw_Or_Normal_Dictionary<x.Static_Object.properties.D>): x.Schema => {
+    export const object_static = (properties: p_.Raw_Dictionary<x.Static_Object.properties.D>): x.Schema => {
         return ['type constraint', ['single', ['object', {
             'type': ['static', {
                 'properties': p_.dictionary(properties),
