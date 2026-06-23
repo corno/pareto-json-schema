@@ -1,4 +1,4 @@
-import * as sh from "../../shorthands/schema_for_legacy_json"
+import * as sh from "../../shorthands/schema_for_legacy_json/manual"
 
 export const $ = sh.document(
     {
