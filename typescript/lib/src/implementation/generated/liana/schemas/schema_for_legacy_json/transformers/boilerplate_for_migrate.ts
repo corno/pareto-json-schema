@@ -44,19 +44,19 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
     ($): t_out.Schema => {
         switch ($[0]) {
             case 'any':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['any', null],
                 )
             case 'const':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['const', Const_Value(
                         $,
                     )],
                 )
             case 'one of':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['one of', p_.from.dictionary($,
                     ).map(
@@ -66,7 +66,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                     )],
                 )
             case 'reference':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['reference', {
                         'document': p_change_context(
@@ -83,56 +83,56 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                     }],
                 )
             case 'type constraint':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['type constraint', p_decide_state(
                         $,
                         ($): t_out.Schema.type_constraint => {
                             switch ($[0]) {
                                 case 'single':
-                                    return p_.ss(
+                                    return p_.option(
                                         $,
                                         ($) => ['single', p_decide_state(
                                             $,
                                             ($): t_out.Schema.type_constraint.single => {
                                                 switch ($[0]) {
                                                     case 'array':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['array', Array(
                                                                 $,
                                                             )],
                                                         )
                                                     case 'boolean':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['boolean', Boolean(
                                                                 $,
                                                             )],
                                                         )
                                                     case 'null':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['null', Null(
                                                                 $,
                                                             )],
                                                         )
                                                     case 'number':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['number', Number(
                                                                 $,
                                                             )],
                                                         )
                                                     case 'object':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['object', Object(
                                                                 $,
                                                             )],
                                                         )
                                                     case 'string':
-                                                        return p_.ss(
+                                                        return p_.option(
                                                             $,
                                                             ($) => ['string', String(
                                                                 $,
@@ -147,7 +147,7 @@ export const Schema: t_signatures.Schema = ($) => p_decide_state(
                                         )],
                                     )
                                 case 'multiple':
-                                    return p_.ss(
+                                    return p_.option(
                                         $,
                                         ($) => ['multiple', {
                                             'array': p_change_context(
@@ -227,7 +227,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => p_decide_state(
     ($): t_out.Const_Value => {
         switch ($[0]) {
             case 'array':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['array', p_.from.list($,
                     ).map(
@@ -237,22 +237,22 @@ export const Const_Value: t_signatures.Const_Value = ($) => p_decide_state(
                     )],
                 )
             case 'boolean':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['boolean', $],
                 )
             case 'null':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['null', null],
                 )
             case 'number':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['number', $],
                 )
             case 'object':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['object', p_.from.dictionary($,
                     ).map(
@@ -262,7 +262,7 @@ export const Const_Value: t_signatures.Const_Value = ($) => p_decide_state(
                     )],
                 )
             case 'string':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['string', $],
                 )
@@ -282,14 +282,14 @@ export const Array: t_signatures.Array = ($) => ({
             ($): t_out.Array.type_ => {
                 switch ($[0]) {
                     case 'dynamic':
-                        return p_.ss(
+                        return p_.option(
                             $,
                             ($) => ['dynamic', Schema(
                                 $,
                             )],
                         )
                     case 'static':
-                        return p_.ss(
+                        return p_.option(
                             $,
                             ($) => ['static', {
                                 'properties': p_change_context(
@@ -327,21 +327,21 @@ export const Object: t_signatures.Object = ($) => ({
             ($): t_out.Object.type_ => {
                 switch ($[0]) {
                     case 'static':
-                        return p_.ss(
+                        return p_.option(
                             $,
                             ($) => ['static', Static_Object(
                                 $,
                             )],
                         )
                     case 'dynamic':
-                        return p_.ss(
+                        return p_.option(
                             $,
                             ($) => ['dynamic', Schema(
                                 $,
                             )],
                         )
                     case 'mixed':
-                        return p_.ss(
+                        return p_.option(
                             $,
                             ($) => ['mixed', {
                                 'static': p_change_context(
@@ -394,12 +394,12 @@ export const String: t_signatures.String = ($) => p_decide_state(
     ($): t_out.String => {
         switch ($[0]) {
             case 'any':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['any', null],
                 )
             case 'enum':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['enum', p_.from.dictionary($,
                     ).map(

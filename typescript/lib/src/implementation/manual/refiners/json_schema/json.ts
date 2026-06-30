@@ -20,8 +20,8 @@ export const Schema: p_i.Refiner<
     return p_.from.state($.type).decide(
         ($) => {
             switch ($[0]) {
-                case 'boolean': return p_.ss($, ($) => ['boolean', $.value])
-                case 'object': return p_.ss($, ($): d_out.Schema => ['object', p_change_context(
+                case 'boolean': return p_.option($, ($) => ['boolean', $.value])
+                case 'object': return p_.option($, ($): d_out.Schema => ['object', p_change_context(
                     r_json_x.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
                         $,
                         abort,
@@ -330,8 +330,8 @@ export const Schema: p_i.Refiner<
                             ($): d_out.Type => p_.from.state($.value.type).decide(
                                 ($) => {
                                     switch ($[0]) {
-                                        case 'string': return p_.ss($, ($) => ['single', Simple_Types($, abort)])
-                                        case 'array': return p_.ss($, ($) => ['array', p_.from.list($.items).map(
+                                        case 'string': return p_.option($, ($) => ['single', Simple_Types($, abort)])
+                                        case 'array': return p_.option($, ($) => ['array', p_.from.list($.items).map(
                                             ($) => Simple_Types(
                                                 r_json_x.String($, abort),
                                                 abort
@@ -603,7 +603,7 @@ export const Schema: p_i.Refiner<
                                         return p_.from.state($.value.type).decide(
                                             ($) => {
                                                 switch ($[0]) {
-                                                    case 'array': return p_.ss($, ($) => ['array', String_Array($, abort)])
+                                                    case 'array': return p_.option($, ($) => ['array', String_Array($, abort)])
                                                     default: return ['schema', Schema(x.value, abort)]
                                                 }
                                             })
