@@ -1,9 +1,9 @@
 
-import * as p_i from 'pareto-core/dist/interface/__internal/Abort'
+import * as p_i from 'pareto-core/interface/__internal/Abort'
 
-import * as i_in from "../../data"
+import * as i_in from "../../data.js"
 
-import * as i_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
+import * as i_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
 export namespace Document_ {
     
@@ -181,7 +181,7 @@ export type String_ = (
     context: String_.I,
 ) => String_.O
 
-export { 
+export type { 
     Document_ as Document, 
     Definitions_ as Definitions, 
     Schema_ as Schema, 

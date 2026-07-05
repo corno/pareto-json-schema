@@ -1,6 +1,6 @@
 
-import * as p_i from 'pareto-core/dist/interface/__internal/Abort'
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_i from 'pareto-core/interface/__internal/Abort'
+import * as p_di from 'pareto-core/interface/data'
 
 export namespace Document_ {
     
@@ -322,7 +322,7 @@ export type String_ =
     | readonly ['any', String_.any_]
     | readonly ['enum', String_.enum_]
 
-export { 
+export type { 
     Document_ as Document, 
     Definitions_ as Definitions, 
     Schema_ as Schema, 

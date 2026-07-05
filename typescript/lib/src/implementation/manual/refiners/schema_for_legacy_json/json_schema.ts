@@ -1,9 +1,9 @@
-import * as p_ from 'pareto-core/dist/implementation/refiner'
-import * as p_i from 'pareto-core/dist/interface/refiner'
+import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_i from 'pareto-core/interface/refiner'
 
 
-import * as d_out from "../../../../interface/generated/liana/schemas/schema_for_legacy_json/data"
-import * as d_in from "../../../../interface/data/json_schema"
+import * as d_out from "../../../../interface/generated/liana/schemas/schema_for_legacy_json/data.js"
+import * as d_in from "../../../../interface/data/json_schema.js"
 
 
 export namespace d_function {
