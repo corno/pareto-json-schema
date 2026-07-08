@@ -6,7 +6,7 @@ import type * as d_out from "../../../../interface/generated/liana/schemas/schem
 import type * as d_in from "../../../../interface/data/json_schema.js"
 
 
-export namespace d_function {
+namespace d_function {
     export type Error = null
 }
 
