@@ -2,9 +2,9 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import * as p_i from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
-import * as d_in from "pareto-json/interface/data/json_with_parse_info"
-import * as d_out from "../../../../interface/data/json_schema.js"
-import * as d_function from "pareto-json/interface/data/unmarshalled_from_json"
+import type * as d_in from "pareto-json/interface/data/json_with_parse_info"
+import type * as d_out from "../../../../interface/data/json_schema.js"
+import type * as d_function from "pareto-json/interface/data/unmarshalled_from_json"
 
 //dependencies
 import * as r_json_y from "pareto-json/implementation/manual/refiners/json_y/json_with_parse_info"
