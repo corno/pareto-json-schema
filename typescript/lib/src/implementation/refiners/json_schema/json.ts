@@ -7,8 +7,8 @@ import type * as d_out from "../../../interface/data/json_schema.js"
 import type * as d_function from "pareto-json/interface/data/unmarshalled_from_json"
 
 //dependencies
-import * as r_json_y from "pareto-json/implementation/manual/refiners/json_y/json_with_parse_info"
-import * as r_json_x from "pareto-json/implementation/manual/refiners/json_x/json_with_parse_info"
+import * as r_json_y from "pareto-json/implementation/refiners/json_y/json_with_parse_info"
+import * as r_json_x from "pareto-json/implementation/refiners/json_x/json_with_parse_info"
 
 
 export const Schema: p_i.Refiner<
