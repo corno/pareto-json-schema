@@ -2,8 +2,8 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import type * as p_i from 'pareto-core/interface/refiner'
 
 
-import type * as d_out from "../../../interface/data/schema_for_legacy_json.js"
-import type * as d_in from "../../../interface/data/json_schema.js"
+import type * as d_out from "../../../interface/schemas/schema_for_legacy_json.js"
+import type * as d_in from "../../../interface/schemas/json_schema.js"
 
 
 namespace d_function {
