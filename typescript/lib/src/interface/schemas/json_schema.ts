@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/data'
 
 
-import type * as d_json from "pareto-json/interface/data/json_with_parse_info"
+import type * as s_json from "pareto-json/interface/data/json_with_parse_info"
 
 export type Schema =
     | ['boolean', boolean]
@@ -43,8 +43,8 @@ export type Schema_Object = {
 
     /******** validation ********/
     'type': p_.Optional_Value<Type>
-    'const': p_.Optional_Value<d_json.Value>
-    'enum': p_.Optional_Value<p_.List<d_json.Value>>
+    'const': p_.Optional_Value<s_json.Value>
+    'enum': p_.Optional_Value<p_.List<s_json.Value>>
     'multipleOf': p_.Optional_Value<number>
     'maximum': p_.Optional_Value<number>
     'exclusiveMaximum': p_.Optional_Value<number>
@@ -66,11 +66,11 @@ export type Schema_Object = {
     /******** meta-data********/
     'title': p_.Optional_Value<string>
     'description': p_.Optional_Value<string>
-    'default': p_.Optional_Value<d_json.Value>
+    'default': p_.Optional_Value<s_json.Value>
     'deprecated': p_.Optional_Value<boolean>
     'readOnly': p_.Optional_Value<boolean>
     'writeOnly': p_.Optional_Value<boolean>
-    'examples': p_.Optional_Value<p_.List<d_json.Value>>
+    'examples': p_.Optional_Value<p_.List<s_json.Value>>
 
     /******** format-annotation ********/
     'format': p_.Optional_Value<string>

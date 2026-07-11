@@ -2,9 +2,9 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import type * as p_i from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
-import type * as d_in from "pareto-json/interface/data/json_with_parse_info"
-import type * as d_out from "../../../interface/schemas/json_schema.js"
-import type * as d_function from "pareto-json/interface/data/unmarshalled_from_json"
+import type * as s_in from "pareto-json/interface/data/json_with_parse_info"
+import type * as s_out from "../../../interface/schemas/json_schema.js"
+import type * as s_function from "pareto-json/interface/data/unmarshalled_from_json"
 
 //dependencies
 import * as r_json_y from "pareto-json/implementation/refiners/json_y/json_with_parse_info"
@@ -12,16 +12,16 @@ import * as r_json_x from "pareto-json/implementation/refiners/json_x/json_with_
 
 
 export const Schema: p_i.Refiner<
-    d_out.Schema,
-    d_function.Error,
-    d_in.Value
+    s_out.Schema,
+    s_function.Error,
+    s_in.Value
 > = ($, abort) => {
     const range = $.range
     return p_.from.state($.type).decide(
         ($) => {
             switch ($[0]) {
                 case 'boolean': return p_.option($, ($) => ['boolean', $.value])
-                case 'object': return p_.option($, ($): d_out.Schema => ['object', p_change_context(
+                case 'object': return p_.option($, ($): s_out.Schema => ['object', p_change_context(
                     r_json_x.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
                         $,
                         abort,
@@ -102,7 +102,7 @@ export const Schema: p_i.Refiner<
                             })
                         }
                     ),
-                    ($): d_out.Schema_Object => ({
+                    ($): s_out.Schema_Object => ({
 
                         /******** core ********/
 
@@ -327,7 +327,7 @@ export const Schema: p_i.Refiner<
                                 "type"
                             )
                         ).map(
-                            ($): d_out.Type => p_.from.state($.value.type).decide(
+                            ($): s_out.Type => p_.from.state($.value.type).decide(
                                 ($) => {
                                     switch ($[0]) {
                                         case 'string': return p_.option($, ($) => ['single', Simple_Types($, abort)])
@@ -637,23 +637,23 @@ export const Schema: p_i.Refiner<
 }
 
 export const Schema_Array: p_i.Refiner<
-    d_out.Schema_Array,
-    d_function.Error,
-    d_in.Array
+    s_out.Schema_Array,
+    s_function.Error,
+    s_in.Array
 > = ($, abort) => p_.from.list($.items).map(
     ($) => Schema($, abort))
 
 export const String_Array: p_i.Refiner<
-    d_out.String_Array,
-    d_function.Error,
-    d_in.Array
+    s_out.String_Array,
+    s_function.Error,
+    s_in.Array
 > = ($, abort) => p_.from.list($.items).map(
     ($) => r_json_x.String($, abort).token.value)
 
 export const Simple_Types: p_i.Refiner<
-    d_out.Simple_Types,
-    d_function.Error,
-    d_in.String
+    s_out.Simple_Types,
+    s_function.Error,
+    s_in.String
 > = ($, abort) => {
     switch ($.token.value) {
         case "string": return ['string', null]
