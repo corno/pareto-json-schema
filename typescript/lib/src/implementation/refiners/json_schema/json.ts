@@ -2,9 +2,9 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import type * as p_i from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
-import type * as s_in from "pareto-json/interface/data/json_with_parse_info"
+import type * as s_in from "../../../interface/schemas/json_with_parse_info.js"
 import type * as s_out from "../../../interface/schemas/json_schema.js"
-import type * as s_function from "pareto-json/interface/data/unmarshalled_from_json"
+import type * as s_error from "../../../interface/schemas/unmarshalled_from_json.js"
 
 //dependencies
 import * as r_json_y from "pareto-json/implementation/refiners/json_y/json_with_parse_info"
@@ -13,7 +13,7 @@ import * as r_json_x from "pareto-json/implementation/refiners/json_x/json_with_
 
 export const Schema: p_i.Refiner<
     s_out.Schema,
-    s_function.Error,
+    s_error.Error,
     s_in.Value
 > = ($, abort) => {
     const range = $.range
@@ -638,21 +638,21 @@ export const Schema: p_i.Refiner<
 
 export const Schema_Array: p_i.Refiner<
     s_out.Schema_Array,
-    s_function.Error,
+    s_error.Error,
     s_in.Array
 > = ($, abort) => p_.from.list($.items).map(
     ($) => Schema($, abort))
 
 export const String_Array: p_i.Refiner<
     s_out.String_Array,
-    s_function.Error,
+    s_error.Error,
     s_in.Array
 > = ($, abort) => p_.from.list($.items).map(
     ($) => r_json_x.String($, abort).token.value)
 
 export const Simple_Types: p_i.Refiner<
     s_out.Simple_Types,
-    s_function.Error,
+    s_error.Error,
     s_in.String
 > = ($, abort) => {
     switch ($.token.value) {
