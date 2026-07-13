@@ -1,6 +1,6 @@
 {
   "name": "pareto-json-schema",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "author": "Corno",
   "license": "Apache-2.0",
   "description": "A TypeScript library for converting JSON Schema to ASTN and vice versa",
