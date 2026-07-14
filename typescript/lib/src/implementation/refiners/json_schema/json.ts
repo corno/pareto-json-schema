@@ -4,11 +4,10 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 
 import type * as s_in from "../../../interface/schemas/json_with_parse_info.js"
 import type * as s_out from "../../../interface/schemas/json_schema.js"
-import type * as s_error from "../../../interface/schemas/unmarshalled_from_json.js"
+import type * as s_error from "../../../interface/schemas/json_unmarshalling.js"
 
 //dependencies
-import * as r_json_y from "pareto-json/implementation/refiners/json_y/json_with_parse_info"
-import * as r_json_x from "pareto-json/implementation/refiners/json_x/json_with_parse_info"
+import * as r_unmarshall from "pareto-json/_implementation/refiners/unmarshalled_json_value/json_with_parse_info"
 
 
 export const Schema: p_i.Refiner<
@@ -22,7 +21,7 @@ export const Schema: p_i.Refiner<
             switch ($[0]) {
                 case 'boolean': return p_.option($, ($) => ['boolean', $.value])
                 case 'object': return p_.option($, ($): s_out.Schema => ['object', p_change_context(
-                    r_json_x.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
+                    r_unmarshall.Object_No_Unexpected_Properties_From_Object( //okay for now, but the JSON schema spec allows additional properties
                         $,
                         abort,
                         {
@@ -110,49 +109,49 @@ export const Schema: p_i.Refiner<
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$id"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$schema': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$schema"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$ref': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$ref"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$anchor': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$anchor"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$dynamicRef': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$dynamicRef"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$dynamicAnchor': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$dynamicAnchor"
                             )).map(
-                                ($) => r_json_x.String($.value, abort).token.value),
+                                ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$vocabulary': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$vocabulary"
                             )).map(
                                 ($) => p_change_context(
-                                    r_json_y.Object_With_Unique_Keys_From_Object(
-                                        r_json_x.Object($.value, abort),
+                                    r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                        r_unmarshall.Object($.value, abort),
                                         abort
                                     ),
                                     ($) => p_.from.dictionary($.properties).map(
-                                        ($) => r_json_x.Boolean($.value, abort).value)
+                                        ($) => r_unmarshall.Boolean($.value, abort).value)
                                 )),
 
                         '$comment': p_.from.optional(
@@ -160,7 +159,7 @@ export const Schema: p_i.Refiner<
                                 "$comment"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$defs': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
@@ -168,8 +167,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -183,7 +182,7 @@ export const Schema: p_i.Refiner<
                                 "prefixItems"
                             )
                         ).map(
-                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
+                            ($) => Schema_Array(r_unmarshall.Array($.value, abort), abort)),
 
                         'items': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
@@ -212,8 +211,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -226,8 +225,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -240,8 +239,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -281,21 +280,21 @@ export const Schema: p_i.Refiner<
                                 "oneOf"
                             )
                         ).map(
-                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
+                            ($) => Schema_Array(r_unmarshall.Array($.value, abort), abort)),
 
                         'anyOf': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "anyOf"
                             )
                         ).map(
-                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
+                            ($) => Schema_Array(r_unmarshall.Array($.value, abort), abort)),
 
                         'allOf': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "allOf"
                             )
                         ).map(
-                            ($) => Schema_Array(r_json_x.Array($.value, abort), abort)),
+                            ($) => Schema_Array(r_unmarshall.Array($.value, abort), abort)),
 
                         'not': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
@@ -333,7 +332,7 @@ export const Schema: p_i.Refiner<
                                         case 'string': return p_.option($, ($) => ['single', Simple_Types($, abort)])
                                         case 'array': return p_.option($, ($) => ['array', p_.from.list($.items).map(
                                             ($) => Simple_Types(
-                                                r_json_x.String($, abort),
+                                                r_unmarshall.String($, abort),
                                                 abort
                                             ))
                                         ])
@@ -358,119 +357,119 @@ export const Schema: p_i.Refiner<
                                 "enum"
                             )
                         ).map(
-                            ($) => r_json_x.Array($.value, abort).items),
+                            ($) => r_unmarshall.Array($.value, abort).items),
 
                         'multipleOf': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "multipleOf"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'maximum': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "maximum"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'exclusiveMaximum': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "exclusiveMaximum"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'minimum': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "minimum"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'exclusiveMinimum': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "exclusiveMinimum"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'maxLength': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "maxLength"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'minLength': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "minLength"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'pattern': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "pattern"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         'maxItems': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "maxItems"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'minItems': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "minItems"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'uniqueItems': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "uniqueItems"
                             )
                         ).map(
-                            ($) => r_json_x.Boolean($.value, abort).value),
+                            ($) => r_unmarshall.Boolean($.value, abort).value),
 
                         'maxContains': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "maxContains"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'minContains': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "minContains"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'maxProperties': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "maxProperties"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'minProperties': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "minProperties"
                             )
                         ).map(
-                            ($) => r_json_x.Number($.value, abort).value),
+                            ($) => r_unmarshall.Number($.value, abort).value),
 
                         'required': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "required"
                             )
                         ).map(
-                            ($) => String_Array(r_json_x.Array($.value, abort), abort)),
+                            ($) => String_Array(r_unmarshall.Array($.value, abort), abort)),
 
                         'dependentRequired': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
@@ -478,12 +477,12 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
-                                    ($) => String_Array(r_json_x.Array($.value, abort), abort))
+                                    ($) => String_Array(r_unmarshall.Array($.value, abort), abort))
                             )),
 
                         /******** meta-data ********/
@@ -493,14 +492,14 @@ export const Schema: p_i.Refiner<
                                 "title"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         'description': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "description"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         'default': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
@@ -514,28 +513,28 @@ export const Schema: p_i.Refiner<
                                 "deprecated"
                             )
                         ).map(
-                            ($) => r_json_x.Boolean($.value, abort).value),
+                            ($) => r_unmarshall.Boolean($.value, abort).value),
 
                         'readOnly': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "readOnly"
                             )
                         ).map(
-                            ($) => r_json_x.Boolean($.value, abort).value),
+                            ($) => r_unmarshall.Boolean($.value, abort).value),
 
                         'writeOnly': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "writeOnly"
                             )
                         ).map(
-                            ($) => r_json_x.Boolean($.value, abort).value),
+                            ($) => r_unmarshall.Boolean($.value, abort).value),
 
                         'examples': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "examples"
                             )
                         ).map(
-                            ($) => r_json_x.Array($.value, abort).items),
+                            ($) => r_unmarshall.Array($.value, abort).items),
 
                         /******** format-annotation ********/
 
@@ -544,7 +543,7 @@ export const Schema: p_i.Refiner<
                                 "format"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         /******** content ********/
 
@@ -553,14 +552,14 @@ export const Schema: p_i.Refiner<
                                 "contentEncoding"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         'contentMediaType': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "contentMediaType"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value
+                            ($) => r_unmarshall.String($.value, abort).token.value
                         ),
 
                         'contentSchema': p_.from.optional(
@@ -578,8 +577,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -593,8 +592,8 @@ export const Schema: p_i.Refiner<
                             )
                         ).map(
                             ($) => p_change_context(
-                                r_json_y.Object_With_Unique_Keys_From_Object(
-                                    r_json_x.Object($.value, abort),
+                                r_unmarshall.Object_With_Unique_Keys_From_Object(
+                                    r_unmarshall.Object($.value, abort),
                                     abort
                                 ),
                                 ($) => p_.from.dictionary($.properties).map(
@@ -615,14 +614,14 @@ export const Schema: p_i.Refiner<
                                 "$recursiveAnchor"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                         '$recursiveRef': p_.from.optional(
                             p_.from.dictionary($.properties).get_possible_entry(
                                 "$recursiveRef"
                             )
                         ).map(
-                            ($) => r_json_x.String($.value, abort).token.value),
+                            ($) => r_unmarshall.String($.value, abort).token.value),
 
                     })
                 )])
@@ -648,7 +647,7 @@ export const String_Array: p_i.Refiner<
     s_error.Error,
     s_in.Array
 > = ($, abort) => p_.from.list($.items).map(
-    ($) => r_json_x.String($, abort).token.value)
+    ($) => r_unmarshall.String($, abort).token.value)
 
 export const Simple_Types: p_i.Refiner<
     s_out.Simple_Types,
