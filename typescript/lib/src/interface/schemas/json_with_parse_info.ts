@@ -1,1 +1,1 @@
-export * from "pareto-json/interface/schemas/json_with_parse_info"
+export * from "pareto-json/modules/deserialization/schemas/model"
