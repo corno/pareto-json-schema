@@ -1,1 +1,0 @@
-export * from "pareto-json/modules/deserialization/schemas/model"
