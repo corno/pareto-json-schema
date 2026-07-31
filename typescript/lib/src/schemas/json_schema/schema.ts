@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/schema'
 
 
-import type * as s_json from "./deserialized_json.js"
+import type * as s_json from "pareto-json/modules/deserialization/schemas/deserialized_json/schema"
 
 export type Schema =
     | ['boolean', boolean]

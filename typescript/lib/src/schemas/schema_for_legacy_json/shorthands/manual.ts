@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core-shorthands/unconstrained_manual'
 
-import * as x from "../../schemas/schema_for_legacy_json.js"
+import * as x from "../schema.js"
 
 
 export const document = (
