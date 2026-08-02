@@ -3,7 +3,7 @@ import type * as p_i from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 import type * as s_in from "pareto-json/modules/deserialization/schemas/deserialized_json/schema"
-import type * as s_out from "../../../schemas/json_schema/schema.js"
+import type * as s_out from "../schema.js"
 import type * as s_error from "pareto-json/modules/unmarshalling/schemas/json_value_unmarshalling/schema"
 
 //dependencies
