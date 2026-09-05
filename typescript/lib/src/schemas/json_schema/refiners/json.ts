@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/implementation/refiner'
-import type * as p_i from 'pareto-core/interface/refiner'
-import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
+import * as p_ from 'pareto-core/refiner'
+import type * as p_i from 'pareto-core/refiner'
+import p_change_context from 'pareto-core/refiner/specials/change_context'
 
 import type * as s_in from "pareto-json/modules/deserialization/schemas/deserialized_json/schema"
 import type * as s_out from "../schema.js"
